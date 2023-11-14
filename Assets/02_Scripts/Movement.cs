@@ -43,13 +43,6 @@ public class Movement : MonoBehaviour
         var newPosDelta = newPos * Time.deltaTime;
         this.transform.position += newPos * Time.fixedDeltaTime;
         _rigid.velocity = Vector3.SmoothDamp(velocity0, newPos, ref velocity0, smoothing);
-
-     /*   Vector2 force = new Vector2(horizontal * moveSpeed * Time.fixedDeltaTime, 0f);
-        _rigid.AddForce(force);
-        if(horizontal == 0)
-        {
-            _rigid.velocity = new Vector2(0f);
-        } */
     }
 
     void Flip()
