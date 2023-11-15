@@ -8,22 +8,37 @@ public class Movement : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float walkSpeed = 1f;
     [SerializeField] float sprintSpeed = 2f;
+    [SerializeField] float crouchSpeed = 0.5f;
+
     [SerializeField] float jumpHeight = 250f;
+    [SerializeField] float originalJump = 250f;
+    [SerializeField] float crouchJump = 175f;
+
+    [SerializeField] float originalWidth = 1f;
+    [SerializeField] float originalHeight = 1000f;
+    [SerializeField] float crouchHeight = 0.5f;
+
     [SerializeField] bool isJumping = false;
     [SerializeField] bool isGrounded = true;
     [SerializeField] bool isSprinting = false;
-    [Range(0, .5f)][SerializeField] float smoothing = .5f;
+    [SerializeField] bool isCrouching = false;
+
+    [Range(0, 1f)][SerializeField] float smoothing = 0.5f;
+
     private Vector3 velocity0 = Vector3.zero;
-    Rigidbody2D _rigid;
+
+    [SerializeField] Rigidbody2D _rigid;
     LayerMask Character;
+
+    [SerializeField] BoxCollider2D c_Collider;
 
     void Start()
     {
-        
+    
     }
     void Awake()
     {
-        _rigid = gameObject.GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -37,6 +52,7 @@ public class Movement : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
         Sprint();
+        Crouch();
         velocity0 = _rigid.velocity;
         var horizontalMove = moveSpeed * horizontal;
         var newPos = Vector3.right * horizontalMove;
@@ -59,7 +75,7 @@ public class Movement : MonoBehaviour
     }
     void Sprint()
     {
-        if(Input.GetButton("Sprint"))
+        if(Input.GetButton("Sprint") && !isCrouching)
         {
             isSprinting = true;
             moveSpeed = sprintSpeed;
@@ -78,6 +94,28 @@ public class Movement : MonoBehaviour
             _rigid.AddForce(force); 
             isJumping = true;
             isGrounded = false;
+        }
+    }
+
+    void Crouch()
+    {
+
+        if(Input.GetButton("Crouch"))
+        {
+            isCrouching = true;
+            jumpHeight = crouchJump;
+            c_Collider.size = new Vector2 (originalWidth, crouchHeight);
+
+        } else
+        {
+            if(crouchHeight != originalHeight)
+            {
+                isCrouching = true;
+            }
+            isCrouching = false;
+            jumpHeight = originalJump;
+            c_Collider.size = new Vector2 (originalWidth, originalHeight);
+
         }
     }
 

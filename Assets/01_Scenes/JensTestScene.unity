@@ -158,11 +158,18 @@ MonoBehaviour:
   moveSpeed: 1
   walkSpeed: 1
   sprintSpeed: 2
+  crouchSpeed: 0.5
   jumpHeight: 250
+  originalWidth: 1
+  originalHeight: 1
+  crouchHeight: 0.5
   isJumping: 0
   isGrounded: 1
   isSprinting: 0
+  isCrouching: 0
   smoothing: 0.5
+  _rigid: {fileID: 236891917}
+  c_Collider: {fileID: 236891918}
 --- !u!50 &236891917
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +189,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &236891918
 BoxCollider2D:
