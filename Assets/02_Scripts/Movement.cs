@@ -104,7 +104,7 @@ public class Movement : MonoBehaviour
         {
             isCrouching = true;
             jumpHeight = crouchJump;
-            c_Collider.size = new Vector2 (originalWidth, crouchHeight);
+           c_Collider.size = new Vector2 (originalWidth, crouchHeight);
 
         } else
         {
