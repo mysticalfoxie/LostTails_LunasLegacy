@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() //Spacebar to Jump!
     {
-        if (Input.GetKeyDown("Jump") && isGrounded())
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
             _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
             isJumping = true;
