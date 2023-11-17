@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 815076178199990512}
   - component: {fileID: 8814216756165073142}
   - component: {fileID: 5314222419614659654}
-  m_Layer: 0
+  - component: {fileID: 7009640092536943406}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,10 +79,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,7 +104,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 704f208db5040dd4da19bcaca6869c8e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8490566, g: 0.4118155, b: 0.11534349, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -416,3 +417,33 @@ PolygonCollider2D:
       - {x: -1.49, y: -2.18}
       - {x: -1.43, y: -2.08}
       - {x: -1.38, y: -1.92}
+--- !u!114 &7009640092536943406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814216756165073138}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: b953237b00000000ad194261
+  m_ShapePath:
+  - {x: -6.3999996, y: -3.6, z: 0}
+  - {x: -6.3999996, y: 3.6, z: 0}
+  - {x: 6.3999996, y: 3.6, z: 0}
+  - {x: 6.3999996, y: -3.6, z: 0}
+  m_ShapePathHash: 353759941
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -216380
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 6.3999996, y: 3.6, z: 0}
