@@ -140,6 +140,8 @@ GameObject:
   - component: {fileID: 236891921}
   - component: {fileID: 236891922}
   - component: {fileID: 236891924}
+  - component: {fileID: 236891925}
+  - component: {fileID: 236891926}
   m_Layer: 3
   m_Name: Character
   m_TagString: Player
@@ -174,7 +176,10 @@ MonoBehaviour:
   isSprinting: 0
   isCrouching: 0
   smoothing: 0.5
+  velocity0: {x: 0, y: 0, z: 0}
   _rigid: {fileID: 0}
+  Character:
+    m_Bits: 0
   c_Collider: {fileID: 0}
 --- !u!50 &236891917
 Rigidbody2D:
@@ -303,10 +308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb51416d151c0a41825d5d418de1029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigid: {fileID: 0}
+  c_Collider: {fileID: 0}
   currentSpeed: 10
   walkSpeed: 10
   sprintSpeed: 25
   isSprinting: 0
+  move: {x: 0, y: 0}
 --- !u!114 &236891922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +448,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386c6ca1875605a4694168d13de0a7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 20
+  walkSpeed: 20
+  sprintSpeed: 30
+  isSprinting: 0
+  jumpPower: 30
+  maxJump: 0.4
+  fallMulti: 0
+  jumpMulti: 0
+  groundCheck: {fileID: 660814572}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isJumping: 0
+  countJump: 0
+--- !u!114 &236891925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236891915}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5627fe951cb6cb44d8ee3f0c6a272b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 20
+  sprintSpeed: 30
+  isSprinting: 0
+  jumpPower: 30
+  maxJump: 0.4
+  fallMulti: 0
+  jumpMulti: 0
+  groundCheck: {fileID: 660814572}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isJumping: 0
+  countJump: 0
+--- !u!114 &236891926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236891915}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bff41f9c9a83c42bd58f8e8614920b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   walkSpeed: 20
   sprintSpeed: 30
   isSprinting: 0

@@ -9,13 +9,9 @@ public class PlayerMovement : MonoBehaviour
     Collider2D c_Collider;
 
     [Header("Movement System")]
-    [SerializeField] float currentSpeed = 20f;
     [SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 30f;
-    //[SerializeField] float sprintJump = 40f;
     [SerializeField] bool isSprinting;
-
-    Vector2 move;
 
     [Header("Jump System")]
     [SerializeField] float jumpPower = 30f;
@@ -32,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-
         _rigid = GetComponent<Rigidbody2D>();
         c_Collider = GetComponent<Collider2D>();
         plGravity = new Vector2(0, -Physics2D.gravity.y);
@@ -40,34 +35,47 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Jump();
-        move = new Vector2(Input.GetAxisRaw("Horizontal"), 0).normalized;
-        Sprint();
+        HandleInput();
+        HandleJump();
         Flip();
     }
+
     void FixedUpdate()
     {
-        _rigid.velocity = new Vector2(move.x * currentSpeed, 0);
+        Move();
+
     }
-    bool isGrounded()
+
+    void HandleInput()
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.12f, 0.1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        Sprint();
     }
-    void Sprint() //Left Shift Button for Sprint!
+
+    void Move()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        Vector2 move = new Vector2(horizontalInput, 0).normalized;
+        _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
+    }
+
+    void Sprint()
     {
         if (Input.GetButton("Sprint"))
         {
             isSprinting = true;
-            currentSpeed = sprintSpeed;
         }
         else
         {
             isSprinting = false;
-            currentSpeed = walkSpeed;
         }
     }
 
-    void Jump() //Spacebar to Jump!
+    float GetCurrentSpeed()
+    {
+        return isSprinting ? sprintSpeed : walkSpeed;
+    }
+
+    void HandleJump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
@@ -90,12 +98,10 @@ public class PlayerMovement : MonoBehaviour
 
             _rigid.velocity += plGravity * currentJump * Time.deltaTime;
         }
-
         if (_rigid.velocity.y < 0)
         {
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
         }
-
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
@@ -107,6 +113,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    bool isGrounded()
+    {
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.12f, 0.1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+    }
+
     void Flip()
     {
         Vector2 scale = transform.localScale;
