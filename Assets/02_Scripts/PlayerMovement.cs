@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D _rigid;
     Collider2D c_Collider;
+    SpriteRenderer mySprite;
 
     [Header("Movement System")]
     [SerializeField] float walkSpeed = 20f;
@@ -19,10 +20,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fallMulti;
     [SerializeField] float jumpMulti;
 
+    [Header("Ground System")]
+    [SerializeField] float groundScaleX = 7.61f;
+    [SerializeField] float groundScaleY = 0.4f;
     public Transform groundCheck;
     public LayerMask groundLayer;
     Vector2 plGravity;
 
+    [Header("Debug")]
     [SerializeField] bool isJumping;
     [SerializeField] float countJump;
 
@@ -31,19 +36,19 @@ public class PlayerMovement : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         c_Collider = GetComponent<Collider2D>();
         plGravity = new Vector2(0, -Physics2D.gravity.y);
+        mySprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         HandleInput();
         HandleJump();
-        Flip();
     }
 
     void FixedUpdate()
     {
         Move();
-
+        Flip();
     }
 
     void HandleInput()
@@ -116,20 +121,18 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded()
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.12f, 0.1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(groundScaleX, groundScaleY), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
 
     void Flip()
     {
-        Vector2 scale = transform.localScale;
         if (_rigid.velocity.x > 0f)
         {
-            scale.x = 1f;
+            mySprite.flipX = true;
         }
         else if (_rigid.velocity.x < 0f)
         {
-            scale.x = -1f;
+            mySprite.flipX = false;
         }
-        transform.localScale = scale;
     }
 }
