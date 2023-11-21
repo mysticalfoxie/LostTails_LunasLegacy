@@ -8,11 +8,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D _rigid;
     Collider2D c_Collider;
     SpriteRenderer mySprite;
+    Animator animator;
+    GameManager gameManager;
 
     [Header("Movement System")]
     [SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
+    [SerializeField] bool isWalking;
 
     [Header("Jump System")]
     [SerializeField] float jumpPower = 30f;
@@ -37,32 +40,34 @@ public class PlayerMovement : MonoBehaviour
         c_Collider = GetComponent<Collider2D>();
         plGravity = new Vector2(0, -Physics2D.gravity.y);
         mySprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
-
     void Update()
     {
         HandleInput();
         HandleJump();
     }
-
     void FixedUpdate()
     {
         Move();
         Flip();
     }
-
     void HandleInput()
     {
         Sprint();
     }
-
     void Move()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         Vector2 move = new Vector2(horizontalInput, 0).normalized;
         _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
+        if (horizontalInput != 0f) {        // ToDo: Improve Script Dynamics
+            animator.SetTrigger("IsWalking");
+        } else
+        {
+            animator.ResetTrigger("IsWalking");
+        }
     }
-
     void Sprint()
     {
         if (Input.GetButton("Sprint"))
@@ -74,12 +79,10 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = false;
         }
     }
-
     float GetCurrentSpeed()
     {
         return isSprinting ? sprintSpeed : walkSpeed;
     }
-
     void HandleJump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded())
