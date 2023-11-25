@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void RestartScene()
-    {
-
-    }
-
     public void StartScene()
     {
         SceneManager.LoadScene(1);
