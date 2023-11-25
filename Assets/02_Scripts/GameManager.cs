@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void LoadNextLevel()
@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        if(Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
+
 }
