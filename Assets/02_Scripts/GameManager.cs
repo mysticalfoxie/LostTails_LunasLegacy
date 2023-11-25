@@ -22,4 +22,29 @@ public class GameManager : MonoBehaviour
         currentLevelIndex += 1;
         SceneManager.LoadScene(currentLevelIndex);
     }
+
+    public void GameOverScene()
+    {
+
+    }
+
+    public void RestartScene()
+    {
+
+    }
+
+    public void StartScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
