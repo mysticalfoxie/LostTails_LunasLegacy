@@ -23,25 +23,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentLevelIndex);
     }
 
-    public void GameOverScene()
-    {
-
-    }
-
-    public void StartScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void GoToMainMenu()
-    {
-        if(Time.timeScale == 0) Time.timeScale = 1;
-        SceneManager.LoadScene(0);
-    }
-
 }
