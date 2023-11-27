@@ -28,19 +28,13 @@ public class StartMenu : MonoBehaviour
 
     public void Credits()
     {
-        startButton.SetActive(false);
-        creditsButton.SetActive(false);
-        optionsButton.SetActive(false);
-        quitButton.SetActive(false);
+        startMenu.SetActive(false);
         creditsMenu.SetActive(true);
     }
 
     public void Options() //To-Do: Sound Slider!
     {
-        startButton.SetActive(false);
-        creditsButton.SetActive(false);
-        optionsButton.SetActive(false);
-        quitButton.SetActive(false);
+        startMenu.SetActive(false);
         optionsMenu.SetActive(true);
     }
 
@@ -56,19 +50,13 @@ public class StartMenu : MonoBehaviour
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat("VolumePref", currentVolume);
-        startButton.SetActive(true);
-        creditsButton.SetActive(true);
-        optionsButton.SetActive(true);
-        quitButton.SetActive(true);
+        startMenu.SetActive(true);
         optionsMenu.SetActive(false);
     }
 
     public void BackButton()
     {
-        startButton.SetActive(true);
-        creditsButton.SetActive(true);
-        optionsButton.SetActive(true);
-        quitButton.SetActive(true);
+        startMenu.SetActive(true);
         creditsMenu.SetActive(false);
     }
     public void loadSettings()
