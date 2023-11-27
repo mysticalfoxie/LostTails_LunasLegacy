@@ -16,9 +16,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     bool Paused = false;
 
-    private void Awake()
+    private void Start()
     {
-
+        loadSettings();
     }
     private void Update()
     {
@@ -77,7 +77,13 @@ public class PauseMenu : MonoBehaviour
 
     public void loadSettings()
     {
-        if (PlayerPrefs.HasKey("VolumePref")) VolumeSlider.value = currentVolume = PlayerPrefs.GetFloat("VolumePref");
-        else VolumeSlider.value = PlayerPrefs.GetFloat("VolumePref");
+        if (PlayerPrefs.HasKey("VolumePref"))
+        {
+            VolumeSlider.value = currentVolume = PlayerPrefs.GetFloat("VolumePref");
+        }
+        else
+        {
+            VolumeSlider.value = PlayerPrefs.GetFloat("VolumePref");
+        }
     }
 }

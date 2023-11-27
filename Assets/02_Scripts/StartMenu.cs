@@ -21,6 +21,11 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject backButton;
 
     //To-Do: How To Play?, Options Button, Menu Sound?
+
+    public void Start()
+    {
+        loadSettings();
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(1);
