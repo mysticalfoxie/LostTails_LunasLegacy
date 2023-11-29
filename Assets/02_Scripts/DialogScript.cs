@@ -31,8 +31,6 @@ public class DialogScript : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[_index];
-                Interactor interactionScript = GetComponent<Interactor>();
-                interactionScript.PressE.SetActive(false);
 
             }
         }

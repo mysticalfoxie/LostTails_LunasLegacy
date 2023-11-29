@@ -26,7 +26,6 @@ public class Interactor : MonoBehaviour
             {
                 PlayerMovement moveScript = GetComponent<PlayerMovement>();
                 Dialogue.SetActive(true);
-                PressE.SetActive(false);
             }
         }
         if (!DetectObject())
@@ -36,7 +35,6 @@ public class Interactor : MonoBehaviour
             {
                 PlayerMovement moveScript = GetComponent<PlayerMovement>();
                 Dialogue.SetActive(false);
-                PressE.SetActive(false);
             }
         }
     }
