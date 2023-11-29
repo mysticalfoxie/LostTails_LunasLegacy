@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Interactor : MonoBehaviour
 {
@@ -10,18 +11,34 @@ public class Interactor : MonoBehaviour
     public LayerMask detectionLayer;
 
     [SerializeField] GameObject Dialogue;
+    [SerializeField] public GameObject PressE;
 
     void Update()
     {
-      if(DetectObject())
-      {
-        if (InteractInput())
+        HandleInteraction();
+    }
+    void HandleInteraction()
+    {
+        if (DetectObject())
         {
-        PlayerMovement moveScript= GetComponent<PlayerMovement>();
-          Dialogue.SetActive(true);
+            PressE.SetActive(true);
+            if (InteractInput())
+            {
+                PlayerMovement moveScript = GetComponent<PlayerMovement>();
+                Dialogue.SetActive(true);
+                PressE.SetActive(false);
+            }
         }
-
-      }
+        if (!DetectObject())
+        {
+            PressE.SetActive(false);
+            if (InteractInput())
+            {
+                PlayerMovement moveScript = GetComponent<PlayerMovement>();
+                Dialogue.SetActive(false);
+                PressE.SetActive(false);
+            }
+        }
     }
     bool InteractInput()
     {
