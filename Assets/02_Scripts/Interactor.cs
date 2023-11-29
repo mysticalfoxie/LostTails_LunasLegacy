@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Interactor : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] GameObject Dialogue;
     [SerializeField] public GameObject PressE;
+    [SerializeField] GameObject CutScene1;
 
     void Update()
     {
@@ -53,5 +54,12 @@ public class Interactor : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(detectionPoint.position, _detectionRadius);
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+    if (other.gameObject.CompareTag("CutScene"))
+        {
+            CutScene1.SetActive(true);
+        }
     }
 }
