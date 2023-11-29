@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
+    [SerializeField] bool isBlocked;
 
     [Header("Jump System")]
     [SerializeField] float jumpPower = 30f;
@@ -45,7 +46,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HandleJump();
+        if (isBlocked == false)
+        {
+            HandleJump();
+        }
     }
     void FixedUpdate()
     {
@@ -58,14 +62,19 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        Vector2 move = new Vector2(horizontalInput, 0).normalized;
-        _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
-        if (horizontalInput != 0f) {        // ToDo: Improve Script Dynamics
-            animator.SetTrigger("IsWalking");
-        } else
+        if (isBlocked == false)
         {
-            animator.ResetTrigger("IsWalking");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            Vector2 move = new Vector2(horizontalInput, 0).normalized;
+            _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
+            if (horizontalInput != 0f)
+            {        // ToDo: Improve Script Dynamics
+                animator.SetTrigger("IsWalking");
+            }
+            else
+            {
+                animator.ResetTrigger("IsWalking");
+            }
         }
     }
     void Sprint()
