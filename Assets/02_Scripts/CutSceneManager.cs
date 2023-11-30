@@ -5,7 +5,7 @@ using TMPro;
 using UnityEditor;
 
 
-public class CutSceneSystem : MonoBehaviour
+public class CutSceneManager : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
@@ -34,9 +34,6 @@ public class CutSceneSystem : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[_index];
-                CutScene1.SetActive(false);
-                CutScene2.SetActive(true);
-
             }
         }
     }
