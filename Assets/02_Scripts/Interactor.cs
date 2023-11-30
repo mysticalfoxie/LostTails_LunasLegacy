@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Interactor : MonoBehaviour
@@ -59,7 +60,7 @@ public class Interactor : MonoBehaviour
     {
     if (other.gameObject.CompareTag("CutScene"))
         {
-            CutScene1.SetActive(true);
+           
         }
     }
 }
