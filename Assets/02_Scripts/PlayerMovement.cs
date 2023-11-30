@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
-    [SerializeField] bool isBlocked;
+    [SerializeField] public bool isBlocked;
 
     [Header("Jump System")]
     [SerializeField] float jumpPower = 30f;
