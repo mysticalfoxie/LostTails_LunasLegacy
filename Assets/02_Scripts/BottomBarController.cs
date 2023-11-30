@@ -35,7 +35,7 @@ public class BottomBarController : MonoBehaviour
     }
     public bool IsLastSentence()
     {
-    return sentenceIndex +1 == currentScene.sentences.Count; 
+    return sentenceIndex + 1 == currentScene.sentences.Count; 
     }
     private IEnumerator TypeText(string text)
     {
@@ -43,7 +43,7 @@ public class BottomBarController : MonoBehaviour
         state = State.PLAYING;
         int wordIndex = 0;
 
-        while(state != State.COMPLETED)
+        while (state != State.COMPLETED)
         {
             barText.text += text[wordIndex];
             yield return new WaitForSeconds(0.05f);
