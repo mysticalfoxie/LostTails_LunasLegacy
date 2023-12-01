@@ -379,7 +379,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 139959506}
   - component: {fileID: 139959505}
   - component: {fileID: 139959504}
+  - component: {fileID: 139959507}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -660,6 +661,40 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &139959507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139959502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e64d571070f4134fbeec0b7cc88b9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
+  resolutionDropdown: {fileID: 338900559}
+  qualityDropdown: {fileID: 887599724}
+  textureDropdown: {fileID: 1789918467}
+  aaDropdown: {fileID: 806928078}
+  VolumeSlider: {fileID: 1776029106}
+  MusicSlider: {fileID: 226959369}
+  SFXSlider: {fileID: 397492306}
+  currentVolume: 0
+  currentMusicVolume: 0
+  currentSFXVolume: 0
+  optionsMenu: {fileID: 879497178}
+  controlsMenu: {fileID: 1436696692}
+  creditsMenu: {fileID: 452507060}
+  startMenu: {fileID: 1065361471}
+  startButton: {fileID: 44136286}
+  creditsButton: {fileID: 2092517502}
+  controlsButton: {fileID: 340960154}
+  optionsButton: {fileID: 1170213275}
+  quitButton: {fileID: 627060772}
+  saveButton: {fileID: 1227172308}
+  backButton: {fileID: 1244088550}
 --- !u!1 &149912239
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +914,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetMusic
         m_Mode: 0
@@ -1487,7 +1522,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -1660,7 +1695,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: Controls
         m_Mode: 1
@@ -1840,7 +1875,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
@@ -1944,7 +1979,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetSFX
         m_Mode: 0
@@ -2522,72 +2557,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467161324}
   m_CullTransparentMesh: 1
---- !u!1 &504237350
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 504237352}
-  - component: {fileID: 504237353}
-  m_Layer: 0
-  m_Name: StartMenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &504237352
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504237350}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.40575778, y: 0.41955614, z: -17.00496}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &504237353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504237350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e64d571070f4134fbeec0b7cc88b9dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
-  resolutionDropdown: {fileID: 338900559}
-  qualityDropdown: {fileID: 887599724}
-  textureDropdown: {fileID: 1789918467}
-  aaDropdown: {fileID: 806928078}
-  VolumeSlider: {fileID: 1776029106}
-  MusicSlider: {fileID: 226959369}
-  SFXSlider: {fileID: 397492306}
-  currentVolume: 0
-  currentMusicVolume: 0
-  currentSFXVolume: 0
-  optionsMenu: {fileID: 879497178}
-  controlsMenu: {fileID: 1436696692}
-  creditsMenu: {fileID: 452507060}
-  startMenu: {fileID: 1065361471}
-  startButton: {fileID: 44136286}
-  creditsButton: {fileID: 2092517502}
-  controlsButton: {fileID: 340960154}
-  optionsButton: {fileID: 1170213275}
-  quitButton: {fileID: 627060772}
-  saveButton: {fileID: 1227172308}
-  backButton: {fileID: 1244088550}
 --- !u!1 &504352881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,7 +2959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -3124,7 +3093,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: BackButton
         m_Mode: 1
@@ -3544,7 +3513,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetAntiAliasing
         m_Mode: 0
@@ -4021,7 +3990,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
@@ -5487,7 +5456,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: Options
         m_Mode: 1
@@ -5658,7 +5627,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SaveSettings
         m_Mode: 1
@@ -5981,7 +5950,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: BackButton
         m_Mode: 1
@@ -7961,7 +7930,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1708264708
 GameObject:
@@ -8297,7 +8266,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
@@ -8599,7 +8568,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: SetTextureQuality
         m_Mode: 0
@@ -10079,7 +10048,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 504237353}
+      - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
         m_MethodName: Credits
         m_Mode: 1

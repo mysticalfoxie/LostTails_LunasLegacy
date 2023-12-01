@@ -119,10 +119,12 @@ public class StartMenu : MonoBehaviour
         qualityDropdown.value = 6;
     }
 
+    private bool qualitylocked;
     public void SetQuality(int qualityIndex)
     {
-        if (qualityIndex != 6)
-        {
+        if (qualitylocked == true) return;
+        if (qualityIndex == 6) return;
+        qualitylocked = true;
             QualitySettings.SetQualityLevel(qualityIndex);
             switch (qualityIndex)
             {
@@ -152,7 +154,7 @@ public class StartMenu : MonoBehaviour
                     break;
             }
             qualityDropdown.value = qualityIndex;
-        }
+        qualitylocked = false;
     }
     public void SaveSettings()
     {
