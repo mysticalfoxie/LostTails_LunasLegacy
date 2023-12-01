@@ -2418,7 +2418,7 @@ SpriteRenderer:
   m_Size: {x: 12.8, y: 7.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8814216756002903505
@@ -2437,6 +2437,7 @@ MonoBehaviour:
   sprintSpeed: 15.6
   isSprinting: 0
   isWalking: 0
+  isBlocked: 0
   jumpPower: 10.12
   maxJump: 0.4
   fallMulti: 0
@@ -2469,7 +2470,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &8814216756002903507
 Transform:
   m_ObjectHideFlags: 0

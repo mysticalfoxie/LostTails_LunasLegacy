@@ -13,7 +13,6 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] GameObject Dialogue;
     [SerializeField] public GameObject PressE;
-    [SerializeField] GameObject CutScene1;
 
     void Update()
     {
@@ -55,12 +54,5 @@ public class Interactor : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(detectionPoint.position, _detectionRadius);
-    }
-    void OnCollisionEnter2D(Collision2D other)
-    {
-    if (other.gameObject.CompareTag("CutScene"))
-        {
-           
-        }
     }
 }
