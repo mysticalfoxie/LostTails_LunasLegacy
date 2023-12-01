@@ -4,84 +4,98 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     Rigidbody2D _rigid;
     Collider2D c_Collider;
     SpriteRenderer mySprite;
     Animator animator;
     GameManager gameManager;
 
-    [Header("Movement System")]
-    [SerializeField] float walkSpeed = 20f;
+    [Header("Movement System")] [SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
     [SerializeField] public bool isBlocked;
 
-    [Header("Jump System")]
-    [SerializeField] float jumpPower = 30f;
+    [Header("Jump System")] [SerializeField] float jumpPower = 30f;
     [SerializeField] float maxJump = 0.4f;
     [SerializeField] float fallMulti;
     [SerializeField] float jumpMulti;
 
-    [Header("Ground System")]
-    [SerializeField] float groundScaleX = 7.61f;
+    [Header("Ground System")] [SerializeField] float groundScaleX = 7.61f;
     [SerializeField] float groundScaleY = 0.4f;
     public Transform groundCheck;
     public LayerMask groundLayer;
     Vector2 plGravity;
 
-    [Header("Debug")]
-    [SerializeField] bool isJumping;
+    [Header("Debug")] [SerializeField] bool isJumping;
     [SerializeField] float countJump;
     int levelIndex;
+    
+    private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
+    private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
 
     private void Awake()
     {
     }
+
     void Start()
     {
         initGetComponent();
     }
+
     void Update()
     {
-        if(levelIndex > 2)
+        if (levelIndex > 2)
         {
             HandleInput();
         }
+
         if (isBlocked == false)
         {
             HandleJump();
         }
     }
+
     void FixedUpdate()
     {
         Move();
         Flip();
     }
+
     void HandleInput()
     {
         {
             Sprint();
         }
     }
+
     void Move()
     {
-        if (isBlocked == false)
+        if (isBlocked)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            Vector2 move = new Vector2(horizontalInput, 0).normalized;
-            _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
-            if (horizontalInput != 0f)
-            {        // ToDo: Improve Script Dynamics
-                animator.SetTrigger("IsWalking");
-            }
-            else
-            {
-                animator.ResetTrigger("IsWalking");
-            }
+            animator.SetBool(IsWalkingAnimation, false);
+            return;
         }
+
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        Vector2 move = new Vector2(horizontalInput, 0).normalized;
+        _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
+
+        if (horizontalInput == 0f)
+        {
+            animator.SetBool(IsWalkingAnimation, false);
+            animator.SetBool(IsSprintingAnimation, false);
+            return;
+        }
+        
+        // ToDo: Improve Script Dynamics
+        if (isSprinting && animator.GetBool(IsWalkingAnimation))
+            animator.SetBool(IsWalkingAnimation, false);
+        else if (!isSprinting && !animator.GetBool(IsWalkingAnimation))
+            animator.SetBool(IsWalkingAnimation, true);
+        animator.SetBool(IsSprintingAnimation, isSprinting);
     }
+
     void Sprint()
     {
         if (Input.GetButton("Sprint") && isGrounded())
@@ -93,10 +107,12 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = false;
         }
     }
+
     float GetCurrentSpeed()
     {
         return isSprinting ? sprintSpeed : walkSpeed;
     }
+
     void HandleJump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded())
@@ -105,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             countJump = 0;
         }
+
         if (_rigid.velocity.y > 0 && isJumping)
         {
             countJump += Time.deltaTime;
@@ -120,10 +137,12 @@ public class PlayerMovement : MonoBehaviour
 
             _rigid.velocity += plGravity * currentJump * Time.deltaTime;
         }
+
         if (_rigid.velocity.y < 0)
         {
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
         }
+
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
@@ -161,6 +180,6 @@ public class PlayerMovement : MonoBehaviour
         mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        levelIndex = gameManager.currentLevelIndex;
+        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 3;
     }
 }
