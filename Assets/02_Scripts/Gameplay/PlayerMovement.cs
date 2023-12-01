@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (levelIndex > 2)
+        if (levelIndex > 1)
         {
             HandleInput();
         }
@@ -180,6 +180,6 @@ public class PlayerMovement : MonoBehaviour
         mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 3;
+        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 2;
     }
 }

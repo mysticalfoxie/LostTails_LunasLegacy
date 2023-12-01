@@ -8,22 +8,31 @@ using System;
 
 public class StartMenu : MonoBehaviour
 {
+    [Header("Music Control")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Dropdown resolutionDropdown;
-    [SerializeField] Dropdown qualityDropdown;
-    [SerializeField] Dropdown textureDropdown;
-    [SerializeField] Dropdown aaDropdown;
     [SerializeField] Slider VolumeSlider;
     [SerializeField] Slider MusicSlider;
     [SerializeField] Slider SFXSlider;
     [SerializeField] float currentVolume;
     [SerializeField] float currentMusicVolume;
     [SerializeField] float currentSFXVolume;
+
+    [Header("Dropdowns")]
+    [SerializeField] Dropdown resolutionDropdown;
+    [SerializeField] Dropdown qualityDropdown;
+    [SerializeField] Dropdown textureDropdown;
+    [SerializeField] Dropdown aaDropdown;
+
     Resolution[] resolutions;
+
+    [Header("Menus")]
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject creditsMenu;
     [SerializeField] GameObject startMenu;
+    [SerializeField] GameObject stateMenu;
+
+    [Header("Buttons")]
     [SerializeField] GameObject startButton;
     [SerializeField] GameObject creditsButton;
     [SerializeField] GameObject controlsButton;
@@ -31,9 +40,6 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject quitButton;
     [SerializeField] GameObject saveButton;
     [SerializeField] GameObject backButton;
-
-    //To-Do: How To Play?, Options Button, Menu Sound?
-
     public void Start()
     {
         resolutionDropdown.ClearOptions();
