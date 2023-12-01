@@ -8,6 +8,7 @@ public class Firewall : MonoBehaviour
 {
     public GameObject player;
 
+
     void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -16,7 +17,6 @@ public class Firewall : MonoBehaviour
     {
         if (other.gameObject.CompareTag ("Player"))
         {
-            Debug.Log(this.gameObject);
             Replay();
         }
     }
