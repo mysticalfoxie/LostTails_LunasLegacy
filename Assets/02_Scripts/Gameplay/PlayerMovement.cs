@@ -34,18 +34,29 @@ public class PlayerMovement : MonoBehaviour
     [Header("Debug")]
     [SerializeField] bool isJumping;
     [SerializeField] float countJump;
+    int levelIndex;
 
+    private void Awake()
+    {
+    }
     void Start()
     {
-        _rigid = GetComponent<Rigidbody2D>();
-        c_Collider = GetComponent<Collider2D>();
-        plGravity = new Vector2(0, -Physics2D.gravity.y);
-        mySprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        initGetComponent();
+        GameObject levelNum = GameObject.Find("GameManager");
+        if (levelNum)
+        {
+            Debug.Log("Found GameManager!");
+        } else
+        {
+            Debug.Log("Not found the GameManager!");
+        }
     }
     void Update()
     {
-        HandleInput();
+        if(levelIndex > 2)
+        {
+            HandleInput();
+        }
         if (isBlocked == false)
         {
             HandleJump();
@@ -58,7 +69,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void HandleInput()
     {
-        Sprint();
+        {
+            Sprint();
+        }
     }
     void Move()
     {
@@ -79,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Sprint()
     {
-        if (Input.GetButton("Sprint"))
+        if (Input.GetButton("Sprint") && isGrounded())
         {
             isSprinting = true;
         }
@@ -146,5 +159,15 @@ public class PlayerMovement : MonoBehaviour
         {
             mySprite.flipX = false;
         }
+    }
+
+    void initGetComponent()
+    {
+        _rigid = GetComponent<Rigidbody2D>();
+        c_Collider = GetComponent<Collider2D>();
+        plGravity = new Vector2(0, -Physics2D.gravity.y);
+        mySprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        gameManager = GetComponent<GameManager>();   
     }
 }
