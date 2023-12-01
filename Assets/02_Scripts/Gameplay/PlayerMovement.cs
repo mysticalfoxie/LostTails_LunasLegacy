@@ -42,14 +42,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         initGetComponent();
-        GameObject levelNum = GameObject.Find("GameManager");
-        if (levelNum)
-        {
-            Debug.Log("Found GameManager!");
-        } else
-        {
-            Debug.Log("Not found the GameManager!");
-        }
     }
     void Update()
     {
@@ -168,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         plGravity = new Vector2(0, -Physics2D.gravity.y);
         mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        gameManager = GetComponent<GameManager>();   
+        var gameManager = FindObjectOfType<GameManager>();
+        levelIndex = gameManager.currentLevelIndex;
     }
 }
