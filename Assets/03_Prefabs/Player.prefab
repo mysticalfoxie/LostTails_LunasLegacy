@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 8814216756165073138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.7988588, z: 1}
+  m_LocalScale: {x: 0.20785424, y: 0.17519024, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 837534380}
@@ -81,12 +81,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386c6ca1875605a4694168d13de0a7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 10.6
-  sprintSpeed: 15.6
+  walkSpeed: 3
+  sprintSpeed: 6
   isSprinting: 0
   isWalking: 0
   isBlocked: 0
-  jumpPower: 10.12
+  jumpPower: 7
   maxJump: 0.4
   fallMulti: 0
   jumpMulti: 0
@@ -138,7 +138,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 112d8824f6a62bc44a6c0f5c28cfc113, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -191,7 +191,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7009640092536943406
 MonoBehaviour:
   m_ObjectHideFlags: 0
