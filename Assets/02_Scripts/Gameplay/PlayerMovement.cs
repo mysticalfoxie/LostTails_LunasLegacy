@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,27 +11,27 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     GameManager gameManager;
 
-    [Header("Movement System")] [SerializeField] float walkSpeed = 20f;
+    [Header("Movement System")][SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
     [SerializeField] public bool isBlocked;
 
-    [Header("Jump System")] [SerializeField] float jumpPower = 30f;
+    [Header("Jump System")][SerializeField] float jumpPower = 30f;
     [SerializeField] float maxJump = 0.4f;
     [SerializeField] float fallMulti;
     [SerializeField] float jumpMulti;
 
-    [Header("Ground System")] [SerializeField] float groundScaleX = 7.61f;
+    [Header("Ground System")][SerializeField] float groundScaleX = 7.61f;
     [SerializeField] float groundScaleY = 0.4f;
     public Transform groundCheck;
     public LayerMask groundLayer;
     Vector2 plGravity;
 
-    [Header("Debug")] [SerializeField] bool isJumping;
+    [Header("Debug")][SerializeField] bool isJumping;
     [SerializeField] float countJump;
     int levelIndex;
-    
+
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
     private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
 
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool(IsSprintingAnimation, false);
             return;
         }
-        
+
         // ToDo: Improve Script Dynamics
         if (isSprinting && animator.GetBool(IsWalkingAnimation))
             animator.SetBool(IsWalkingAnimation, false);
