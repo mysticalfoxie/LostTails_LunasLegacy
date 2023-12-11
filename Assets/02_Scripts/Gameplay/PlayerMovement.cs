@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
     private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
+    private static readonly int IsGroundedAnimation = Animator.StringToHash("IsGrounded");
+    private static readonly int IsJumpingAnimation = Animator.StringToHash("IsJumping");
+    private static readonly int IsFallingAnimation = Animator.StringToHash("IsFalling");
 
     private void Awake()
     {
