@@ -9,7 +9,7 @@ public class PlayerDeath : MonoBehaviour
     //Beim Inspector: Original Height = 1 setzen,ansonsten läuft nix!
     public GameObject respawnPoint;
     public GameObject player;
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag ("Player"))
         {
