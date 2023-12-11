@@ -40,8 +40,11 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject quitButton;
     [SerializeField] GameObject saveButton;
     [SerializeField] GameObject backButton;
+
+    Fading fading;
     public void Start()
     {
+        fading = FindAnyObjectByType<Fading>();
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -61,7 +64,15 @@ public class StartMenu : MonoBehaviour
     }
     public void StartGame()
     {
+        StartCoroutine(_ChangeScene());
+    }
+
+    public IEnumerator _ChangeScene()
+    {
+        fading.FadeIn();
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(1);
+        fading.FadeOut();
     }
 
     public void Credits()

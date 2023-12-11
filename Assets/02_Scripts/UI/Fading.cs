@@ -44,19 +44,16 @@ public class Fading : MonoBehaviour
     }
     public void FadeIn()
     {
-        Debug.Log("FadeIn wird geladen");
         fadeIn = true;
     }
 
     public void FadeOut()
     {
-        Debug.Log("FadeOut wird geladen");
         fadeOut = true;
     }
 
     public IEnumerator _ChangeScene()
     {
-        Debug.Log("_ChangeScene wird geladen");
         FadeIn();
         yield return new WaitForSeconds(1);
         gameManager.LoadNextLevel();
@@ -67,7 +64,6 @@ public class Fading : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Trigger NextLevel!");
             StartCoroutine(_ChangeScene());
         }
     }

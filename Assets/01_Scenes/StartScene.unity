@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 180644410}
   - component: {fileID: 180644409}
   - component: {fileID: 180644408}
+  - component: {fileID: 180644411}
   m_Layer: 5
   m_Name: FadeScreen
   m_TagString: Untagged
@@ -878,6 +879,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180644406}
   m_CullTransparentMesh: 1
+--- !u!114 &180644411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180644406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414c0a1623fd05c40ab996e5136ce3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasGroup: {fileID: 180644408}
+  fadeIn: 0
+  fadeOut: 0
+  timeToFade: 1
 --- !u!1 &185762919
 GameObject:
   m_ObjectHideFlags: 0
