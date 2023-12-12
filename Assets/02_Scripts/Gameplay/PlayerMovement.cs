@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Sprint()
     {
-        if (Input.GetButton("Sprint") && isGrounded())
+        if (Input.GetButton("Sprint") /*&& isGrounded()*/)
         {
             isSprinting = true;
         }
@@ -117,9 +117,16 @@ public class PlayerMovement : MonoBehaviour
         if (levelIndex == 3) return;
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
-            _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
-            isJumping = true;
-            countJump = 0;
+            if (isSprinting == true)
+            {
+                _rigid.velocity = new Vector2(_rigid.velocity.x+jumpSprint, jumpPower);
+            }
+            else
+            {
+                _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
+            }
+                isJumping = true;
+                countJump = 0;
         }
 
         if (_rigid.velocity.y > 0 && isJumping)
@@ -129,17 +136,14 @@ public class PlayerMovement : MonoBehaviour
 
             float t = countJump / maxJump;
             float currentJump = jumpMulti;
-            if(isSprinting) 
-            {
-                currentJump = jumpSprint;
-            }
-
             if (t > 0.5f)
             {
-                if(isSprinting)
+                if (isSprinting)
                 {
-                    currentJump = jumpSprint * (1 - t);
-                } else
+                    // currentJump = jumpSprint * (1 - t);
+                    currentJump = jumpMulti * (1 - t);
+                }
+                else
                 {
                     currentJump = jumpMulti * (1 - t);
 
