@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
 {
     public int currentLevelIndex;
     public static GameManager Instance;
+    Fading fading;
 
 
     public GameManager()
     {
-     //   if (FindObjectsOfType<GameManager>().Length > 0)
-     //       throw new Exception("JUSTIN/TONI!!! STOP IT!.... Es können keine 2 GameManager in einer Szene sein!");
+
     }
     
     private void Awake()
@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        fading = FindAnyObjectByType<Fading>();
+        fading.FadeOut();
     }
 
     void Update()

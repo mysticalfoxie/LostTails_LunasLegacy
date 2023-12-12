@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D _rigid;
-    Collider2D c_Collider;
-    SpriteRenderer mySprite;
     Animator animator;
     GameManager gameManager;
 
@@ -189,23 +187,12 @@ public class PlayerMovement : MonoBehaviour
             scale.x = -ScalingX;
         }
         this.transform.localScale = scale;
-
-       /* if (_rigid.velocity.x > 0f)
-        {
-            mySprite.flipX = true;
-        }
-        else if (_rigid.velocity.x < 0f)
-        {
-            mySprite.flipX = false;
-        }*/
     }
 
     void initGetComponent()
     {
         _rigid = GetComponent<Rigidbody2D>();
-        c_Collider = GetComponent<Collider2D>();
         plGravity = new Vector2(0, -Physics2D.gravity.y);
-        mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
         levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
