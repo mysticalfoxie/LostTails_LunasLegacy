@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Debug")][SerializeField] bool isJumping;
     [SerializeField] float countJump;
     int levelIndex;
+    float originScale;
 
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
     private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
@@ -177,14 +178,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Flip()
     {
-        if (_rigid.velocity.x > 0f)
+        Vector3 scale = this.transform.localScale;
+        float ScalingX = originScale;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            scale.x = ScalingX;
+        } else if (Input.GetKey(KeyCode.D))
+        {
+            scale.x = -ScalingX;
+        }
+        this.transform.localScale = scale;
+
+       /* if (_rigid.velocity.x > 0f)
         {
             mySprite.flipX = true;
         }
         else if (_rigid.velocity.x < 0f)
         {
             mySprite.flipX = false;
-        }
+        }*/
     }
 
     void initGetComponent()
@@ -196,5 +209,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
         levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
+        originScale = _rigid.transform.localScale.x;
     }
 }
