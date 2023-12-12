@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxJump = 0.4f;
     [SerializeField] float fallMulti;
     [SerializeField] float jumpMulti;
+    [SerializeField] float jumpSprint = 2f;
 
     [Header("Ground System")][SerializeField] float groundScaleX = 7.61f;
     [SerializeField] float groundScaleY = 0.4f;
@@ -49,11 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (levelIndex > 1)
-        {
-            HandleInput();
-        }
-
+        HandleInput();
         if (isBlocked == false)
         {
             HandleJump();
@@ -68,9 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleInput()
     {
-        {
-            Sprint();
-        }
+        if (levelIndex == 1 || levelIndex == 3) return;
+        Sprint();
     }
 
     void Move()
@@ -92,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // ToDo: Improve Script Dynamics
         if (isSprinting && animator.GetBool(IsWalkingAnimation))
             animator.SetBool(IsWalkingAnimation, false);
         else if (!isSprinting && !animator.GetBool(IsWalkingAnimation))
@@ -119,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
+        if (levelIndex == 3) return;
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
@@ -133,10 +129,21 @@ public class PlayerMovement : MonoBehaviour
 
             float t = countJump / maxJump;
             float currentJump = jumpMulti;
+            if(isSprinting) 
+            {
+                currentJump = jumpSprint;
+            }
 
             if (t > 0.5f)
             {
-                currentJump = jumpMulti * (1 - t);
+                if(isSprinting)
+                {
+                    currentJump = jumpSprint * (1 - t);
+                } else
+                {
+                    currentJump = jumpMulti * (1 - t);
+
+                }
             }
 
             _rigid.velocity += plGravity * currentJump * Time.deltaTime;
@@ -184,6 +191,6 @@ public class PlayerMovement : MonoBehaviour
         mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 2;
+        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
     }
 }
