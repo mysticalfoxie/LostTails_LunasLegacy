@@ -88,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // ToDo: Improve Script Dynamics
         if (isSprinting && animator.GetBool(IsWalkingAnimation))
             animator.SetBool(IsWalkingAnimation, false);
         else if (!isSprinting && !animator.GetBool(IsWalkingAnimation))
