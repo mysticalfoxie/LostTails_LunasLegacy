@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxJump = 0.4f;
     [SerializeField] float fallMulti;
     [SerializeField] float jumpMulti;
+    [SerializeField] float jumpSprint = 2f;
 
     [Header("Ground System")][SerializeField] float groundScaleX = 7.61f;
     [SerializeField] float groundScaleY = 0.4f;
@@ -129,10 +130,21 @@ public class PlayerMovement : MonoBehaviour
 
             float t = countJump / maxJump;
             float currentJump = jumpMulti;
+            if(isSprinting) 
+            {
+                currentJump = jumpSprint;
+            }
 
             if (t > 0.5f)
             {
-                currentJump = jumpMulti * (1 - t);
+                if(isSprinting)
+                {
+                    currentJump = jumpSprint * (1 - t);
+                } else
+                {
+                    currentJump = jumpMulti * (1 - t);
+
+                }
             }
 
             _rigid.velocity += plGravity * currentJump * Time.deltaTime;
