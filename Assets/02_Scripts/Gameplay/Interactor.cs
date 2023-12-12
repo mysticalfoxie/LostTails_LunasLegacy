@@ -26,7 +26,10 @@ public class Interactor : MonoBehaviour
             if (InteractInput())
             {
                 PlayerMovement moveScript = GetComponent<PlayerMovement>();
+                moveScript.isBlocked = true;
                 Dialogue.SetActive(true);
+                PressE.SetActive(false);
+                
             }
         }
         if (!DetectObject())
@@ -42,7 +45,6 @@ public class Interactor : MonoBehaviour
     bool InteractInput()
     {
         return Input.GetKeyDown(KeyCode.E);
-        
     }
     bool DetectObject()
     {
