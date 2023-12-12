@@ -49,11 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (levelIndex > 1)
-        {
-            HandleInput();
-        }
-
+        HandleInput();
         if (isBlocked == false)
         {
             HandleJump();
@@ -68,9 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleInput()
     {
-        {
-            Sprint();
-        }
+        if (levelIndex == 1 || levelIndex == 3) return;
+        Sprint();
     }
 
     void Move()
@@ -119,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
+        if (levelIndex == 3) return;
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
@@ -184,6 +180,6 @@ public class PlayerMovement : MonoBehaviour
         mySprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 2;
+        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
     }
 }
