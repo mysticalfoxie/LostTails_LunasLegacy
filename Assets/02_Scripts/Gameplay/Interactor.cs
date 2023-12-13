@@ -34,10 +34,11 @@ public class Interactor : MonoBehaviour
         }
         if (!DetectObject())
         {
+            PlayerMovement moveScript = GetComponent< PlayerMovement>();
+            moveScript.isBlocked = false;
             PressE.SetActive(false);
             if (InteractInput())
             {
-                PlayerMovement moveScript = GetComponent<PlayerMovement>();
                 Dialogue.SetActive(false);
             }
         }
