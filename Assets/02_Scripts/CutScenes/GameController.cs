@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class GameController : MonoBehaviour
                     }
                     currentScene = currentScene.nextScene;
                     bottomBar.PlayScene(currentScene);
-                    backgroundController.SwitchImage(currentScene.background);
+                    backgroundController.SetImage(currentScene.background);
                 }
                 else
                 {
