@@ -12,6 +12,8 @@ public class BottomBarController : MonoBehaviour
     private int sentenceIndex = -1;
     private StoryScene currentScene;
     private State state = State.COMPLETED;
+
+    private StoryScene lastScene;
     
     private enum State
     {
