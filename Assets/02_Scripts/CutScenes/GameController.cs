@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     public StoryScene currentScene;
+    public StoryScene[] allScenes;
     public BottomBarController bottomBar;
     public BackgroundController backgroundController;
 
@@ -24,6 +26,12 @@ public class GameController : MonoBehaviour
             { 
                 if(bottomBar.IsLastSentence())
                 {
+                    var lastScene = allScenes.Last();
+                    var isLastScene = lastScene == currentScene;
+                    if(allScenes.Last()== currentScene)
+                    {
+                        SceneManager.LoadScene(1);
+                    }
                     currentScene = currentScene.nextScene;
                     bottomBar.PlayScene(currentScene);
                     backgroundController.SwitchImage(currentScene.background);
