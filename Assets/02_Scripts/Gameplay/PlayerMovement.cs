@@ -50,10 +50,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleInput();
-        if (isBlocked == false)
-        {
-            HandleJump();
-        }
+        HandleJump();
     }
 
     void FixedUpdate()
@@ -64,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleInput()
     {
+        if (isBlocked) return;
         if (levelIndex == 1 || levelIndex == 3) return;
         Sprint();
     }
