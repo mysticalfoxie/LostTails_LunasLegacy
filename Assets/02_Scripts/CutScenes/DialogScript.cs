@@ -14,6 +14,8 @@ public class DialogScript : MonoBehaviour
 
     public PlayerMovement playerMovement;
 
+    public GameObject Object;
+
     void Start()
     {
         bottomBar.PlayScene(currentScene);
@@ -32,6 +34,8 @@ public class DialogScript : MonoBehaviour
                     playerMovement.isBlocked = false;
                     PressEText.SetActive(false);
                     DialogueCanvas.gameObject.SetActive(false);
+                    Object.SetActive(false);
+
                 }
                 else
                 {
