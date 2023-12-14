@@ -13,7 +13,7 @@ public class BottomBarController : MonoBehaviour
     private StoryScene currentScene;
     private State state = State.COMPLETED;
 
-    private StoryScene lastScene;
+    public PlayerMovement playerMovement;
     
     private enum State
     {
@@ -30,6 +30,7 @@ public class BottomBarController : MonoBehaviour
      StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text)); 
     personNameText.text = currentScene.sentences[sentenceIndex].speaker.speakerName;
     personNameText.color = currentScene.sentences[sentenceIndex].speaker.textColor;
+     playerMovement.isBlocked = true;
     }
     public bool IsCompleted()
     {
