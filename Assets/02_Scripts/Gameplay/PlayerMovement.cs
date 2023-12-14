@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
-    [SerializeField] public bool isBlocked;
+    [SerializeField] public bool isBlocked; //Block Movement and Jumping in Dialoque
 
     [Header("Jump System")][SerializeField] float jumpPower = 30f;
     [SerializeField] float maxJump = 0.4f;

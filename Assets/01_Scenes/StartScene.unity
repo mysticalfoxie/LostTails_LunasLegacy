@@ -460,7 +460,7 @@ RectTransform:
   - {fileID: 1436696693}
   - {fileID: 180644407}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -547,6 +547,7 @@ MonoBehaviour:
   currentVolume: 0
   currentMusicVolume: 0
   currentSFXVolume: 0
+  backgroundAudio: {fileID: 1683134572}
   resolutionDropdown: {fileID: 338900559}
   qualityDropdown: {fileID: 887599724}
   textureDropdown: {fileID: 1789918467}
@@ -958,9 +959,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1138331612}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 20
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2023,9 +2024,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 694176584}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 20
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3756,7 +3757,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862661874
 GameObject:
@@ -8406,7 +8407,7 @@ GameObject:
   - component: {fileID: 1683134573}
   - component: {fileID: 1683134572}
   m_Layer: 0
-  m_Name: Background Music
+  m_Name: BackgroundMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8424,7 +8425,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2457538300249378793, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 468d7820f113cea4ea6fc553372831b1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8516,12 +8517,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683134571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.303246, y: 3.6227, z: -17.087887}
+  m_LocalPosition: {x: 959, y: 446, z: -17.087887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1708264708
 GameObject:
@@ -8851,9 +8852,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1447273167}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 20
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

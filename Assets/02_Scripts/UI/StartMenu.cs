@@ -16,6 +16,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] float currentVolume;
     [SerializeField] float currentMusicVolume;
     [SerializeField] float currentSFXVolume;
+    [SerializeField] AudioSource backgroundAudio;
 
     [Header("Dropdowns")]
     [SerializeField] Dropdown resolutionDropdown;
@@ -44,6 +45,8 @@ public class StartMenu : MonoBehaviour
     Fading fading;
     public void Start()
     {
+        backgroundAudio = FindObjectOfType<AudioSource>();
+        backgroundAudio.Play();
         fading = FindAnyObjectByType<Fading>();
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -70,6 +73,7 @@ public class StartMenu : MonoBehaviour
     public IEnumerator _ChangeScene()
     {
         fading.FadeIn();
+        backgroundAudio.Stop();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(1);
         fading.FadeOut();
