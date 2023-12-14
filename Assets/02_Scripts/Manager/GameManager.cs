@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         fading = FindAnyObjectByType<Fading>();
-        fading.FadeOut();
+        fading?.FadeOut();
     }
 
     void Update()
