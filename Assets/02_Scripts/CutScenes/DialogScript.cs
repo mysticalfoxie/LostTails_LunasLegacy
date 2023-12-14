@@ -12,10 +12,13 @@ public class DialogScript : MonoBehaviour
     public GameObject DialogueCanvas;
     public GameObject PressEText;
 
+    public PlayerMovement playerMovement;
+
+    public GameObject Object;
+
     void Start()
     {
         bottomBar.PlayScene(currentScene);
-        PlayerMovement moveScript = GetComponent<PlayerMovement>();
 
     }
 
@@ -28,11 +31,11 @@ public class DialogScript : MonoBehaviour
             {
                 if (bottomBar.IsLastSentence())
                 {
+                    playerMovement.isBlocked = false;
                     PressEText.SetActive(false);
                     DialogueCanvas.gameObject.SetActive(false);
-                    PlayerMovement moveScript = GetComponent<PlayerMovement>();
-                    moveScript.isBlocked = false;
-                    
+                    Object.SetActive(false);
+
                 }
                 else
                 {
