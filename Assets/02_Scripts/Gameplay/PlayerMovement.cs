@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 30f;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
+    [SerializeField] bool isFalling;
     [SerializeField] public bool isBlocked; //Block Movement and Jumping in Dialoque
 
     [Header("Jump System")][SerializeField] float jumpPower = 30f;
@@ -111,8 +112,14 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
+        var grounded = isGrounded();
+        animator.SetBool(IsGroundedAnimation, grounded);
+        
+        if (grounded && isFalling)
+            animator.SetBool(IsFallingAnimation, false);
+        
         if (levelIndex == 3) return;
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             if (isSprinting == true)
             {
@@ -122,14 +129,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
             }
-                isJumping = true;
-                countJump = 0;
+            
+            animator.SetBool(IsJumpingAnimation, true); 
+            isJumping = true;
+            countJump = 0;
         }
 
         if (_rigid.velocity.y > 0 && isJumping)
         {
             countJump += Time.deltaTime;
-            if (countJump > maxJump) isJumping = false;
+            if (countJump > maxJump)
+            {
+                isJumping = false;
+                animator.SetBool(IsJumpingAnimation, false);
+            }
 
             float t = countJump / maxJump;
             float currentJump = jumpMulti;
@@ -152,12 +165,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigid.velocity.y < 0)
         {
+            Debug.Log("Falling!");
+            isFalling = true;
+            animator.SetBool(IsFallingAnimation, true);
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
         }
 
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
+            animator.SetBool(IsJumpingAnimation, false);
             countJump = 0;
 
             if (_rigid.velocity.y > 0)
