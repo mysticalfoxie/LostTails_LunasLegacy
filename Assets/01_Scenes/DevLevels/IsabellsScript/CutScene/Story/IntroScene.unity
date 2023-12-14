@@ -187,7 +187,6 @@ GameObject:
   - component: {fileID: 448266939}
   - component: {fileID: 448266938}
   - component: {fileID: 448266942}
-  - component: {fileID: 448266943}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -297,23 +296,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16b7f25d639899144b38a70578ca3705, type: 2}
   bottomBar: {fileID: 1061756175}
   backgroundController: {fileID: 369019626}
-  lastScene: {fileID: 448266943}
---- !u!114 &448266943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448266937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6bee94c2ca43e541b0a85c47feea878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneIndex:
-  - {fileID: 11400000, guid: 1380a06ea9c228f4da7f31fa7666217f, type: 2}
-  - {fileID: 11400000, guid: 2fd9f46244d8059409ddd5197f711dbf, type: 2}
-  - {fileID: 11400000, guid: 16b7f25d639899144b38a70578ca3705, type: 2}
 --- !u!1 &545242813
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +417,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 10.889008, w: 0}
+  m_margin: {x: 0, y: 0, z: 1.2993698, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
