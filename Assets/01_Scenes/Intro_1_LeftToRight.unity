@@ -638,7 +638,6 @@ GameObject:
   m_Component:
   - component: {fileID: 37231649}
   - component: {fileID: 37231648}
-  - component: {fileID: 37231650}
   m_Layer: 7
   m_Name: Tile1
   m_TagString: Ground
@@ -713,32 +712,6 @@ Transform:
   m_Father: {fileID: 806948248}
   m_RootOrder: 75
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &37231650
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37231646}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 2.5307846, y: -0.5227943}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 9.6040535, y: 1.5905644}
-  m_EdgeRadius: 0
 --- !u!1 &40691845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 163312797}
   - component: {fileID: 163312799}
-  - component: {fileID: 163312800}
   m_Layer: 7
   m_Name: TilePreset4 (12)
   m_TagString: Ground
@@ -1548,32 +1520,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &163312800
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163312796}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.13589144, y: -1.802717}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.792245, y: 3.8819227}
-  m_EdgeRadius: 0
 --- !u!1 &164917110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1530,6 @@ GameObject:
   m_Component:
   - component: {fileID: 164917111}
   - component: {fileID: 164917113}
-  - component: {fileID: 164917114}
   m_Layer: 7
   m_Name: TilePreset6 (12)
   m_TagString: Ground
@@ -1600,8 +1545,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164917110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 147.22444, y: -17.52, z: -8.188886}
-  m_LocalScale: {x: 1, y: 0.9318459, z: 1}
+  m_LocalPosition: {x: 147.8344, y: -17.52, z: -8.188886}
+  m_LocalScale: {x: 0.8048, y: 0.9318459, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 806948248}
@@ -1659,31 +1604,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &164917114
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164917110}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.9515684, y: 0.2982447}
-  - {x: -1.0867615, y: 0.35483873}
-  - {x: 0.45433044, y: 0.63083345}
-  - {x: 1.9558563, y: 1.058003}
-  - {x: 2.8470762, y: 1.3918071}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1001 &168124080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2244,7 +2164,6 @@ GameObject:
   m_Component:
   - component: {fileID: 228942863}
   - component: {fileID: 228942865}
-  - component: {fileID: 228942866}
   m_Layer: 7
   m_Name: TilePreset6 (11)
   m_TagString: Ground
@@ -2319,32 +2238,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &228942866
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228942862}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -14.265945, y: -2.0877106}
-  - {x: -8.577917, y: -1.2340187}
-  - {x: -1.4159434, y: 0.21521077}
-  - {x: 0.15540016, y: 0.4325987}
-  - {x: 1.4787035, y: 0.8449854}
-  - {x: 2.7494447, y: 1.4249434}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1001 &255473515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3328,7 +3221,6 @@ GameObject:
   m_Component:
   - component: {fileID: 445637167}
   - component: {fileID: 445637169}
-  - component: {fileID: 445637170}
   m_Layer: 7
   m_Name: TilePreset4 (11)
   m_TagString: Ground
@@ -3403,32 +3295,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &445637170
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 445637166}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.15976405, y: -1.3483465}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.793902, y: 2.7561135}
-  m_EdgeRadius: 0
 --- !u!1 &450615023
 GameObject:
   m_ObjectHideFlags: 0
@@ -3782,8 +3648,35 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -7.9055176, y: 1.1808425}
-  - {x: -7.9055147, y: 1.1808424}
+  - {x: -144.67279, y: 2.4482763}
+  - {x: -141.47995, y: 1.3446892}
+  - {x: -137.77704, y: 0.8752521}
+  - {x: -134.02602, y: 0.07246247}
+  - {x: -130.87718, y: 0.011261225}
+  - {x: -104.34008, y: -0.116106525}
+  - {x: -101.79964, y: 0.093449146}
+  - {x: -99.04412, y: 0.7266412}
+  - {x: -96.587006, y: 1.1618304}
+  - {x: -93.39774, y: 2.0441499}
+  - {x: -90.608765, y: 2.4874783}
+  - {x: -87.85118, y: 3.308191}
+  - {x: -54.560276, y: 3.1463628}
+  - {x: -50.117966, y: 1.9809458}
+  - {x: -45.749626, y: 4.57817}
+  - {x: -43.447647, y: 5.2353773}
+  - {x: -41.684673, y: 4.377783}
+  - {x: -41.254593, y: 3.2363708}
+  - {x: -35.570892, y: 2.891236}
+  - {x: -34.264294, y: 4.2745676}
+  - {x: -32.812767, y: 4.833314}
+  - {x: -30.436235, y: 3.9820852}
+  - {x: -28.095098, y: 2.8094342}
+  - {x: -24.963276, y: 2.1472774}
+  - {x: -19.328442, y: 2.158328}
+  - {x: -16.043676, y: 1.4321862}
+  - {x: -13.783043, y: 1.1673687}
+  - {x: -7.9225583, y: 1.2573122}
+  - {x: -4.765689, y: 0.369685}
   - {x: 0.5572645, y: -0.7614111}
   - {x: 0.99863964, y: -0.866357}
   - {x: 1.6171099, y: -0.973477}
@@ -4303,7 +4196,6 @@ GameObject:
   m_Component:
   - component: {fileID: 590730104}
   - component: {fileID: 590730106}
-  - component: {fileID: 590730107}
   m_Layer: 7
   m_Name: TilePreset7 (10)
   m_TagString: Ground
@@ -4319,8 +4211,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590730103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 152.22446, y: -17.6, z: -8.188886}
-  m_LocalScale: {x: 1, y: 0.9640224, z: 1}
+  m_LocalPosition: {x: 152.1541, y: -17.6, z: -8.188886}
+  m_LocalScale: {x: 0.72227585, y: 0.9640224, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 806948248}
@@ -4378,32 +4270,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &590730107
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590730103}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 14.760506, y: 0.16016102}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 33.794724, y: 2.5868702}
-  m_EdgeRadius: 0
 --- !u!1 &599691330
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,7 +4280,6 @@ GameObject:
   m_Component:
   - component: {fileID: 599691331}
   - component: {fileID: 599691333}
-  - component: {fileID: 599691334}
   m_Layer: 7
   m_Name: Im alive again
   m_TagString: Ground
@@ -4489,28 +4354,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &599691334
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599691330}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.8775175, y: 0.17776227}
-  - {x: 2.565109, y: 1.2649219}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &605824798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6078,7 +5921,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2620426077724556361, guid: 0529a0c3e10ed7e4f99dbe8cee2cba53, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0529a0c3e10ed7e4f99dbe8cee2cba53, type: 3}
 --- !u!1 &824556087
 GameObject:
@@ -6602,7 +6446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 889261048}
   - component: {fileID: 889261050}
-  - component: {fileID: 889261051}
   m_Layer: 7
   m_Name: TilePreset6 (3)
   m_TagString: Ground
@@ -6677,31 +6520,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &889261051
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889261047}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.9115598, y: 0.12196565}
-  - {x: -1.6635513, y: 0.13148236}
-  - {x: -0.4777298, y: 0.29138064}
-  - {x: 1.5717773, y: 0.82042956}
-  - {x: 2.8317716, y: 1.451911}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &897535798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6941,7 +6759,6 @@ GameObject:
   m_Component:
   - component: {fileID: 935654887}
   - component: {fileID: 935654886}
-  - component: {fileID: 935654888}
   m_Layer: 7
   m_Name: Tile3 (1)
   m_TagString: Ground
@@ -7016,31 +6833,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &935654888
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935654884}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.8593013, y: 1.9502661}
-  - {x: -1.9545625, y: 1.2255342}
-  - {x: -0.40037584, y: 0.6139866}
-  - {x: 0.9191812, y: 0.3033524}
-  - {x: 2.9832926, y: 0.24378324}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &952701012
 GameObject:
   m_ObjectHideFlags: 0
@@ -7476,7 +7268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 983259324}
   - component: {fileID: 983259326}
-  - component: {fileID: 983259327}
   m_Layer: 7
   m_Name: TilePreset6 (10)
   m_TagString: Ground
@@ -7492,8 +7283,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983259323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 142.22444, y: -17.52, z: -8.188886}
-  m_LocalScale: {x: -1.032, y: 0.9318459, z: 1}
+  m_LocalPosition: {x: 143.3506, y: -17.52, z: -8.188886}
+  m_LocalScale: {x: -0.7317381, y: 0.9318459, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 806948248}
@@ -7551,31 +7342,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &983259327
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983259323}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.9155614, y: 0.26510644}
-  - {x: -2.149607, y: 0.3824577}
-  - {x: -1.0133297, y: 0.4916139}
-  - {x: -0.3744122, y: 0.59514683}
-  - {x: 0.19260597, y: 0.8284565}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &983332043
 GameObject:
   m_ObjectHideFlags: 0
@@ -13775,7 +13541,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1282641107}
   - component: {fileID: 1282641109}
-  - component: {fileID: 1282641110}
   m_Layer: 7
   m_Name: TilePreset7 (1)
   m_TagString: Ground
@@ -13850,32 +13615,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1282641110
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282641106}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 8.874483, y: 0.027353525}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 23.588947, y: 2.8204665}
-  m_EdgeRadius: 0
 --- !u!4 &1293746162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8512717945444459562, guid: 4acba6e8ba317d049826b9048e859397, type: 3}
@@ -14357,13 +14096,19 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -3.3433976, y: -2.1343966}
-  - {x: -3.0079918, y: -2.2258706}
+  - {x: -3.2964768, y: 2.0883574}
+  - {x: -3.2895088, y: -2.085112}
   - {x: -2.1579018, y: -2.1635847}
   - {x: -1.2588005, y: -2.132353}
   - {x: -0.5596771, y: -2.0133893}
   - {x: 0.92619133, y: -1.4507358}
-  - {x: 3.4043822, y: 0.27442265}
+  - {x: 3.3630037, y: 0.14320481}
+  - {x: 7.1191597, y: -1.4779015}
+  - {x: 17.619316, y: -1.5536302}
+  - {x: 23.004534, y: -0.40133333}
+  - {x: 28.840895, y: -0.42491293}
+  - {x: 34.470413, y: -1.8670981}
+  - {x: 39.157036, y: -2.3530688}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -14937,7 +14682,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1448392116}
   - component: {fileID: 1448392118}
-  - component: {fileID: 1448392119}
   m_Layer: 7
   m_Name: TilePreset6 (8)
   m_TagString: Ground
@@ -15012,32 +14756,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1448392119
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448392115}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.046318054, y: -1.3752375}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.786789, y: 4.000579}
-  m_EdgeRadius: 0
 --- !u!1 &1460202218
 GameObject:
   m_ObjectHideFlags: 0
@@ -15440,7 +15158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1493708620}
   - component: {fileID: 1493708619}
-  - component: {fileID: 1493708621}
   m_Layer: 7
   m_Name: TilePreset7
   m_TagString: Ground
@@ -15515,32 +15232,6 @@ Transform:
   m_Father: {fileID: 806948248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1493708621
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493708618}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.010696411, y: -0.015814781}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.862713, y: 2.7341294}
-  m_EdgeRadius: 0
 --- !u!1 &1503292286
 GameObject:
   m_ObjectHideFlags: 0
@@ -15642,7 +15333,13 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -4.927805, y: 1.2490444}
+  - {x: -34.329765, y: -0.98956263}
+  - {x: -32.136272, y: -0.5787772}
+  - {x: -29.46136, y: 0.28988934}
+  - {x: -18.71084, y: 0.3202292}
+  - {x: -17.409544, y: 0.5193509}
+  - {x: -15.984776, y: 1.1487507}
+  - {x: -4.8931623, y: 1.0919657}
   - {x: -4.1345167, y: 0.81341213}
   - {x: -2.963566, y: 0.28723297}
   - {x: -2.2345533, y: 0.055262618}
@@ -15833,7 +15530,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1538567896}
   - component: {fileID: 1538567898}
-  - component: {fileID: 1538567899}
   m_Layer: 7
   m_Name: WaterRespawn
   m_TagString: Untagged
@@ -15908,33 +15604,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &1538567899
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538567895}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -7.744191, y: 1.2301521}
-  - {x: -4.661254, y: 0.49750972}
-  - {x: -1.6856838, y: -0.07849285}
-  - {x: -0.64101964, y: -0.29364592}
-  - {x: 0.6961478, y: -0.77169406}
-  - {x: 1.7721212, y: -0.9687209}
-  - {x: 2.6148796, y: -1.0872352}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!4 &1555409465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8512717945444459562, guid: 4acba6e8ba317d049826b9048e859397, type: 3}
@@ -17386,7 +17055,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1650146029}
   - component: {fileID: 1650146028}
-  - component: {fileID: 1650146030}
   m_Layer: 7
   m_Name: WaterDeathRespawn
   m_TagString: Untagged
@@ -17461,32 +17129,6 @@ Transform:
   m_Father: {fileID: 806948248}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &1650146030
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650146026}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.2717612, y: 0.3936893}
-  - {x: -2.2674692, y: 0.3891466}
-  - {x: 1.3418542, y: -0.77290326}
-  - {x: 1.77631, y: -0.8572525}
-  - {x: 2.2818189, y: -0.9767909}
-  - {x: 2.6390994, y: -1.2677498}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &1656109104
 GameObject:
   m_ObjectHideFlags: 0
@@ -17581,7 +17223,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1666786012}
   - component: {fileID: 1666786014}
-  - component: {fileID: 1666786015}
   m_Layer: 7
   m_Name: Tile2 (4)
   m_TagString: Ground
@@ -17656,32 +17297,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1666786015
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666786011}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 11.419037, y: -0.65497524}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 28.628036, y: 1.6568042}
-  m_EdgeRadius: 0
 --- !u!1 &1670687654
 GameObject:
   m_ObjectHideFlags: 0
@@ -18094,7 +17709,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1722144940}
   - component: {fileID: 1722144942}
-  - component: {fileID: 1722144943}
   m_Layer: 7
   m_Name: TilePreset4 (2)
   m_TagString: Ground
@@ -18169,32 +17783,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1722144943
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722144939}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 9.355843, y: -1.2995168}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.2499995, y: 6.7510543}
-    newSize: {x: 6.2499995, y: 6.7510543}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 23.087433, y: 2.8537734}
-  m_EdgeRadius: 0
 --- !u!1 &1741683692
 GameObject:
   m_ObjectHideFlags: 0
@@ -18373,7 +17961,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1761946513}
   - component: {fileID: 1761946515}
-  - component: {fileID: 1761946516}
   m_Layer: 7
   m_Name: TilePreset6 (6)
   m_TagString: Ground
@@ -18448,32 +18035,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &1761946516
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761946512}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.869949, y: 0.09831971}
-  - {x: -1.7787781, y: 0.17915528}
-  - {x: -0.8131256, y: 0.2747099}
-  - {x: 0.555954, y: 0.54069245}
-  - {x: 1.9313202, y: 0.9620166}
-  - {x: 2.5761564, y: 1.2106954}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &1791323230
 GameObject:
   m_ObjectHideFlags: 0
@@ -18633,7 +18194,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1800348860}
   - component: {fileID: 1800348862}
-  - component: {fileID: 1800348863}
   m_Layer: 7
   m_Name: Tile3 (5)
   m_TagString: Ground
@@ -18708,34 +18268,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &1800348863
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800348859}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.8730936, y: 0.24236529}
-  - {x: -2.1516528, y: 0.19758016}
-  - {x: -1.5011481, y: 0.22683702}
-  - {x: -1.5011481, y: 0.22683701}
-  - {x: -0.29300022, y: 0.40113145}
-  - {x: 2.7606802, y: 1.0587043}
-  - {x: 7.196058, y: 2.3372967}
-  - {x: 9.642903, y: 3.5777736}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1001 &1806555897
 PrefabInstance:
   m_ObjectHideFlags: 0
