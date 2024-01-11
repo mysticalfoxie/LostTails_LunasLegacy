@@ -116,7 +116,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool(IsGroundedAnimation, grounded);
         
         if (grounded && isFalling)
+        {
             animator.SetBool(IsFallingAnimation, false);
+            isFalling = false;
+        }
         
         if (levelIndex == 3) return;
         if (Input.GetButtonDown("Jump") && grounded)
@@ -165,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigid.velocity.y < 0)
         {
-            Debug.Log("Falling!");
+          //  Debug.Log("Falling!");
             isFalling = true;
             animator.SetBool(IsFallingAnimation, true);
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;

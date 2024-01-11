@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using System;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 public class StartMenu : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject creditsMenu;
     [SerializeField] GameObject startMenu;
     [SerializeField] GameObject stateMenu;
+    [SerializeField] GameObject pauseMenu;
+    bool Paused = false;
 
     [Header("Buttons")]
     [SerializeField] GameObject startButton;
@@ -65,9 +68,40 @@ public class StartMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         loadSettings(currentResolutionIndex);
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Paused == false)
+            {
+                Pause();
+
+            }
+            else
+            {
+                Resume();
+            }
+        }
+    }
     public void StartGame()
     {
         StartCoroutine(_ChangeScene());
+    }
+
+    public void Pause()
+    {
+        // Cursor.visible = true;
+        Time.timeScale = 0.0f;
+        pauseMenu.SetActive(true);
+        Paused = true;
+    }
+    public void Resume()
+    {
+        // Cursor.visible = false;
+        Time.timeScale = 1.0f;
+        pauseMenu.SetActive(false);
+        Paused = false;
     }
 
     public IEnumerator _ChangeScene()
@@ -91,7 +125,13 @@ public class StartMenu : MonoBehaviour
         controlsMenu.SetActive(true);
     }
 
-    public void Options() //To-Do: Sound Slider!
+    public void Home()
+    {
+        if (Time.timeScale == 0) Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    public void Options()
     {
         startMenu.SetActive(false);
         optionsMenu.SetActive(true);
