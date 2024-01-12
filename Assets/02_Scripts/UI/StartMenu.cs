@@ -6,14 +6,15 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using System;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEngine.UIElements;
 
 public class StartMenu : MonoBehaviour
 {
     [Header("Music Control")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider VolumeSlider;
-    [SerializeField] Slider MusicSlider;
-    [SerializeField] Slider SFXSlider;
+    [SerializeField] UnityEngine.UI.Slider VolumeSlider;
+    [SerializeField] UnityEngine.UI.Slider MusicSlider;
+    [SerializeField] UnityEngine.UI.Slider SFXSlider;
     [SerializeField] float currentVolume;
     [SerializeField] float currentMusicVolume;
     [SerializeField] float currentSFXVolume;
@@ -35,6 +36,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject stateMenu;
     [SerializeField] GameObject pauseMenu;
     bool Paused = false;
+    bool gameStarted;
 
     [Header("Buttons")]
     [SerializeField] GameObject startButton;
@@ -45,9 +47,13 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject saveButton;
     [SerializeField] GameObject backButton;
 
+    [SerializeField] GameObject BackgroundImage;
+
     Fading fading;
     public void Start()
     {
+        startMenu.SetActive(true);
+        BackgroundImage.SetActive(true);
         backgroundAudio = FindObjectOfType<AudioSource>();
         backgroundAudio.Play();
         fading = FindAnyObjectByType<Fading>();
@@ -86,6 +92,7 @@ public class StartMenu : MonoBehaviour
     }
     public void StartGame()
     {
+        //gameStarted = true;
         StartCoroutine(_ChangeScene());
     }
 
@@ -110,18 +117,26 @@ public class StartMenu : MonoBehaviour
         backgroundAudio.Stop();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(1);
+        if (!gameStarted) { 
+            BackgroundImage.SetActive(false);
+            startMenu.SetActive(false);
+            gameStarted = true;
+        } else if(gameStarted == true)
+        {
+
+        }
         fading.FadeOut();
     }
 
     public void Credits()
     {
-        startMenu.SetActive(false);
+        GameStartedOff();
         creditsMenu.SetActive(true);
     }
 
     public void Controls()
     {
-        startMenu.SetActive(false);
+        GameStartedOff();
         controlsMenu.SetActive(true);
     }
 
@@ -129,11 +144,13 @@ public class StartMenu : MonoBehaviour
     {
         if (Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(0);
+        gameStarted = false;
+        GameStartedOn();
     }
 
     public void Options()
     {
-        startMenu.SetActive(false);
+        GameStartedOff();
         optionsMenu.SetActive(true);
     }
 
@@ -227,15 +244,42 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.SetInt("TextureQualityPreference", textureDropdown.value);
         PlayerPrefs.SetInt("AntiAliasingPreference",aaDropdown.value);
         PlayerPrefs.SetInt("FullscreenPreference",Convert.ToInt32(Screen.fullScreen));
-        startMenu.SetActive(true);
+        GameStartedOn();
         optionsMenu.SetActive(false);
     }
 
     public void BackButton()
     {
-        startMenu.SetActive(true);
+        GameStartedOn();
         creditsMenu.SetActive(false);
         controlsMenu.SetActive(false);
+    }
+
+    public void GameStartedOn()
+    {
+        if (gameStarted)
+        {
+            pauseMenu.SetActive(true);
+
+        }
+        else
+        {
+            startMenu.SetActive(true);
+            BackgroundImage.SetActive(true);
+        }
+    }
+    public void GameStartedOff()
+    {
+        if (gameStarted)
+        {
+            pauseMenu.SetActive(false);
+
+        }
+        else
+        {
+            startMenu.SetActive(false);
+            if(gameStarted)BackgroundImage.SetActive(false);
+        }
     }
     public void loadSettings(int currentResolutionIndex)
     {
