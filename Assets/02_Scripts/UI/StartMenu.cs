@@ -146,6 +146,7 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene(0);
         gameStarted = false;
         GameStartedOn();
+        pauseMenu.SetActive(false);
     }
 
     public void Options()
