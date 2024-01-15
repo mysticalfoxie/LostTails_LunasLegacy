@@ -197,10 +197,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = this.transform.localScale;
         float ScalingX = originScale;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             scale.x = ScalingX;
-        } else if (Input.GetKey(KeyCode.D))
+        } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             scale.x = -ScalingX;
         }
