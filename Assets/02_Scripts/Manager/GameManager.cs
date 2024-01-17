@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
 
     private static IEnumerator NextLevelWithoutFading(Func<IEnumerator> actionsDuringBlackscreen)
     {
-        yield return actionsDuringBlackscreen();
+        if (actionsDuringBlackscreen is not null)
+            yield return actionsDuringBlackscreen();
         var operation = Instance.SwitchSceneAsync();
         Debug.Log("Fading skipped. FadeScreen is missing.");
         yield return operation;
