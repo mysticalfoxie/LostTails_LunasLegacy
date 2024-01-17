@@ -10,56 +10,66 @@ public class GameManager : MonoBehaviour
     private Fading _fader;
     private GameObject _fadeScreenGameObject;
     private bool _inTransition;
+    
+    [SerializeField]
+    private float _progress;
 
     private void Awake()
     {
+        if (Instance is not null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        
         Instance = this;
         var fadeScreen = GameObject.FindGameObjectWithTag("FadeScreen");
         if (fadeScreen is not null)
-            _fader = fadeScreen.GetComponent<Fading>();
+            Instance._fader = fadeScreen.GetComponent<Fading>();
+        
+        DontDestroyOnLoad(Instance);
     }
 
-    public void LoadNextLevel()
+    public static void LoadNextLevel()
     {
-        StartCoroutine(LoadNextLevelAsync());
+        Instance.StartCoroutine(LoadNextLevelAsync());
     }
 
-    public IEnumerator LoadNextLevelAsync(Func<IEnumerator> actionsDuringBlackscreen = null)
+    public static IEnumerator LoadNextLevelAsync(Func<IEnumerator> actionsDuringBlackscreen = null)
     {
-        if (_inTransition) yield break;
-        if (_fader is null)
+        if (Instance._inTransition) yield break;
+        if (Instance._fader is null)
             yield return NextLevelWithoutFading(actionsDuringBlackscreen);
         else
         {
-            _inTransition = true;
+            Instance._inTransition = true;
             yield return NextLevelWithFading(actionsDuringBlackscreen);
         }
     }
 
-    private IEnumerator NextLevelWithFading(Func<IEnumerator> actionsDuringBlackscreen)
+    private static IEnumerator NextLevelWithFading(Func<IEnumerator> actionsDuringBlackscreen)
     {
-        yield return _fader.FadeInAsync();
+        yield return Instance._fader.FadeInAsync();
         if (actionsDuringBlackscreen is not null)
             yield return actionsDuringBlackscreen();
-
-        yield return Instance.SwitchSceneAsync();
+        yield return SwitchSceneAsync();
         yield return new WaitForSeconds(1.0F);
-        yield return _fader.FadeOutAsync();
-        _inTransition = false;
+        yield return Instance._fader.FadeOutAsync();
+        
+        Instance._inTransition = false;
     }
 
     private static IEnumerator NextLevelWithoutFading(Func<IEnumerator> actionsDuringBlackscreen)
     {
         if (actionsDuringBlackscreen is not null)
             yield return actionsDuringBlackscreen();
-        var operation = Instance.SwitchSceneAsync();
         Debug.Log("Fading skipped. FadeScreen is missing.");
-        yield return operation;
+        yield return SwitchSceneAsync();
     }
 
-    private IEnumerator SwitchSceneAsync()
+    private static IEnumerator SwitchSceneAsync()
     {
-        currentLevelIndex += 1;
-        yield return SceneManager.LoadSceneAsync(currentLevelIndex);
+        Instance.currentLevelIndex += 1;
+        yield return SceneManager.LoadSceneAsync(Instance.currentLevelIndex);
     }
 }

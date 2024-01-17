@@ -5,6 +5,6 @@ public class TriggerNextLevel : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("NextLevel")) return;
-        StartCoroutine(GameManager.Instance.LoadNextLevelAsync());
+        GameManager.LoadNextLevel();
     }
 }

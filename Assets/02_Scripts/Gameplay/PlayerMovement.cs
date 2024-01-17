@@ -121,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
             isFalling = false;
         }
         
-        if (levelIndex == 3) return;
         if (Input.GetButtonDown("Jump") && grounded)
         {
             if (isSprinting == true)

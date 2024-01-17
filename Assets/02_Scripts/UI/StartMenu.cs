@@ -110,7 +110,7 @@ public class StartMenu : MonoBehaviour
 
     public IEnumerator _ChangeScene()
     {
-        yield return GameManager.Instance.LoadNextLevelAsync(ActionsDuringSceneChange);
+        yield return GameManager.LoadNextLevelAsync(ActionsDuringSceneChange);
         _starting = false;
     }
     
