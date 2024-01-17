@@ -1,35 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using System;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEngine.UIElements;
 
 public class StartMenu : MonoBehaviour
 {
-    [Header("Music Control")]
-    [SerializeField] AudioMixer audioMixer;
-    [SerializeField] UnityEngine.UI.Slider VolumeSlider;
-    [SerializeField] UnityEngine.UI.Slider MusicSlider;
-    [SerializeField] UnityEngine.UI.Slider SFXSlider;
+    [Header("Music Control")] [SerializeField] AudioMixer audioMixer;
+    [SerializeField] Slider VolumeSlider;
+    [SerializeField] Slider MusicSlider;
+    [SerializeField] Slider SFXSlider;
     [SerializeField] float currentVolume;
     [SerializeField] float currentMusicVolume;
     [SerializeField] float currentSFXVolume;
     [SerializeField] AudioSource backgroundAudio;
 
-    [Header("Dropdowns")]
-    [SerializeField] Dropdown resolutionDropdown;
+    [Header("Dropdowns")] [SerializeField] Dropdown resolutionDropdown;
     [SerializeField] Dropdown qualityDropdown;
     [SerializeField] Dropdown textureDropdown;
     [SerializeField] Dropdown aaDropdown;
 
     Resolution[] resolutions;
 
-    [Header("Menus")]
-    [SerializeField] GameObject optionsMenu;
+    [Header("Menus")] [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject creditsMenu;
     [SerializeField] GameObject startMenu;
@@ -38,8 +33,7 @@ public class StartMenu : MonoBehaviour
     bool Paused = false;
     bool gameStarted;
 
-    [Header("Buttons")]
-    [SerializeField] GameObject startButton;
+    [Header("Buttons")] [SerializeField] GameObject startButton;
     [SerializeField] GameObject creditsButton;
     [SerializeField] GameObject controlsButton;
     [SerializeField] GameObject optionsButton;
@@ -49,14 +43,14 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] GameObject BackgroundImage;
 
-    Fading fading;
+    private bool _starting = false;
+    
     public void Start()
     {
         startMenu.SetActive(true);
         BackgroundImage.SetActive(true);
         backgroundAudio = FindObjectOfType<AudioSource>();
         backgroundAudio.Play();
-        fading = FindAnyObjectByType<Fading>();
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
@@ -70,6 +64,7 @@ public class StartMenu : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
+
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.RefreshShownValue();
         loadSettings(currentResolutionIndex);
@@ -82,7 +77,6 @@ public class StartMenu : MonoBehaviour
             if (Paused == false)
             {
                 Pause();
-
             }
             else
             {
@@ -90,9 +84,11 @@ public class StartMenu : MonoBehaviour
             }
         }
     }
+
     public void StartGame()
     {
-        //gameStarted = true;
+        if (_starting) return;
+        _starting = true;
         StartCoroutine(_ChangeScene());
     }
 
@@ -103,6 +99,7 @@ public class StartMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Paused = true;
     }
+
     public void Resume()
     {
         // Cursor.visible = false;
@@ -113,19 +110,19 @@ public class StartMenu : MonoBehaviour
 
     public IEnumerator _ChangeScene()
     {
-        fading.FadeIn();
+        yield return GameManager.Instance.LoadNextLevelAsync(ActionsDuringSceneChange);
+        _starting = false;
+    }
+    
+    private IEnumerator ActionsDuringSceneChange()
+    {
         backgroundAudio.Stop();
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(1);
-        if (!gameStarted) { 
-            BackgroundImage.SetActive(false);
-            startMenu.SetActive(false);
-            gameStarted = true;
-        } else if(gameStarted == true)
-        {
-
-        }
-        fading.FadeOut();
+        if (gameStarted)
+            yield break;
+        
+        BackgroundImage.SetActive(false);
+        startMenu.SetActive(false);
+        gameStarted = true;
     }
 
     public void Credits()
@@ -160,16 +157,19 @@ public class StartMenu : MonoBehaviour
         audioMixer.SetFloat("Volume", volume);
         currentVolume = volume;
     }
+
     public void SetMusic(float music)
     {
         audioMixer.SetFloat("Music", music);
         currentMusicVolume = music;
     }
+
     public void SetSFX(float sfx)
     {
         audioMixer.SetFloat("SFX", sfx);
         currentSFXVolume = sfx;
     }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -199,42 +199,45 @@ public class StartMenu : MonoBehaviour
     }
 
     private bool qualitylocked;
+
     public void SetQuality(int qualityIndex)
     {
         if (qualitylocked == true) return;
         if (qualityIndex == 6) return;
         qualitylocked = true;
-            QualitySettings.SetQualityLevel(qualityIndex);
-            switch (qualityIndex)
-            {
-                case 0: // quality level - very low
-                    textureDropdown.value = 3;
-                    aaDropdown.value = 0;
-                    break;
-                case 1: // quality level - low
-                    textureDropdown.value = 2;
-                    aaDropdown.value = 0;
-                    break;
-                case 2: // quality level - medium
-                    textureDropdown.value = 1;
-                    aaDropdown.value = 0;
-                    break;
-                case 3: // quality level - high
-                    textureDropdown.value = 0;
-                    aaDropdown.value = 0;
-                    break;
-                case 4: // quality level - very high
-                    textureDropdown.value = 0;
-                    aaDropdown.value = 1;
-                    break;
-                case 5: // quality level - ultra
-                    textureDropdown.value = 0;
-                    aaDropdown.value = 2;
-                    break;
-            }
-            qualityDropdown.value = qualityIndex;
+        QualitySettings.SetQualityLevel(qualityIndex);
+        switch (qualityIndex)
+        {
+            case 0: // quality level - very low
+                textureDropdown.value = 3;
+                aaDropdown.value = 0;
+                break;
+            case 1: // quality level - low
+                textureDropdown.value = 2;
+                aaDropdown.value = 0;
+                break;
+            case 2: // quality level - medium
+                textureDropdown.value = 1;
+                aaDropdown.value = 0;
+                break;
+            case 3: // quality level - high
+                textureDropdown.value = 0;
+                aaDropdown.value = 0;
+                break;
+            case 4: // quality level - very high
+                textureDropdown.value = 0;
+                aaDropdown.value = 1;
+                break;
+            case 5: // quality level - ultra
+                textureDropdown.value = 0;
+                aaDropdown.value = 2;
+                break;
+        }
+
+        qualityDropdown.value = qualityIndex;
         qualitylocked = false;
     }
+
     public void SaveSettings()
     {
         PlayerPrefs.SetFloat("VolumePref", currentVolume);
@@ -243,8 +246,8 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.SetInt("QualitySettingPreference", qualityDropdown.value);
         PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
         PlayerPrefs.SetInt("TextureQualityPreference", textureDropdown.value);
-        PlayerPrefs.SetInt("AntiAliasingPreference",aaDropdown.value);
-        PlayerPrefs.SetInt("FullscreenPreference",Convert.ToInt32(Screen.fullScreen));
+        PlayerPrefs.SetInt("AntiAliasingPreference", aaDropdown.value);
+        PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(Screen.fullScreen));
         GameStartedOn();
         optionsMenu.SetActive(false);
     }
@@ -261,7 +264,6 @@ public class StartMenu : MonoBehaviour
         if (gameStarted)
         {
             pauseMenu.SetActive(true);
-
         }
         else
         {
@@ -269,19 +271,20 @@ public class StartMenu : MonoBehaviour
             BackgroundImage.SetActive(true);
         }
     }
+
     public void GameStartedOff()
     {
         if (gameStarted)
         {
             pauseMenu.SetActive(false);
-
         }
         else
         {
             startMenu.SetActive(false);
-            if(gameStarted)BackgroundImage.SetActive(false);
+            if (gameStarted) BackgroundImage.SetActive(false);
         }
     }
+
     public void loadSettings(int currentResolutionIndex)
     {
         if (PlayerPrefs.HasKey("QualitySettingPreference")) qualityDropdown.value = PlayerPrefs.GetInt("QualitySettingPreference");
@@ -299,7 +302,7 @@ public class StartMenu : MonoBehaviour
         if (PlayerPrefs.HasKey("FullScreenPreference")) Screen.fullScreen = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
         else Screen.fullScreen = true;
 
-        if(PlayerPrefs.HasKey("VolumePref"))VolumeSlider.value = currentVolume = PlayerPrefs.GetFloat("VolumePref");
+        if (PlayerPrefs.HasKey("VolumePref")) VolumeSlider.value = currentVolume = PlayerPrefs.GetFloat("VolumePref");
         else VolumeSlider.value = PlayerPrefs.GetFloat("VolumePref");
 
         if (PlayerPrefs.HasKey("MusicPref")) MusicSlider.value = currentMusicVolume = PlayerPrefs.GetFloat("MusicPref");

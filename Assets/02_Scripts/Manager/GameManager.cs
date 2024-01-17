@@ -1,41 +1,64 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
-
 
 public class GameManager : MonoBehaviour
 {
     public int currentLevelIndex;
     public static GameManager Instance;
-    Fading fading;
+    private Fading _fader;
+    private GameObject _fadeScreenGameObject;
+    private bool _inTransition;
 
-
-    public GameManager()
-    {
-
-    }
-    
     private void Awake()
     {
         Instance = this;
-    }
-    void Start()
-    {
-        fading = FindAnyObjectByType<Fading>();
-        fading?.FadeOut();
-    }
-
-    void Update()
-    {
-
+        var fadeScreen = GameObject.FindGameObjectWithTag("FadeScreen");
+        if (fadeScreen is not null)
+            _fader = fadeScreen.GetComponent<Fading>();
     }
 
     public void LoadNextLevel()
     {
-        currentLevelIndex += 1;
-        SceneManager.LoadScene(currentLevelIndex);
+        StartCoroutine(LoadNextLevelAsync());
     }
 
+    public IEnumerator LoadNextLevelAsync(Func<IEnumerator> actionsDuringBlackscreen = null)
+    {
+        if (_inTransition) yield break;
+        if (_fader is null)
+            yield return NextLevelWithoutFading(actionsDuringBlackscreen);
+        else
+        {
+            _inTransition = true;
+            yield return NextLevelWithFading(actionsDuringBlackscreen);
+        }
+    }
+
+    private IEnumerator NextLevelWithFading(Func<IEnumerator> actionsDuringBlackscreen)
+    {
+        yield return _fader.FadeInAsync();
+        if (actionsDuringBlackscreen is not null)
+            yield return actionsDuringBlackscreen();
+
+        yield return Instance.SwitchSceneAsync();
+        yield return new WaitForSeconds(1.0F);
+        yield return _fader.FadeOutAsync();
+        _inTransition = false;
+    }
+
+    private static IEnumerator NextLevelWithoutFading(Func<IEnumerator> actionsDuringBlackscreen)
+    {
+        yield return actionsDuringBlackscreen();
+        var operation = Instance.SwitchSceneAsync();
+        Debug.Log("Fading skipped. FadeScreen is missing.");
+        yield return operation;
+    }
+
+    private IEnumerator SwitchSceneAsync()
+    {
+        currentLevelIndex += 1;
+        yield return SceneManager.LoadSceneAsync(currentLevelIndex);
+    }
 }
