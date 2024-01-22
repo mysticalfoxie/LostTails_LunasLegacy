@@ -7,13 +7,9 @@ using UnityEngine.UI;
 public class BackgroundController : MonoBehaviour
 {
     public Image background1;
-   
-
     public void SetImage(Sprite sprite)
     {
             background1.sprite = sprite;
     }
- 
-
 }
 
