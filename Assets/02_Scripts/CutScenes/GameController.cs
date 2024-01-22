@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
                     var isLastScene = lastScene == currentScene;
                     if(allScenes.Last()== currentScene)
                     {
-                        SceneManager.LoadScene(1);
+                        GameManager.LoadNextLevel();
                     }
                     currentScene = currentScene.nextScene;
                     bottomBar.PlayScene(currentScene);
