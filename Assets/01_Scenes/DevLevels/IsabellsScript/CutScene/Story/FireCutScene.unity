@@ -161,7 +161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7f4a5df0af2e28c4dafcd5bba836fe41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2076f6be648c9164cb3eb663177f6a35, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -194,10 +194,10 @@ RectTransform:
   m_Father: {fileID: 369019625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 0.00034332}
-  m_SizeDelta: {x: 673.33, y: 292}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.00036621094, y: -8.9712}
+  m_SizeDelta: {x: -0.0009, y: 17.9431}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &369019624
 GameObject:
@@ -367,9 +367,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScene: {fileID: 11400000, guid: 1380a06ea9c228f4da7f31fa7666217f, type: 2}
   allScenes:
-  - {fileID: 11400000, guid: 1380a06ea9c228f4da7f31fa7666217f, type: 2}
-  - {fileID: 11400000, guid: 2fd9f46244d8059409ddd5197f711dbf, type: 2}
-  - {fileID: 11400000, guid: 16b7f25d639899144b38a70578ca3705, type: 2}
+  - {fileID: 11400000, guid: ef423935fab133e40b12c983a36abb5c, type: 2}
+  - {fileID: 11400000, guid: 613084cdc33b04a499f0da1b25c9624f, type: 2}
   bottomBar: {fileID: 1061756175}
   backgroundController: {fileID: 369019626}
 --- !u!1 &545242813
