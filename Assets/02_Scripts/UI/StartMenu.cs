@@ -43,6 +43,8 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] GameObject BackgroundImage;
 
+    Boolean blockPauseMenu = true;
+
     private bool _starting = false;
     
     public void Start()
@@ -72,7 +74,7 @@ public class StartMenu : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !blockPauseMenu)
         {
             if (Paused == false)
             {
@@ -89,6 +91,7 @@ public class StartMenu : MonoBehaviour
     {
         if (_starting) return;
         _starting = true;
+        blockPauseMenu = false;
         StartCoroutine(_ChangeScene());
     }
 
@@ -144,6 +147,7 @@ public class StartMenu : MonoBehaviour
         gameStarted = false;
         GameStartedOn();
         pauseMenu.SetActive(false);
+        blockPauseMenu = true;
     }
 
     public void Options()
