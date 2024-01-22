@@ -1114,7 +1114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &273141715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1919,6 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelIndex: 0
+  _progress: 0
 --- !u!4 &341207932
 Transform:
   m_ObjectHideFlags: 0
@@ -10546,7 +10547,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
