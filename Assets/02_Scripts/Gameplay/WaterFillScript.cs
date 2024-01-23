@@ -11,10 +11,16 @@ public class WaterFillScript : MonoBehaviour
     [SerializeField] GameObject TransformPos;
     [SerializeField] GameObject TransformPos2;
     [SerializeField] GameObject TransformPos3;
+    [SerializeField] GameObject Ceiling;
+    [SerializeField] GameObject Waterfall;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Waterfall.SetActive(false);
+        Ceiling.SetActive(true);
+
     }
 
     // Update is called once per frame
@@ -30,6 +36,8 @@ public class WaterFillScript : MonoBehaviour
             Baumstamm.transform.position = TransformPos.transform.position;
             Baumstamm2.transform.position = TransformPos2.transform.position;
             Baumstamm3.transform.position = TransformPos3.transform.position;
+        Ceiling.SetActive(false);
+        Waterfall.SetActive(true);
         }
     }
 }
