@@ -10430,7 +10430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246954502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 135.1, y: 24.32, z: 0}
+  m_LocalPosition: {x: 135.75, y: 24.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13440,6 +13440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1609049859}
   - component: {fileID: 1609049858}
+  - component: {fileID: 1609049860}
   m_Layer: 0
   m_Name: StonePillar1 (4)
   m_TagString: Untagged
@@ -13514,6 +13515,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 103
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 13.658}
+--- !u!68 &1609049860
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609049857}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -5.651103, y: -5.143513}
+  - {x: -7.253789, y: -3.3906996}
+  - {x: -6.260015, y: -2.839039}
+  - {x: -4.499591, y: -3.0190902}
+  - {x: -4.1280584, y: -1.4726864}
+  - {x: -2.8323028, y: 2.3467622}
+  - {x: -1.8633575, y: 5.732687}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1610879003
 GameObject:
   m_ObjectHideFlags: 0
