@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D _rigid;
     Animator animator;
-    GameManager gameManager;
+    [SerializeField] AudioSource movementSoundOne;
+    [SerializeField] AudioSource movementSoundTwo;
+    [SerializeField] AudioSource sprintSoundOne;
+    [SerializeField] AudioSource sprintSoundTwo;
+    [SerializeField] AudioSource jumpSound;
+    [SerializeField] AudioSource landingSound;
 
     [Header("Movement System")][SerializeField] float walkSpeed = 20f;
     [SerializeField] float sprintSpeed = 30f;
+    [SerializeField] bool isMoving;
     [SerializeField] bool isSprinting;
     [SerializeField] bool isWalking;
     [SerializeField] bool isFalling;
@@ -32,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float countJump;
     int levelIndex;
     float originScale;
+
 
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
     private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
@@ -58,12 +66,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Flip();
+        HandleSound();
     }
 
     void HandleInput()
     {
         if (isBlocked) return;
-        if (levelIndex == 1 || levelIndex == 3) return;
+        if (levelIndex == 2 || levelIndex == 4) return;
         Sprint();
     }
 
@@ -72,17 +81,27 @@ public class PlayerMovement : MonoBehaviour
         if (isBlocked)
         {
             animator.SetBool(IsWalkingAnimation, false);
+            isMoving = false;
             return;
         }
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         Vector2 move = new Vector2(horizontalInput, 0).normalized;
         _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
+     //   isMoving = true;
 
+        if ( _rigid.velocity.x != 0)
+        {
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
+        }
         if (horizontalInput == 0f)
         {
             animator.SetBool(IsWalkingAnimation, false);
             animator.SetBool(IsSprintingAnimation, false);
+            isMoving = false;
             return;
         }
 
@@ -114,11 +133,15 @@ public class PlayerMovement : MonoBehaviour
     {
         var grounded = isGrounded();
         animator.SetBool(IsGroundedAnimation, grounded);
-        
+
         if (grounded && isFalling)
         {
             animator.SetBool(IsFallingAnimation, false);
             isFalling = false;
+            if (!landingSound.isPlaying)
+            {
+                landingSound.Play();
+            }
         }
         
         if (Input.GetButtonDown("Jump") && grounded)
@@ -131,10 +154,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
             }
-            
             animator.SetBool(IsJumpingAnimation, true); 
             isJumping = true;
             countJump = 0;
+          /*  if (!jumpSound.isPlaying) //WIP Future Sound for Jump!
+            {
+                jumpSound.Play();
+            }*/
         }
 
         if (_rigid.velocity.y > 0 && isJumping)
@@ -152,13 +178,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isSprinting)
                 {
-                    // currentJump = jumpSprint * (1 - t);
                     currentJump = jumpMulti * (1 - t);
                 }
                 else
                 {
                     currentJump = jumpMulti * (1 - t);
-
                 }
             }
 
@@ -167,9 +191,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigid.velocity.y < 0)
         {
-          //  Debug.Log("Falling!");
-            isFalling = true;
-            animator.SetBool(IsFallingAnimation, true);
+            if (!grounded) { 
+                isFalling = true;
+                animator.SetBool(IsFallingAnimation, true);
+            }
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
         }
 
@@ -204,6 +229,25 @@ public class PlayerMovement : MonoBehaviour
             scale.x = -ScalingX;
         }
         this.transform.localScale = scale;
+    }
+    void HandleSound()
+    {
+        if (!isMoving && sprintSoundOne.isPlaying)
+        {
+            sprintSoundOne.Stop();
+        }
+        if (!isMoving && movementSoundOne.isPlaying)
+        {
+            movementSoundOne.Stop();
+        }
+        if(isMoving && !isJumping && isGrounded() && isSprinting && !sprintSoundOne.isPlaying)
+        {
+            sprintSoundOne.Play();
+        }
+        if(isMoving && !isJumping && isGrounded() && !isSprinting && !movementSoundOne.isPlaying)
+        {
+            movementSoundOne.Play();
+        }
     }
 
     void initGetComponent()

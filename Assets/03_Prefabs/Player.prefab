@@ -75,7 +75,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 171233496db72de49a05606f506b2fed, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.505
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -203,7 +203,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8041f3fee3fe69b44895e87faeb243d2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.495
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -543,7 +543,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8ae963a82b209ad478f4a8467b05bf98, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.501
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -671,7 +671,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9e2577f3b5f27fe4e8dcfb80a3c1a775, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.515
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -799,7 +799,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 81d6ac105f9be374f9e91b9d53d350a2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.512
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -942,12 +942,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386c6ca1875605a4694168d13de0a7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSoundOne: {fileID: 0}
-  movementSoundTwo: {fileID: 0}
-  sprintSoundOne: {fileID: 0}
-  sprintSoundTwo: {fileID: 0}
-  jumpSound: {fileID: 0}
-  landingSound: {fileID: 0}
+  movementSoundOne: {fileID: 1318892147044605534}
+  movementSoundTwo: {fileID: 5687092712606110505}
+  sprintSoundOne: {fileID: 3753538529674172475}
+  sprintSoundTwo: {fileID: 7913673866686192510}
+  jumpSound: {fileID: 8590689476737971233}
+  landingSound: {fileID: 1593990257372602883}
   walkSpeed: 3
   sprintSpeed: 6
   isMoving: 0
