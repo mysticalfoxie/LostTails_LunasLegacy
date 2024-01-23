@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleInput()
     {
         if (isBlocked) return;
-        if (levelIndex == 2 || levelIndex == 4) return;
+        if (levelIndex == 2) return;
         Sprint();
     }
 
