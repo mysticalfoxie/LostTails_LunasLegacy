@@ -20,7 +20,7 @@ public class MoveStone : MonoBehaviour
             {
                 Rigidbody2D Rigidbody = GetComponent<Rigidbody2D>();
                 Rigidbody.constraints = RigidbodyConstraints2D.None;
-                Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                
             }
             else
             {
