@@ -138,10 +138,10 @@ public class PlayerMovement : MonoBehaviour
         var grounded = isGrounded();
         animator.SetBool(IsGroundedAnimation, grounded);
 
-        if (!grounded || isJumping)
+        if ((!grounded || isJumping) && _notGroundedSince > 0)
             _notGroundedSince++;
         if (_notGroundedSince > _groundGhostingTickCount)
-            _notGroundedSince = 0;
+            _notGroundedSince = -1;
 
         if (grounded && isFalling)
         {
@@ -227,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
         // Das ist für die ersten paar Momente wo der Spieler gerade erst abgesprungen ist.
         // Der Collider von dem Ground Check ist in dem Moment immer noch in dem Boden drin, auch wenn er gerade am absprung ist.
         // Hier würd quasie für "_groundGhostingTickCount" ticks ignoriert dass er überlappt.
-        if (_notGroundedSince > 0 && _notGroundedSince < _groundGhostingTickCount)
+        if (_notGroundedSince > 0 && (isJumping || _notGroundedSince < _groundGhostingTickCount))
             return false;
 
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(groundScaleX, groundScaleY), CapsuleDirection2D.Horizontal, 0, groundLayer);
