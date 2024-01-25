@@ -25,7 +25,7 @@ public class BottomBarController : MonoBehaviour
     }
     public void PlayNextSentence()
     {
-     StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text)); 
+    StartCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text)); 
     personNameText.text = currentScene.sentences[sentenceIndex].speaker.speakerName;
     personNameText.color = currentScene.sentences[sentenceIndex].speaker.textColor;
     }
