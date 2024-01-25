@@ -967,6 +967,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isJumping: 0
+  _notGroundedSince: 0
+  _groundGhostingTickCount: 5
   countJump: 0
 --- !u!212 &7571189895736245335
 SpriteRenderer:

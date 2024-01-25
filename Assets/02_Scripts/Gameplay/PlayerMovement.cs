@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
@@ -36,9 +37,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 plGravity;
 
     [Header("Debug")][SerializeField] bool isJumping;
+    [SerializeField] private float _notGroundedSince;
+    [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
     [SerializeField] float countJump;
     int levelIndex;
     float originScale;
+    private bool _wasGrounded;
 
 
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
@@ -134,6 +138,11 @@ public class PlayerMovement : MonoBehaviour
         var grounded = isGrounded();
         animator.SetBool(IsGroundedAnimation, grounded);
 
+        if (!grounded || isJumping)
+            _notGroundedSince++;
+        if (_notGroundedSince > _groundGhostingTickCount)
+            _notGroundedSince = 0;
+
         if (grounded && isFalling)
         {
             animator.SetBool(IsFallingAnimation, false);
@@ -154,7 +163,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
             }
-            animator.SetBool(IsJumpingAnimation, true); 
+            animator.SetBool(IsJumpingAnimation, true);
+            _notGroundedSince = 1;
             isJumping = true;
             countJump = 0;
           /*  if (!jumpSound.isPlaying) //WIP Future Sound for Jump!
@@ -167,10 +177,7 @@ public class PlayerMovement : MonoBehaviour
         {
             countJump += Time.deltaTime;
             if (countJump > maxJump)
-            {
                 isJumping = false;
-                animator.SetBool(IsJumpingAnimation, false);
-            }
 
             float t = countJump / maxJump;
             float currentJump = jumpMulti;
@@ -198,10 +205,12 @@ public class PlayerMovement : MonoBehaviour
             _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
         }
 
+        if (!_wasGrounded && grounded) // Wenn der Player im letzten Tick noch nicht grounded war es aber jetzt ist hört der Sprung auf.
+            animator.SetBool(IsJumpingAnimation, false);
+
         if (Input.GetButtonUp("Jump"))
         {
             isJumping = false;
-            animator.SetBool(IsJumpingAnimation, false);
             countJump = 0;
 
             if (_rigid.velocity.y > 0)
@@ -209,10 +218,18 @@ public class PlayerMovement : MonoBehaviour
                 _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y * 0.6f);
             }
         }
+        
+        _wasGrounded = grounded;
     }
 
     bool isGrounded()
     {
+        // Das ist für die ersten paar Momente wo der Spieler gerade erst abgesprungen ist.
+        // Der Collider von dem Ground Check ist in dem Moment immer noch in dem Boden drin, auch wenn er gerade am absprung ist.
+        // Hier würd quasie für "_groundGhostingTickCount" ticks ignoriert dass er überlappt.
+        if (_notGroundedSince > 0 && _notGroundedSince < _groundGhostingTickCount)
+            return false;
+
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(groundScaleX, groundScaleY), CapsuleDirection2D.Horizontal, 0, groundLayer);
     }
 
