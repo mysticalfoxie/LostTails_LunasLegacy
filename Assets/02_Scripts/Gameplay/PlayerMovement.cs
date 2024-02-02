@@ -1,47 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D _rigid;
-    Animator animator;
-    [SerializeField] AudioSource movementSoundOne;
-    [SerializeField] AudioSource movementSoundTwo;
-    [SerializeField] AudioSource sprintSoundOne;
-    [SerializeField] AudioSource sprintSoundTwo;
-    [SerializeField] AudioSource jumpSound;
-    [SerializeField] AudioSource landingSound;
+    private Rigidbody2D _rigid;
+    private Animator _animator;
+    [SerializeField] private AudioSource _movementSoundOne;
+    [SerializeField] private AudioSource _sprintSoundOne;
+   // [SerializeField] private AudioSource _jumpSound;
+    [SerializeField] private AudioSource _landingSound;
 
-    [Header("Movement System")][SerializeField] float walkSpeed = 20f;
-    [SerializeField] float sprintSpeed = 30f;
-    [SerializeField] bool isMoving;
-    [SerializeField] bool isSprinting;
-    [SerializeField] bool isWalking;
-    [SerializeField] bool isFalling;
-    [SerializeField] public bool isBlocked; //Block Movement and Jumping in Dialoque
+    [Header("Movement System")][SerializeField]
+    private float _walkSpeed = 20f;
+    [SerializeField] private float _sprintSpeed = 30f;
+    [SerializeField] private bool _isMoving;
+    [SerializeField] private bool _isSprinting;
+    //[SerializeField] private bool _isWalking;
+    [SerializeField] private bool _isFalling;
+    [SerializeField] public bool _isBlocked; //Block Movement and Jumping in Dialogue
 
-    [Header("Jump System")][SerializeField] float jumpPower = 30f;
-    [SerializeField] float maxJump = 0.4f;
-    [SerializeField] float fallMulti;
-    [SerializeField] float jumpMulti;
-    [SerializeField] float jumpSprint = 2f;
+    [Header("Jump System")][SerializeField]
+    private float _jumpPower = 30f;
+    [SerializeField] private float _maxJump = 0.4f;
+    [SerializeField] private float _fallMulti;
+    [SerializeField] private float _jumpMulti;
+    [SerializeField] private float _jumpSprint = 2f;
 
-    [Header("Ground System")][SerializeField] float groundScaleX = 7.61f;
-    [SerializeField] float groundScaleY = 0.4f;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    Vector2 plGravity;
+    [Header("Ground System")][SerializeField]
+    private float _groundScaleX = 7.61f;
+    [SerializeField] private float _groundScaleY = 0.4f;
+    public Transform _groundCheck;
+    public LayerMask _groundLayer;
+    private Vector2 _plGravity;
 
-    [Header("Debug")][SerializeField] bool isJumping;
+    [Header("Debug")][SerializeField] private bool _isJumping;
     [SerializeField] private float _notGroundedSince;
     [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
-    [SerializeField] float countJump;
-    int levelIndex;
-    float originScale;
+    [SerializeField] private float _countJump;
+    private int _levelIndex;
+    private float _originScale;
     private bool _wasGrounded;
 
 
@@ -51,229 +48,208 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int IsJumpingAnimation = Animator.StringToHash("IsJumping");
     private static readonly int IsFallingAnimation = Animator.StringToHash("IsFalling");
 
-    private void Awake()
+    private void Start()
     {
+        InitGetComponent();
     }
 
-    void Start()
-    {
-        initGetComponent();
-    }
-
-    void Update()
+    private void Update()
     {
         HandleInput();
         HandleJump();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
         Flip();
         HandleSound();
     }
 
-    void HandleInput()
+    private void HandleInput()
     {
-        if (isBlocked) return;
-        if (levelIndex == 2) return;
+        if (_isBlocked) return;
+        if (_levelIndex == 2) return;
         Sprint();
     }
 
-    void Move()
+    private void Move()
     {
-        if (isBlocked)
+        if (_isBlocked)
         {
-            animator.SetBool(IsWalkingAnimation, false);
-            isMoving = false;
+            _animator.SetBool(IsWalkingAnimation, false);
+            _isMoving = false;
             return;
         }
 
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
         Vector2 move = new Vector2(horizontalInput, 0).normalized;
-        _rigid.velocity = new Vector2(move.x * GetCurrentSpeed(), _rigid.velocity.y);
-     //   isMoving = true;
+        var velocity = new Vector2(move.x * GetCurrentSpeed(), (_rigid.velocity).y);
+        _rigid.velocity = velocity;
+        //   isMoving = true;
 
-        if ( _rigid.velocity.x != 0)
-        {
-            isMoving = true;
-        } else
-        {
-            isMoving = false;
-        }
+        _isMoving = velocity.x != 0;
         if (horizontalInput == 0f)
         {
-            animator.SetBool(IsWalkingAnimation, false);
-            animator.SetBool(IsSprintingAnimation, false);
-            isMoving = false;
+            _animator.SetBool(IsWalkingAnimation, false);
+            _animator.SetBool(IsSprintingAnimation, false);
+            _isMoving = false;
             return;
         }
 
-        if (isSprinting && animator.GetBool(IsWalkingAnimation))
-            animator.SetBool(IsWalkingAnimation, false);
-        else if (!isSprinting && !animator.GetBool(IsWalkingAnimation))
-            animator.SetBool(IsWalkingAnimation, true);
-        animator.SetBool(IsSprintingAnimation, isSprinting);
+        if (_isSprinting && _animator.GetBool(IsWalkingAnimation))
+            _animator.SetBool(IsWalkingAnimation, false);
+        else if (!_isSprinting && !_animator.GetBool(IsWalkingAnimation))
+            _animator.SetBool(IsWalkingAnimation, true);
+        _animator.SetBool(IsSprintingAnimation, _isSprinting);
     }
 
-    void Sprint()
+    private void Sprint()
     {
-        if (Input.GetButton("Sprint") /*&& isGrounded()*/)
-        {
-            isSprinting = true;
-        }
-        else
-        {
-            isSprinting = false;
-        }
+        _isSprinting = Input.GetButton("Sprint") /*&& isGrounded()*/;
     }
 
-    float GetCurrentSpeed()
+    private float GetCurrentSpeed()
     {
-        return isSprinting ? sprintSpeed : walkSpeed;
+        return _isSprinting ? _sprintSpeed : _walkSpeed;
     }
 
-    void HandleJump()
+    private void HandleJump()
     {
-        var grounded = isGrounded();
-        animator.SetBool(IsGroundedAnimation, grounded);
+        var grounded = IsGrounded();
+        _animator.SetBool(IsGroundedAnimation, grounded);
 
-        if ((!grounded || isJumping) && _notGroundedSince > 0)
+        if ((!grounded || _isJumping) && _notGroundedSince > 0)
             _notGroundedSince++;
         if (_notGroundedSince > _groundGhostingTickCount)
             _notGroundedSince = -1;
 
-        if (grounded && isFalling)
+        if (grounded && _isFalling)
         {
-            animator.SetBool(IsFallingAnimation, false);
-            isFalling = false;
-            if (!landingSound.isPlaying)
+            _animator.SetBool(IsFallingAnimation, false);
+            _isFalling = false;
+            if (!_landingSound.isPlaying)
             {
-                landingSound.Play();
+                _landingSound.Play();
             }
         }
-        
+
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            if (isSprinting == true)
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x+jumpSprint, jumpPower);
-            }
-            else
-            {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, jumpPower);
-            }
-            animator.SetBool(IsJumpingAnimation, true);
+            _rigid.velocity = _isSprinting
+                ? new Vector2(_rigid.velocity.x + _jumpSprint, _jumpPower)
+                : new Vector2(_rigid.velocity.x, _jumpPower);
+            _animator.SetBool(IsJumpingAnimation, true);
             _notGroundedSince = 1;
-            isJumping = true;
-            countJump = 0;
-          /*  if (!jumpSound.isPlaying) //WIP Future Sound for Jump!
-            {
-                jumpSound.Play();
-            }*/
+            _isJumping = true;
+            _countJump = 0;
+            /*  if (!jumpSound.isPlaying) //WIP Future Sound for Jump!
+              {
+                  jumpSound.Play();
+              }*/
         }
 
-        if (_rigid.velocity.y > 0 && isJumping)
+        if (_rigid.velocity.y > 0 && _isJumping)
         {
-            countJump += Time.deltaTime;
-            if (countJump > maxJump)
-                isJumping = false;
+            _countJump += Time.deltaTime;
+            if (_countJump > _maxJump)
+                _isJumping = false;
 
-            float t = countJump / maxJump;
-            float currentJump = jumpMulti;
+            var t = _countJump / _maxJump;
+            var currentJump = _jumpMulti;
             if (t > 0.5f)
             {
-                if (isSprinting)
+                if (_isSprinting)
                 {
-                    currentJump = jumpMulti * (1 - t);
+                    currentJump = _jumpMulti * (1 - t);
                 }
                 else
                 {
-                    currentJump = jumpMulti * (1 - t);
+                    currentJump = _jumpMulti * (1 - t);
                 }
             }
 
-            _rigid.velocity += plGravity * currentJump * Time.deltaTime;
+            _rigid.velocity += _plGravity * (currentJump * Time.deltaTime);
         }
 
         if (_rigid.velocity.y < 0)
         {
             if (!grounded) { 
-                isFalling = true;
-                animator.SetBool(IsFallingAnimation, true);
+                _isFalling = true;
+                _animator.SetBool(IsFallingAnimation, true);
             }
-            _rigid.velocity -= plGravity * fallMulti * Time.deltaTime;
+            _rigid.velocity -= _plGravity * (_fallMulti * Time.deltaTime);
         }
 
-        if (!_wasGrounded && grounded) // Wenn der Player im letzten Tick noch nicht grounded war es aber jetzt ist hört der Sprung auf.
-            animator.SetBool(IsJumpingAnimation, false);
+        if (!_wasGrounded && grounded) // wenn der Player im letzten Tick noch nicht grounded war es aber jetzt ist, hört der Sprung auf.
+            _animator.SetBool(IsJumpingAnimation, false);
 
         if (Input.GetButtonUp("Jump"))
         {
-            isJumping = false;
-            countJump = 0;
+            _isJumping = false;
+            _countJump = 0;
 
             if (_rigid.velocity.y > 0)
             {
-                _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y * 0.6f);
+                var velocity = _rigid.velocity;
+                velocity = new Vector2(velocity.x, velocity.y * 0.6f);
+                _rigid.velocity = velocity;
             }
         }
         
         _wasGrounded = grounded;
     }
 
-    bool isGrounded()
+    private bool IsGrounded()
     {
         // Das ist für die ersten paar Momente wo der Spieler gerade erst abgesprungen ist.
         // Der Collider von dem Ground Check ist in dem Moment immer noch in dem Boden drin, auch wenn er gerade am absprung ist.
-        // Hier würd quasie für "_groundGhostingTickCount" ticks ignoriert dass er überlappt.
-        if (_notGroundedSince > 0 && (isJumping || _notGroundedSince < _groundGhostingTickCount))
+        // Hier wird quasie für "_groundGhostingTickCount" ticks ignoriert dass er überlappt.
+        if (_notGroundedSince > 0 && (_isJumping || _notGroundedSince < _groundGhostingTickCount))
             return false;
 
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(groundScaleX, groundScaleY), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        return Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(_groundScaleX, _groundScaleY), CapsuleDirection2D.Horizontal, 0, _groundLayer);
     }
 
-    void Flip()
+    private void Flip()
     {
         Vector3 scale = this.transform.localScale;
-        float ScalingX = originScale;
+        var scalingX = _originScale;
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            scale.x = ScalingX;
-        } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            scale.x = -ScalingX;
-        }
+            scale.x = scalingX;
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            scale.x = -scalingX;
         this.transform.localScale = scale;
     }
-    void HandleSound()
+
+    private void HandleSound()
     {
-        if (!isMoving && sprintSoundOne.isPlaying)
+        if (!_isMoving && _sprintSoundOne.isPlaying)
         {
-            sprintSoundOne.Stop();
+            _sprintSoundOne.Stop();
         }
-        if (!isMoving && movementSoundOne.isPlaying)
+        if (!_isMoving && _movementSoundOne.isPlaying)
         {
-            movementSoundOne.Stop();
+            _movementSoundOne.Stop();
         }
-        if(isMoving && !isJumping && isGrounded() && isSprinting && !sprintSoundOne.isPlaying)
+        if(_isMoving && !_isJumping && IsGrounded() && _isSprinting && !_sprintSoundOne.isPlaying)
         {
-            sprintSoundOne.Play();
+            _sprintSoundOne.Play();
         }
-        if(isMoving && !isJumping && isGrounded() && !isSprinting && !movementSoundOne.isPlaying)
+        if(_isMoving && !_isJumping && IsGrounded() && !_isSprinting && !_movementSoundOne.isPlaying)
         {
-            movementSoundOne.Play();
+            _movementSoundOne.Play();
         }
     }
 
-    void initGetComponent()
+    private void InitGetComponent()
     {
         _rigid = GetComponent<Rigidbody2D>();
-        plGravity = new Vector2(0, -Physics2D.gravity.y);
-        animator = GetComponent<Animator>();
+        _plGravity = new Vector2(0, -Physics2D.gravity.y);
+        _animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
-        originScale = _rigid.transform.localScale.x;
+        _levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
+        _originScale = _rigid.transform.localScale.x;
     }
 }

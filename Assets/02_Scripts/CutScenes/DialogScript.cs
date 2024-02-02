@@ -31,7 +31,7 @@ public class DialogScript : MonoBehaviour
             {
                 if (bottomBar.IsLastSentence())
                 {
-                    playerMovement.isBlocked = false;
+                    playerMovement._isBlocked = false;
                     PressEText.SetActive(false);
                     DialogueCanvas.gameObject.SetActive(false);
                     Object.SetActive(false);
