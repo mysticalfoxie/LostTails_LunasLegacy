@@ -7,28 +7,26 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     [SerializeField] private AudioSource _movementSoundOne;
     [SerializeField] private AudioSource _sprintSoundOne;
-   // [SerializeField] private AudioSource _jumpSound;
     [SerializeField] private AudioSource _landingSound;
 
-    [Header("Movement System")][SerializeField]
-    private float _walkSpeed = 20f;
-    [SerializeField] private float _sprintSpeed = 30f;
+    [Header("Movement System")]
+    [SerializeField] private float _walkSpeed = 5f;
+    [SerializeField] private float _sprintSpeed = 2f;
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isSprinting;
-    //[SerializeField] private bool _isWalking;
     [SerializeField] private bool _isFalling;
     [SerializeField] public bool _isBlocked; //Block Movement and Jumping in Dialogue
 
-    [Header("Jump System")][SerializeField]
-    private float _jumpPower = 30f;
+    [Header("Jump System")]
+    [SerializeField] private float _jumpPower = 10f;
     [SerializeField] private float _maxJump = 0.4f;
     [SerializeField] private float _fallMulti;
     [SerializeField] private float _jumpMulti;
     [SerializeField] private float _jumpSprint = 2f;
 
-    [Header("Ground System")][SerializeField]
-    private float _groundScaleX = 7.61f;
-    [SerializeField] private float _groundScaleY = 0.4f;
+    [Header("Ground System")]
+    [SerializeField] private float _groundScaleX = 6.41f;
+    [SerializeField] private float _groundScaleY = 0.2f;
     public Transform _groundCheck;
     public LayerMask _groundLayer;
     private Vector2 _plGravity;
@@ -86,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = new Vector2(horizontalInput, 0).normalized;
         var velocity = new Vector2(move.x * GetCurrentSpeed(), (_rigid.velocity).y);
         _rigid.velocity = velocity;
-        //   isMoving = true;
 
         _isMoving = velocity.x != 0;
         if (horizontalInput == 0f)
@@ -106,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Sprint()
     {
-        _isSprinting = Input.GetButton("Sprint") /*&& isGrounded()*/;
+        _isSprinting = Input.GetButton("Sprint");
     }
 
     private float GetCurrentSpeed()
@@ -143,10 +140,6 @@ public class PlayerMovement : MonoBehaviour
             _notGroundedSince = 1;
             _isJumping = true;
             _countJump = 0;
-            /*  if (!jumpSound.isPlaying) //WIP Future Sound for Jump!
-              {
-                  jumpSound.Play();
-              }*/
         }
 
         if (_rigid.velocity.y > 0 && _isJumping)
@@ -181,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             _rigid.velocity -= _plGravity * (_fallMulti * Time.deltaTime);
         }
 
-        if (!_wasGrounded && grounded) // wenn der Player im letzten Tick noch nicht grounded war es aber jetzt ist, hört der Sprung auf.
+        if (!_wasGrounded && grounded)
             _animator.SetBool(IsJumpingAnimation, false);
 
         if (Input.GetButtonUp("Jump"))
@@ -202,12 +195,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        // Das ist für die ersten paar Momente wo der Spieler gerade erst abgesprungen ist.
-        // Der Collider von dem Ground Check ist in dem Moment immer noch in dem Boden drin, auch wenn er gerade am absprung ist.
-        // Hier wird quasie für "_groundGhostingTickCount" ticks ignoriert dass er überlappt.
         if (_notGroundedSince > 0 && (_isJumping || _notGroundedSince < _groundGhostingTickCount))
             return false;
-
         return Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(_groundScaleX, _groundScaleY), CapsuleDirection2D.Horizontal, 0, _groundLayer);
     }
 
