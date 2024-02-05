@@ -942,34 +942,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386c6ca1875605a4694168d13de0a7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSoundOne: {fileID: 1318892147044605534}
-  movementSoundTwo: {fileID: 5687092712606110505}
-  sprintSoundOne: {fileID: 3753538529674172475}
-  sprintSoundTwo: {fileID: 7913673866686192510}
-  jumpSound: {fileID: 8590689476737971233}
-  landingSound: {fileID: 1593990257372602883}
-  walkSpeed: 3
-  sprintSpeed: 6
-  isMoving: 0
-  isSprinting: 0
-  isWalking: 0
-  isFalling: 0
-  isBlocked: 0
-  jumpPower: 7
-  maxJump: 0.4
-  fallMulti: 0
-  jumpMulti: 0
-  jumpSprint: 2
-  groundScaleX: 0.35
-  groundScaleY: 0.35
-  groundCheck: {fileID: 837534380}
-  groundLayer:
+  _movementSoundOne: {fileID: 1318892147044605534}
+  _sprintSoundOne: {fileID: 3753538529674172475}
+  _landingSound: {fileID: 1593990257372602883}
+  _walkSpeed: 5
+  _sprintSpeed: 2
+  _isMoving: 0
+  _isSprinting: 0
+  _isFalling: 0
+  _isBlocked: 0
+  _jumpPower: 10
+  _maxJump: 0.4
+  _fallMulti: 0
+  _jumpMulti: 0
+  _jumpSprint: 2
+  _groundScaleX: 7.61
+  _groundScaleY: 0.4
+  _groundCheck: {fileID: 837534380}
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  isJumping: 0
+  _isJumping: 0
   _notGroundedSince: 0
   _groundGhostingTickCount: 15
-  countJump: 0
+  _countJump: 0
 --- !u!212 &7571189895736245335
 SpriteRenderer:
   m_ObjectHideFlags: 0
