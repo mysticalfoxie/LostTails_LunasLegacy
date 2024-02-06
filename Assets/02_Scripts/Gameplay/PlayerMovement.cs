@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, DataPersistence
 {
     private Rigidbody2D _rigid;
     private Animator _animator;
@@ -230,6 +230,16 @@ public class PlayerMovement : MonoBehaviour
         {
             _movementSoundOne.Play();
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data._playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data._playerPosition = this.transform.position;
     }
 
     private void InitGetComponent()
