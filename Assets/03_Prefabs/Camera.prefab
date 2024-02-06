@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1132929950725202625}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1109997249
 Camera:
@@ -150,7 +150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1132929950725202625}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1865491943
 Camera:
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 1132929950244706821}
   - component: {fileID: 1132929950244706822}
   m_Layer: 0
-  m_Name: VirtualCamera
+  m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ Transform:
   m_Children:
   - {fileID: 1132929951667200081}
   m_Father: {fileID: 1132929950725202625}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1132929950244706822
 MonoBehaviour:
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 1132929950725202626}
   - component: {fileID: 1132929950725202627}
   m_Layer: 0
-  m_Name: Camera_New
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,10 +339,10 @@ Transform:
   m_LocalScale: {x: 0.20785424, y: 0.1658999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1132929950244706821}
-  - {fileID: 1132929951221975251}
   - {fileID: 1109997250}
   - {fileID: 1865491944}
+  - {fileID: 1132929950244706821}
+  - {fileID: 1132929951221975251}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
+  m_Antialiasing: 2
+  m_AntialiasingQuality: 1
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
@@ -5288,7 +5288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132929951221975251}
   m_Layer: 0
-  m_Name: ParticleSystem
+  m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5310,7 +5310,7 @@ Transform:
   - {fileID: 1132929951215740529}
   - {fileID: 1132929951938194737}
   m_Father: {fileID: 1132929950725202625}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1132929951667200080
 GameObject:
