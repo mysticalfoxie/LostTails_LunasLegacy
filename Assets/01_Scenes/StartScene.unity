@@ -1663,6 +1663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelIndex: 0
+  savedLevelIndex: 0
   _progress: 0
 --- !u!4 &341207932
 Transform:
@@ -4192,7 +4193,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4200,7 +4201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575123595306, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4296,15 +4297,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_Value
-      value: 0.75
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MaxValue
-      value: 0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MinValue
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4916,7 +4917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4924,7 +4925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575123595306, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5020,15 +5021,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_Value
-      value: 0.75
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MaxValue
-      value: 0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MinValue
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -9495,7 +9496,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 139959507}
         m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10889,7 +10890,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10897,7 +10898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169574920655528, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575123595306, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_AnchorMax.x
@@ -10993,15 +10994,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_Value
-      value: 0.75
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MaxValue
-      value: 0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_MinValue
-      value: 0
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 4828169575581433301, guid: 6bce90ab3c77a6a4aaecc39d57d665fa, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
