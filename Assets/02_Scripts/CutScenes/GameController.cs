@@ -10,20 +10,27 @@ public class GameController : MonoBehaviour
     public StoryScene[] allScenes;
     public BottomBarController bottomBar;
     public BackgroundController backgroundController;
+   
+   
+
+
 
     void Start()
     {
         bottomBar.PlayScene(currentScene);
         backgroundController.SetImage(currentScene.background);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(bottomBar.IsCompleted())
+            GameManager.LoadNextLevel();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (bottomBar.IsCompleted())
             { 
                 if(bottomBar.IsLastSentence())
                 {
@@ -31,11 +38,16 @@ public class GameController : MonoBehaviour
                     var isLastScene = lastScene == currentScene;
                     if(allScenes.Last()== currentScene)
                     {
+                        StopAllCoroutines();
                         GameManager.LoadNextLevel();
                     }
-                    currentScene = currentScene.nextScene;
-                    bottomBar.PlayScene(currentScene);
-                    backgroundController.SetImage(currentScene.background);
+                    else
+                    {
+                        currentScene = currentScene.nextScene;
+                        bottomBar.PlayScene(currentScene);
+                        backgroundController.SetImage(currentScene.background);
+                    }
+                    
                 }
                 else
                 {
