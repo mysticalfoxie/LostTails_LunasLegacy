@@ -8,82 +8,80 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
-    [Header("Music Control")] [SerializeField] AudioMixer audioMixer;
-    [SerializeField] Slider VolumeSlider;
-    [SerializeField] Slider MusicSlider;
-    [SerializeField] Slider SFXSlider;
-    [SerializeField] float currentVolume;
-    [SerializeField] float currentMusicVolume;
-    [SerializeField] float currentSFXVolume;
-    [SerializeField] AudioSource backgroundAudio;
+    [Header("Music Control")]
+    [SerializeField] private AudioMixer _audioMixer;
+    [SerializeField] private Slider _volumeSlider;
+    [SerializeField] private Slider _musicSlider;
+    [SerializeField] private Slider _sfxSlider;
+    [SerializeField] private float _currentVolume;
+    [SerializeField] private float _currentMusicVolume;
+    [SerializeField] private float _currentSfxVolume;
+    [SerializeField] private AudioSource _backgroundAudio;
 
-    [Header("Dropdowns")] [SerializeField] Dropdown resolutionDropdown;
-    [SerializeField] Dropdown qualityDropdown;
-    [SerializeField] Dropdown textureDropdown;
-    [SerializeField] Dropdown aaDropdown;
+    [Header("Dropdowns")]
+    [SerializeField] private Dropdown _resolutionDropdown;
+    [SerializeField] private Dropdown _qualityDropdown;
+    [SerializeField] private Dropdown _textureDropdown;
+    [SerializeField] private Dropdown _aaDropdown;
 
-    Resolution[] resolutions;
+    private Resolution[] _resolutions;
 
-    [Header("Menus")] [SerializeField] GameObject optionsMenu;
-    [SerializeField] GameObject controlsMenu;
-    [SerializeField] GameObject creditsMenu;
-    [SerializeField] GameObject startMenu;
-    [SerializeField] GameObject stateMenu;
-    [SerializeField] GameObject pauseMenu;
-    bool Paused = false;
-    bool gameStarted;
+    [Header("Menus")]
+    [SerializeField] private GameObject _optionsMenu;
+    [SerializeField] private GameObject _controlsMenu;
+    [SerializeField] private GameObject _creditsMenu;
+    [SerializeField] private GameObject _startMenu;
+    [SerializeField] private GameObject _pauseMenu;
+    private bool _paused;
+    private bool _gameStarted;
+    
+    [SerializeField] private GameObject _loadGameButton;
+    
+    [SerializeField] private GameObject _backgroundImage;
 
-    [Header("Buttons")] [SerializeField] GameObject startButton;
-    [SerializeField] GameObject creditsButton;
-    [SerializeField] GameObject controlsButton;
-    [SerializeField] GameObject optionsButton;
-    [SerializeField] GameObject quitButton;
-    [SerializeField] GameObject saveButton;
-    [SerializeField] GameObject backButton;
-
-    [SerializeField] GameObject BackgroundImage;
-
-    Boolean blockPauseMenu = true;
-
-    private bool _starting = false;
+    private Boolean _blockPauseMenu = true;
+    
+    private bool _starting;
     
     public void Start()
     {
-        startMenu.SetActive(true);
-        BackgroundImage.SetActive(true);
-        backgroundAudio = FindObjectOfType<AudioSource>();
-        backgroundAudio.Play();
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        _startMenu.SetActive(true);
+        _backgroundImage.SetActive(true);
+        _backgroundAudio = FindObjectOfType<AudioSource>();
+        _backgroundAudio.Play();
+        _resolutionDropdown.ClearOptions();
+        DataPersistenceManager.Instance.HasGameData();
+        var hasGameData = DataPersistenceManager.Instance.HasGameData();
+        _loadGameButton.SetActive(hasGameData);
+
+        var options = new List<string>();
+        _resolutions = Screen.resolutions;
+        var currentResolutionIndex = 0;
+        for (var i = 0; i < _resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
+            var option = _resolutions[i].width + " x " + _resolutions[i].height;
             options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (_resolutions[i].width == Screen.currentResolution.width && _resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-        loadSettings(currentResolutionIndex);
+        _resolutionDropdown.AddOptions(options);
+        _resolutionDropdown.RefreshShownValue();
+        LoadSettings(currentResolutionIndex);
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !blockPauseMenu)
+        if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
+        if (!_paused)
         {
-            if (Paused == false)
-            {
-                Pause();
-            }
-            else
-            {
-                Resume();
-            }
+            Pause();
+        }
+        else
+        {
+            Resume();
         }
     }
 
@@ -91,7 +89,7 @@ public class StartMenu : MonoBehaviour
     {
         if (_starting) return;
         _starting = true;
-        blockPauseMenu = false;
+        _blockPauseMenu = false;
         DataPersistenceManager.Instance.NewGame();
         StartCoroutine(_ChangeScene());
     }
@@ -100,27 +98,26 @@ public class StartMenu : MonoBehaviour
     {
         if (_starting) return;
         _starting = true;
-        blockPauseMenu = false;
+        _blockPauseMenu = false;
         StartCoroutine(_ChangeScene());    
     }
 
-    public void Pause()
+    private void Pause()
     {
-        // Cursor.visible = true;
         Time.timeScale = 0.0f;
-        pauseMenu.SetActive(true);
-        Paused = true;
+        _pauseMenu.SetActive(true);
+        _paused = true;
     }
 
     public void Resume()
     {
         // Cursor.visible = false;
         Time.timeScale = 1.0f;
-        pauseMenu.SetActive(false);
-        Paused = false;
+        _pauseMenu.SetActive(false);
+        _paused = false;
     }
 
-    public IEnumerator _ChangeScene()
+    private IEnumerator _ChangeScene()
     {
         yield return GameManager.LoadNextLevelAsync(ActionsDuringSceneChange);
         _starting = false;
@@ -128,59 +125,59 @@ public class StartMenu : MonoBehaviour
     
     private IEnumerator ActionsDuringSceneChange()
     {
-        backgroundAudio.Stop();
-        if (gameStarted)
+        _backgroundAudio.Stop();
+        if (_gameStarted)
             yield break;
         
-        BackgroundImage.SetActive(false);
-        startMenu.SetActive(false);
-        gameStarted = true;
+        _backgroundImage.SetActive(false);
+        _startMenu.SetActive(false);
+        _gameStarted = true;
     }
 
     public void Credits()
     {
         GameStartedOff();
-        creditsMenu.SetActive(true);
+        _creditsMenu.SetActive(true);
     }
 
     public void Controls()
     {
         GameStartedOff();
-        controlsMenu.SetActive(true);
+        _controlsMenu.SetActive(true);
     }
 
     public void Home()
     {
         if (Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(0);
-        gameStarted = false;
+        _gameStarted = false;
         GameStartedOn();
-        pauseMenu.SetActive(false);
-        blockPauseMenu = true;
+        _pauseMenu.SetActive(false);
+        _blockPauseMenu = true;
     }
 
     public void Options()
     {
         GameStartedOff();
-        optionsMenu.SetActive(true);
+        _optionsMenu.SetActive(true);
     }
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
-        currentVolume = volume;
+        _audioMixer.SetFloat("Volume", volume);
+        _currentVolume = volume;
     }
 
     public void SetMusic(float music)
     {
-        audioMixer.SetFloat("Music", music);
-        currentMusicVolume = music;
+        _audioMixer.SetFloat("Music", music);
+        _currentMusicVolume = music;
     }
 
-    public void SetSFX(float sfx)
+    public void SetSfx(float sfx)
     {
-        audioMixer.SetFloat("SFX", sfx);
-        currentSFXVolume = sfx;
+        _audioMixer.SetFloat("SFX", sfx);
+        _currentSfxVolume = sfx;
     }
 
     public void QuitGame()
@@ -195,133 +192,131 @@ public class StartMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        var resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void SetTextureQuality(int textureIndex)
     {
         QualitySettings.masterTextureLimit = textureIndex;
-        qualityDropdown.value = 6;
+        _qualityDropdown.value = 6;
     }
 
     public void SetAntiAliasing(int aaIndex)
     {
         QualitySettings.antiAliasing = aaIndex;
-        qualityDropdown.value = 6;
+        _qualityDropdown.value = 6;
     }
 
-    private bool qualitylocked;
+    private bool _qualitylocked;
 
     public void SetQuality(int qualityIndex)
     {
-        if (qualitylocked == true) return;
+        if (_qualitylocked) return;
         if (qualityIndex == 6) return;
-        qualitylocked = true;
+        _qualitylocked = true;
         QualitySettings.SetQualityLevel(qualityIndex);
         switch (qualityIndex)
         {
             case 0: // quality level - very low
-                textureDropdown.value = 3;
-                aaDropdown.value = 0;
+                _textureDropdown.value = 3;
+                _aaDropdown.value = 0;
                 break;
             case 1: // quality level - low
-                textureDropdown.value = 2;
-                aaDropdown.value = 0;
+                _textureDropdown.value = 2;
+                _aaDropdown.value = 0;
                 break;
             case 2: // quality level - medium
-                textureDropdown.value = 1;
-                aaDropdown.value = 0;
+                _textureDropdown.value = 1;
+                _aaDropdown.value = 0;
                 break;
             case 3: // quality level - high
-                textureDropdown.value = 0;
-                aaDropdown.value = 0;
+                _textureDropdown.value = 0;
+                _aaDropdown.value = 0;
                 break;
             case 4: // quality level - very high
-                textureDropdown.value = 0;
-                aaDropdown.value = 1;
+                _textureDropdown.value = 0;
+                _aaDropdown.value = 1;
                 break;
             case 5: // quality level - ultra
-                textureDropdown.value = 0;
-                aaDropdown.value = 2;
+                _textureDropdown.value = 0;
+                _aaDropdown.value = 2;
                 break;
         }
 
-        qualityDropdown.value = qualityIndex;
-        qualitylocked = false;
+        _qualityDropdown.value = qualityIndex;
+        _qualitylocked = false;
     }
 
     public void SaveSettings()
     {
-        PlayerPrefs.SetFloat("VolumePref", currentVolume);
-        PlayerPrefs.SetFloat("MusicPref", currentMusicVolume);
-        PlayerPrefs.SetFloat("SFXPref", currentSFXVolume);
-        PlayerPrefs.SetInt("QualitySettingPreference", qualityDropdown.value);
-        PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
-        PlayerPrefs.SetInt("TextureQualityPreference", textureDropdown.value);
-        PlayerPrefs.SetInt("AntiAliasingPreference", aaDropdown.value);
+        PlayerPrefs.SetFloat("VolumePref", _currentVolume);
+        PlayerPrefs.SetFloat("MusicPref", _currentMusicVolume);
+        PlayerPrefs.SetFloat("SFXPref", _currentSfxVolume);
+        PlayerPrefs.SetInt("QualitySettingPreference", _qualityDropdown.value);
+        PlayerPrefs.SetInt("ResolutionPreference", _resolutionDropdown.value);
+        PlayerPrefs.SetInt("TextureQualityPreference", _textureDropdown.value);
+        PlayerPrefs.SetInt("AntiAliasingPreference", _aaDropdown.value);
         PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(Screen.fullScreen));
         GameStartedOn();
-        optionsMenu.SetActive(false);
+        _optionsMenu.SetActive(false);
     }
 
     public void BackButton()
     {
         GameStartedOn();
-        creditsMenu.SetActive(false);
-        controlsMenu.SetActive(false);
+        _creditsMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
     }
 
-    public void GameStartedOn()
+    private void GameStartedOn()
     {
-        if (gameStarted)
+        if (_gameStarted)
         {
-            pauseMenu.SetActive(true);
+            _pauseMenu.SetActive(true);
         }
         else
         {
-            startMenu.SetActive(true);
-            BackgroundImage.SetActive(true);
+            _startMenu.SetActive(true);
+            _backgroundImage.SetActive(true);
         }
     }
 
-    public void GameStartedOff()
+    private void GameStartedOff()
     {
-        if (gameStarted)
+        if (_gameStarted)
         {
-            pauseMenu.SetActive(false);
+            _pauseMenu.SetActive(false);
         }
         else
         {
-            startMenu.SetActive(false);
-            if (gameStarted) BackgroundImage.SetActive(false);
+            _startMenu.SetActive(false);
+            if (_gameStarted) _backgroundImage.SetActive(false);
         }
     }
 
-    public void loadSettings(int currentResolutionIndex)
+    private void LoadSettings(int currentResolutionIndex)
     {
-        if (PlayerPrefs.HasKey("QualitySettingPreference")) qualityDropdown.value = PlayerPrefs.GetInt("QualitySettingPreference");
-        else qualityDropdown.value = 3;
+        _qualityDropdown.value = PlayerPrefs.HasKey("QualitySettingPreference") ? PlayerPrefs.GetInt("QualitySettingPreference") : 3;
 
-        if (PlayerPrefs.HasKey("ResolutionPreference")) resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionPreference");
-        else resolutionDropdown.value = currentResolutionIndex;
+        _resolutionDropdown.value = PlayerPrefs.HasKey("ResolutionPreference") ? PlayerPrefs.GetInt("ResolutionPreference") : currentResolutionIndex;
 
-        if (PlayerPrefs.HasKey("TextureQualityPreference")) textureDropdown.value = PlayerPrefs.GetInt("TextureQualityPreference");
-        else textureDropdown.value = 0;
+        _textureDropdown.value = PlayerPrefs.HasKey("TextureQualityPreference") ? PlayerPrefs.GetInt("TextureQualityPreference") : 0;
 
-        if (PlayerPrefs.HasKey("AntiAliasingPreference")) aaDropdown.value = PlayerPrefs.GetInt("AntiAliasingPreference");
-        else aaDropdown.value = 1;
+        _aaDropdown.value = PlayerPrefs.HasKey("AntiAliasingPreference") ? PlayerPrefs.GetInt("AntiAliasingPreference") : 1;
 
-        if (PlayerPrefs.HasKey("FullScreenPreference")) Screen.fullScreen = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
-        else Screen.fullScreen = true;
+        Screen.fullScreen = !PlayerPrefs.HasKey("FullScreenPreference") || Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
 
-        if (PlayerPrefs.HasKey("VolumePref")) VolumeSlider.value = currentVolume = PlayerPrefs.GetFloat("VolumePref");
-        else VolumeSlider.value = PlayerPrefs.GetFloat("VolumePref");
-
-        if (PlayerPrefs.HasKey("MusicPref")) MusicSlider.value = currentMusicVolume = PlayerPrefs.GetFloat("MusicPref");
-        else MusicSlider.value = PlayerPrefs.GetFloat("MusicPref");
-
-        if (PlayerPrefs.HasKey("SFXPref")) SFXSlider.value = currentSFXVolume = PlayerPrefs.GetFloat("SFXPref");
-        else SFXSlider.value = PlayerPrefs.GetFloat("SFXPref");
+        _volumeSlider.value = PlayerPrefs.HasKey("VolumePref")
+            ? _currentVolume = PlayerPrefs.GetFloat("VolumePref")
+            : PlayerPrefs.GetFloat("VolumePref"); 
+        
+        _musicSlider.value = PlayerPrefs.HasKey("MusicPref")
+            ? _currentMusicVolume = PlayerPrefs.GetFloat("MusicPref")
+            : PlayerPrefs.GetFloat("MusicPref");
+        
+        _sfxSlider.value = PlayerPrefs.HasKey("SFXPref")
+            ? _currentSfxVolume = PlayerPrefs.GetFloat("SFXPref")
+            : PlayerPrefs.GetFloat("SFXPref"); 
     }
 }
