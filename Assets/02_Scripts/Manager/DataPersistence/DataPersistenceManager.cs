@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField] private bool _useEncryption;
 
     private GameData _gameData;
+    private GameManager _gameManager;
+   // private int saved_level = _gameManager.savedLevelIndex;
     private List<DataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
     public static DataPersistenceManager Instance { get; private set; }
@@ -21,15 +24,32 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.Log("Found more than one Data Persistence Manager in this scene.");
         }
-
         Instance = this;
+        
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _useEncryption);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+
+    public void OnSceneUnloaded(Scene scene)
+    {
+        SaveGame();
     }
 
     public void NewGame()
@@ -50,7 +70,9 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistence.LoadData(_gameData);
         }
-        
+
+      //  saved_level = _gameManager.currentLevelIndex(buildIndex);
+
     }
 
     public void SaveGame()

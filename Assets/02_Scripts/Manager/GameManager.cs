@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int currentLevelIndex;
+    public int savedLevelIndex;
     public static GameManager Instance;
     private Fading _fader;
     private GameObject _fadeScreenGameObject;
     private bool _inTransition;
     
-    [SerializeField]
-    private float _progress;
+    [SerializeField] private float _progress;
 
     private void Awake()
     {
