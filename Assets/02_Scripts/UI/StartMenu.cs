@@ -92,7 +92,16 @@ public class StartMenu : MonoBehaviour
         if (_starting) return;
         _starting = true;
         blockPauseMenu = false;
+        DataPersistenceManager.Instance.NewGame();
         StartCoroutine(_ChangeScene());
+    }
+
+    public void LoadGame()
+    {
+        if (_starting) return;
+        _starting = true;
+        blockPauseMenu = false;
+        StartCoroutine(_ChangeScene());    
     }
 
     public void Pause()
