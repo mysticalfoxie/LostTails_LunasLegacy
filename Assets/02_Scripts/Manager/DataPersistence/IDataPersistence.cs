@@ -1,4 +1,4 @@
-public interface DataPersistence
+public interface IDataPersistence
 {
     void LoadData(GameData data);
 

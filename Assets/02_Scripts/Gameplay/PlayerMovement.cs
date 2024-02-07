@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour, DataPersistence
+public class PlayerMovement : MonoBehaviour, IDataPersistence
 {
     private Rigidbody2D _rigid;
     private Animator _animator;

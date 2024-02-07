@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
 
-    public new List<TKey> Keys = new List<TKey>();
-    public new List<TValue> Values = new List<TValue>();
+    public List<TKey> _keys = new List<TKey>();
+    public List<TValue> _values = new List<TValue>();
     public void OnBeforeSerialize()
     {
-        Keys.Clear();
-        Values.Clear();
+        _keys.Clear();
+        _values.Clear();
         foreach (KeyValuePair<TKey, TValue> pair in this)
         {
-            Keys.Add(pair.Key);
-            Values.Add(pair.Value);
+            _keys.Add(pair.Key);
+            _values.Add(pair.Value);
         }
     }
 
@@ -24,14 +24,14 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     {
         this.Clear();
 
-        if (Keys.Count != Values.Count)
+        if (_keys.Count != _values.Count)
         {
-            Debug.LogError($"Tried to deserialize a SerializableDictionary, but the amount of keys ({Keys.Count}) does not match the number of values ({Values.Count}) which indicates that something went wrong");
+            Debug.LogError($"Tried to deserialize a SerializableDictionary, but the amount of keys ({_keys.Count}) does not match the number of values ({_values.Count}) which indicates that something went wrong");
         }
 
-        for (int i = 0; i < Keys.Count; i++)
+        for (var i = 0; i < _keys.Count; i++)
         {
-            this.Add(Keys[i], Values[i]);
+            this.Add(_keys[i], _values[i]);
         }
     }
 }

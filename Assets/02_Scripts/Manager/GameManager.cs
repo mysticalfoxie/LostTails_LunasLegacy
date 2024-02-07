@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int currentLevelIndex;
-    public int savedLevelIndex;
     public static GameManager Instance;
     private Fading _fader;
     private GameObject _fadeScreenGameObject;

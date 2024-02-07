@@ -1,55 +1,32 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public class FileDataHandler
 {
-    private string _dataDirPath = "";
-    private string _dataFileName = "";
-    private bool _useEncryption = false;
-    private readonly string encryptionCodeWord = "LunaIsNotEmber!";
+    private readonly string _dataDirPath;
+    private readonly string _dataFileName;
 
-    public FileDataHandler(string dataDirPath, string dataFileName, bool _useEncryption)
+    public FileDataHandler(string dataDirPath, string dataFileName)
     {
-        this._dataDirPath = dataDirPath;
-        this._dataFileName = dataFileName;
-        this._useEncryption = _useEncryption;
+        _dataDirPath = dataDirPath;
+        _dataFileName = dataFileName;
     }
-
     public GameData Load()
     {
         var fullPath = Path.Combine(_dataDirPath, _dataFileName);
-        GameData loadedData = null;
-        if (File.Exists(fullPath))
+        if (!File.Exists(fullPath))
+            return null;
+        try
         {
-            try
-            {
-                var dataToLoad = "";
-                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
-                {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        dataToLoad = reader.ReadToEnd();
-                    }
-                }
-
-                if (_useEncryption)
-                {
-                    dataToLoad = EncryptDecrypt(dataToLoad);
-                }
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error occured when trying to load data to file: {fullPath} \n" + e);
-            }    
+            var dataToLoad = File.ReadAllText(fullPath);
+            return JsonUtility.FromJson<GameData>(dataToLoad);
         }
-
-        return loadedData;
+        catch (Exception e)
+        {
+            Debug.LogError($"Error occured when trying to load data to file: {fullPath} \n" + e);
+            return null;
+        }
     }
 
     public void Save(GameData data)
@@ -59,35 +36,12 @@ public class FileDataHandler
         {
             var directoryPath = Path.GetDirectoryName(fullPath);
             Directory.CreateDirectory(directoryPath!);
-            var dataToStore = JsonUtility.ToJson(data, true);
-
-            if (_useEncryption)
-            {
-                dataToStore = EncryptDecrypt(dataToStore);
-            }
-
-            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
-            {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.Write(dataToStore);
-                }
-            }
+            var json = JsonUtility.ToJson(data, true);
+            File.WriteAllText(fullPath,json);
         }
         catch (Exception e)
         {
             Debug.LogError($"Error occured when trying to save data to file: {fullPath} \n" + e);
         }
-    }
-
-    private string EncryptDecrypt(string data)
-    {
-        string modifiedData = "";
-        for (int i = 0; i < data.Length; i++)
-        {
-            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
-        }
-
-        return modifiedData;
     }
 }
