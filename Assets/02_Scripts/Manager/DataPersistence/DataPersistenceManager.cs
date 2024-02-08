@@ -60,7 +60,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void NewGame()
     {
-        _gameData = gameObject.AddComponent<GameData>();
+        _gameData = new GameData();
     }
 
     public void LoadGame()
@@ -93,7 +93,7 @@ public class DataPersistenceManager : MonoBehaviour
         }
         foreach (IDataPersistence dataPersistence in _dataPersistenceObjects)
         {
-            dataPersistence.SaveData(ref _gameData);
+            dataPersistence.SaveData(_gameData);
         }
         _dataHandler.Save(_gameData);
             

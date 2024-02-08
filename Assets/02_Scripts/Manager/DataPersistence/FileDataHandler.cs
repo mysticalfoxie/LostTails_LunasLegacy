@@ -15,18 +15,28 @@ public class FileDataHandler
     public GameData Load()
     {
         var fullPath = Path.Combine(_dataDirPath, _dataFileName);
+        GameData loadedData = null;
         if (!File.Exists(fullPath))
             return null;
         try
         {
-            var dataToLoad = File.ReadAllText(fullPath);
-            return JsonUtility.FromJson<GameData>(dataToLoad);
+            var dataToLoad = "";
+            using (FileStream stream = new FileStream(fullPath, FileMode.Open))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    dataToLoad = reader.ReadToEnd();
+                }
+            }
+            loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
         }
         catch (Exception e)
         {
             Debug.LogError($"Error occured when trying to load data to file: {fullPath} \n" + e);
             return null;
         }
+
+        return loadedData;
     }
 
     public void Save(GameData data)
@@ -36,8 +46,14 @@ public class FileDataHandler
         {
             var directoryPath = Path.GetDirectoryName(fullPath);
             Directory.CreateDirectory(directoryPath!);
-            var json = JsonUtility.ToJson(data, true);
-            File.WriteAllText(fullPath,json);
+            var dataToStore = JsonUtility.ToJson(data, true);
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(dataToStore);
+                }
+            }
         }
         catch (Exception e)
         {

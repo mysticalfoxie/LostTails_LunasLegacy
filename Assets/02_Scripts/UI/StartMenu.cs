@@ -45,7 +45,6 @@ public class StartMenu : MonoBehaviour
     private bool _starting;
 
     private GameManager _gameManager;
-    private int _levelIndex;
     
     public void Start()
     {
@@ -57,7 +56,7 @@ public class StartMenu : MonoBehaviour
         DataPersistenceManager.Instance.HasGameData();
         var hasGameData = DataPersistenceManager.Instance.HasGameData();
         _loadGameButton.SetActive(hasGameData);
-        var _levelIndex = _gameManager.currentLevelIndex;
+        _gameManager = FindObjectOfType<GameManager>();
 
         var options = new List<string>();
         _resolutions = Screen.resolutions;
@@ -80,7 +79,7 @@ public class StartMenu : MonoBehaviour
     public void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
-        if (_levelIndex == 11) EndScene();
+        if (_gameManager.currentLevelIndex == 11) EndScene();
         if (!_paused)
         {
             Pause();
