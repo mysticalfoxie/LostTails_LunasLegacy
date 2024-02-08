@@ -32,6 +32,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject _creditsMenu;
     [SerializeField] private GameObject _startMenu;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _endScene;
     private bool _paused;
     private bool _gameStarted;
     
@@ -42,6 +43,9 @@ public class StartMenu : MonoBehaviour
     private Boolean _blockPauseMenu = true;
     
     private bool _starting;
+
+    private GameManager _gameManager;
+    private int _levelIndex;
     
     public void Start()
     {
@@ -53,6 +57,7 @@ public class StartMenu : MonoBehaviour
         DataPersistenceManager.Instance.HasGameData();
         var hasGameData = DataPersistenceManager.Instance.HasGameData();
         _loadGameButton.SetActive(hasGameData);
+        var _levelIndex = _gameManager.currentLevelIndex;
 
         var options = new List<string>();
         _resolutions = Screen.resolutions;
@@ -75,6 +80,7 @@ public class StartMenu : MonoBehaviour
     public void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
+        if (_levelIndex == 11) EndScene();
         if (!_paused)
         {
             Pause();
@@ -152,7 +158,8 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene(0);
         _gameStarted = false;
         GameStartedOn();
-        _pauseMenu.SetActive(false);
+        if(_pauseMenu) _pauseMenu.SetActive(false);
+        if(_endScene) _endScene.SetActive(false);
         _blockPauseMenu = true;
     }
 
@@ -209,6 +216,7 @@ public class StartMenu : MonoBehaviour
     }
 
     private bool _qualitylocked;
+
 
     public void SetQuality(int qualityIndex)
     {
@@ -295,6 +303,12 @@ public class StartMenu : MonoBehaviour
         }
     }
 
+    private void EndScene()
+    {
+        if (_pauseMenu) _pauseMenu.SetActive(false);
+        if (_startMenu) _startMenu.SetActive(false);
+        if (!_endScene) _endScene.SetActive(true);
+    }
     private void LoadSettings(int currentResolutionIndex)
     {
         _qualityDropdown.value = PlayerPrefs.HasKey("QualitySettingPreference") ? PlayerPrefs.GetInt("QualitySettingPreference") : 3;
