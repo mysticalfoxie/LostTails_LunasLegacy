@@ -15777,8 +15777,8 @@ GameObject:
   - component: {fileID: 1181527699}
   - component: {fileID: 1181527698}
   - component: {fileID: 1181527701}
-  - component: {fileID: 1181527702}
   - component: {fileID: 1181527703}
+  - component: {fileID: 1181527704}
   m_Layer: 0
   m_Name: Glut1 (1)
   m_TagString: Untagged
@@ -16079,20 +16079,6 @@ PolygonCollider2D:
       - {x: 1.7800632, y: -0.88014233}
       - {x: 1.7800632, y: -0.893328}
       - {x: 1.7833595, y: -0.8966244}
---- !u!114 &1181527702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181527697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d6e28a8eeb49b41b0c26833760b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
-  player: {fileID: 1701733507}
 --- !u!82 &1181527703
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16189,6 +16175,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1181527704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181527697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a18c8b2f13547478a77f7732f27ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1701733507}
 --- !u!1 &1183900640
 GameObject:
   m_ObjectHideFlags: 0
@@ -18535,8 +18534,8 @@ GameObject:
   - component: {fileID: 1397243034}
   - component: {fileID: 1397243033}
   - component: {fileID: 1397243032}
-  - component: {fileID: 1397243031}
   - component: {fileID: 1397243035}
+  - component: {fileID: 1397243036}
   m_Layer: 0
   m_Name: Glut1 (5)
   m_TagString: Untagged
@@ -18544,20 +18543,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1397243031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397243030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d6e28a8eeb49b41b0c26833760b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
-  player: {fileID: 1701733507}
 --- !u!60 &1397243032
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -18947,6 +18932,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1397243036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397243030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a18c8b2f13547478a77f7732f27ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1701733507}
 --- !u!1 &1398015090
 GameObject:
   m_ObjectHideFlags: 0
@@ -23582,7 +23580,6 @@ GameObject:
   - component: {fileID: 1735107824}
   - component: {fileID: 1735107827}
   - component: {fileID: 1735107826}
-  - component: {fileID: 1735107828}
   - component: {fileID: 1735107829}
   m_Layer: 0
   m_Name: Glut1 (2)
@@ -23885,20 +23882,6 @@ PolygonCollider2D:
       - {x: 1.7800632, y: -0.893328}
       - {x: 1.7833595, y: -0.8966244}
 --- !u!114 &1735107827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735107823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa9d6e28a8eeb49b41b0c26833760b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 35713544}
-  player: {fileID: 1701733507}
---- !u!114 &1735107828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28504,7 +28487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034930393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 133.54, y: 3.1498, z: 12.5}
+  m_LocalPosition: {x: 133.47, y: 2.42, z: 12.5}
   m_LocalScale: {x: -1.9706, y: 2.2074661, z: 1.9706}
   m_ConstrainProportionsScale: 0
   m_Children: []
