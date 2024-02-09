@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -43,9 +44,23 @@ public class StartMenu : MonoBehaviour
     private Boolean _blockPauseMenu = true;
     
     private bool _starting;
+    // ReSharper disable once HeapView.ObjectAllocation
+    private int[] _cutScenes = {0,1,3,5,10};
+    private PlayerMovement _playerMovement;
 
-    private GameManager _gameManager;
-    
+    public void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode UwU)
+    {
+        if (GameManager.Instance.currentLevelIndex != 11) return;
+        if (_pauseMenu) _pauseMenu.SetActive(false);
+        if (_startMenu) _startMenu.SetActive(false);
+        if (!_endScene) _endScene.SetActive(true);
+    }
+
     public void Start()
     {
         _startMenu.SetActive(true);
@@ -56,7 +71,6 @@ public class StartMenu : MonoBehaviour
         DataPersistenceManager.Instance.HasGameData();
         var hasGameData = DataPersistenceManager.Instance.HasGameData();
         _loadGameButton.SetActive(hasGameData);
-        _gameManager = FindObjectOfType<GameManager>();
 
         var options = new List<string>();
         _resolutions = Screen.resolutions;
@@ -79,7 +93,9 @@ public class StartMenu : MonoBehaviour
     public void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
-        if (_gameManager.currentLevelIndex == 11) EndScene();
+        if (_playerMovement.isJumping) return;
+        if (_cutScenes.Contains(GameManager.Instance.currentLevelIndex) ) return;
+        
         if (!_paused)
         {
             Pause();
@@ -104,6 +120,7 @@ public class StartMenu : MonoBehaviour
         if (_starting) return;
         _starting = true;
         _blockPauseMenu = false;
+        DataPersistenceManager.Instance.LoadGame();
         StartCoroutine(_ChangeScene());    
     }
 
@@ -300,13 +317,6 @@ public class StartMenu : MonoBehaviour
             _startMenu.SetActive(false);
             if (_gameStarted) _backgroundImage.SetActive(false);
         }
-    }
-
-    private void EndScene()
-    {
-        if (_pauseMenu) _pauseMenu.SetActive(false);
-        if (_startMenu) _startMenu.SetActive(false);
-        if (!_endScene) _endScene.SetActive(true);
     }
     private void LoadSettings(int currentResolutionIndex)
     {

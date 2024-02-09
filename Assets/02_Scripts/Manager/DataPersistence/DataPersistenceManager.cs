@@ -93,7 +93,7 @@ public class DataPersistenceManager : MonoBehaviour
         }
         foreach (IDataPersistence dataPersistence in _dataPersistenceObjects)
         {
-            dataPersistence.SaveData(_gameData);
+            dataPersistence.SaveData(ref _gameData);
         }
         _dataHandler.Save(_gameData);
             

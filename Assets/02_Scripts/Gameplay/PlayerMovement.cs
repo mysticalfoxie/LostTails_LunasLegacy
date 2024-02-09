@@ -31,14 +31,13 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
     public LayerMask _groundLayer;
     private Vector2 _plGravity;
 
-    [Header("Debug")][SerializeField] private bool _isJumping;
+    [Header("Debug")][SerializeField] public bool isJumping;
     [SerializeField] private float _notGroundedSince;
     [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
     [SerializeField] private float _countJump;
     private int _levelIndex;
     private float _originScale;
     private bool _wasGrounded;
-
 
     private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
     private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
@@ -66,8 +65,10 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private void HandleInput()
     {
+        var grounded = IsGrounded();
         if (_isBlocked) return;
         if (_levelIndex == 2) return;
+        if (!grounded) return;
         Sprint();
     }
 
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         var grounded = IsGrounded();
         _animator.SetBool(IsGroundedAnimation, grounded);
 
-        if ((!grounded || _isJumping) && _notGroundedSince > 0)
+        if ((!grounded || isJumping) && _notGroundedSince > 0)
             _notGroundedSince++;
         if (_notGroundedSince > _groundGhostingTickCount)
             _notGroundedSince = -1;
@@ -138,15 +139,15 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
                 : new Vector2(_rigid.velocity.x, _jumpPower);
             _animator.SetBool(IsJumpingAnimation, true);
             _notGroundedSince = 1;
-            _isJumping = true;
+            isJumping = true;
             _countJump = 0;
         }
 
-        if (_rigid.velocity.y > 0 && _isJumping)
+        if (_rigid.velocity.y > 0 && isJumping)
         {
             _countJump += Time.deltaTime;
             if (_countJump > _maxJump)
-                _isJumping = false;
+                isJumping = false;
 
             var t = _countJump / _maxJump;
             var currentJump = _jumpMulti;
@@ -179,7 +180,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
         if (Input.GetButtonUp("Jump"))
         {
-            _isJumping = false;
+            isJumping = false;
             _countJump = 0;
 
             if (_rigid.velocity.y > 0)
@@ -195,7 +196,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
 
     private bool IsGrounded()
     {
-        if (_notGroundedSince > 0 && (_isJumping || _notGroundedSince < _groundGhostingTickCount))
+        if (_notGroundedSince > 0 && (isJumping || _notGroundedSince < _groundGhostingTickCount))
             return false;
         return Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(_groundScaleX, _groundScaleY), CapsuleDirection2D.Horizontal, 0, _groundLayer);
     }
@@ -222,11 +223,11 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         {
             _movementSoundOne.Stop();
         }
-        if(_isMoving && !_isJumping && IsGrounded() && _isSprinting && !_sprintSoundOne.isPlaying)
+        if(_isMoving && !isJumping && IsGrounded() && _isSprinting && !_sprintSoundOne.isPlaying)
         {
             _sprintSoundOne.Play();
         }
-        if(_isMoving && !_isJumping && IsGrounded() && !_isSprinting && !_movementSoundOne.isPlaying)
+        if(_isMoving && !isJumping && IsGrounded() && !_isSprinting && !_movementSoundOne.isPlaying)
         {
             _movementSoundOne.Play();
         }
@@ -237,7 +238,7 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         this.transform.position = data._playerPosition;
     }
     
-    public void SaveData(GameData data)
+    public void SaveData(ref GameData data)
     {
         data._playerPosition = this.transform.position;
     }

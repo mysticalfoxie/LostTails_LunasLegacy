@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private Fading _fader;
     private GameObject _fadeScreenGameObject;
     private bool _inTransition;
-    
+
     [SerializeField] private float _progress;
 
     private void Awake()
@@ -20,13 +20,23 @@ public class GameManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        
+
         Instance = this;
         var fadeScreen = GameObject.FindGameObjectWithTag("FadeScreen");
         if (fadeScreen is not null)
             Instance._fader = fadeScreen.GetComponent<Fading>();
-        
+
         DontDestroyOnLoad(Instance);
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentLevelIndex = data._savedLevelIndex;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data._savedLevelIndex = currentLevelIndex;
     }
 
     public static void LoadNextLevel()
@@ -54,7 +64,7 @@ public class GameManager : MonoBehaviour
         yield return SwitchSceneAsync();
         yield return new WaitForSeconds(1.0F);
         yield return Instance._fader.FadeOutAsync();
-        
+
         Instance._inTransition = false;
     }
 
