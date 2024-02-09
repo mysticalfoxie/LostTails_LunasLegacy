@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -147,14 +148,15 @@ public class StartMenu : MonoBehaviour
         _starting = false;
     }
     
+    [SuppressMessage("ReSharper", "Unity.NoNullPropagation")]
     private IEnumerator ActionsDuringSceneChange()
     {
-        _backgroundAudio.Stop();
+        _backgroundAudio?.Stop();
         if (_gameStarted)
             yield break;
         
-        _backgroundImage.SetActive(false);
-        _startMenu.SetActive(false);
+        _backgroundImage?.SetActive(false);
+        _startMenu?.SetActive(false);
         _gameStarted = true;
     }
 

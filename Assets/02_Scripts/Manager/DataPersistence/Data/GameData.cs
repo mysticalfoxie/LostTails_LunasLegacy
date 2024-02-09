@@ -5,6 +5,6 @@ using UnityEngine;
 
 [Serializable]
 public class GameData
-{    
-    public int? SavedLevelIndex { get; set; }
+{
+    public int SavedLevelIndex;
 }

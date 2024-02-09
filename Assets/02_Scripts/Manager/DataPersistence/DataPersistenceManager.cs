@@ -31,6 +31,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     public int? GetLevelIndex() => _dataHandler.Load()?.SavedLevelIndex;
 
+    public bool HasGameData() => (_gameData?.SavedLevelIndex ?? 0) != 0;
+
     public void UpdateLevelIndex(int index)
     {
         _gameData ??= new GameData();
@@ -41,8 +43,7 @@ public class DataPersistenceManager : MonoBehaviour
         */
         
         _gameData.SavedLevelIndex = index;
+        Debug.Log(JsonUtility.ToJson(_gameData));
         _dataHandler.Save(_gameData);
     }
-
-    public bool HasGameData() => _gameData != null;
 }
