@@ -1,18 +1,10 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-[System.Serializable]
+
+// ReSharper disable CommentTypo
+
+[Serializable]
 public class GameData
 {    
-    public Vector3 _playerPosition;
-    public int _savedLevelIndex;
-
-    private void Start()
-    {
-        
-    }
-    public GameData()
-    {
-        _playerPosition = Vector3.zero;
-        var _savedLevelIndex = ;
-    }
+    public int? SavedLevelIndex { get; set; }
 }

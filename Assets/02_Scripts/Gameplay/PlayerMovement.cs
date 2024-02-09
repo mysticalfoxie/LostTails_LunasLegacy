@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour, IDataPersistence
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigid;
     private Animator _animator;
@@ -233,23 +233,13 @@ public class PlayerMovement : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void LoadData(GameData data)
-    {
-        this.transform.position = data._playerPosition;
-    }
-    
-    public void SaveData(ref GameData data)
-    {
-        data._playerPosition = this.transform.position;
-    }
-
     private void InitGetComponent()
     {
         _rigid = GetComponent<Rigidbody2D>();
         _plGravity = new Vector2(0, -Physics2D.gravity.y);
         _animator = GetComponent<Animator>();
         var gameManager = FindObjectOfType<GameManager>();
-        _levelIndex = gameManager != null ? gameManager.currentLevelIndex : 5;
+        _levelIndex = gameManager != null ? gameManager._currentLevelIndex : 5;
         _originScale = _rigid.transform.localScale.x;
     }
 }

@@ -45,7 +45,7 @@ public class StartMenu : MonoBehaviour
     
     private bool _starting;
     // ReSharper disable once HeapView.ObjectAllocation
-    private int[] _cutScenes = {0,1,3,5,10};
+    private readonly int[] _cutScenes = {0,1,3,5,10};
     private PlayerMovement _playerMovement;
 
     public void Awake()
@@ -55,7 +55,7 @@ public class StartMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode UwU)
     {
-        if (GameManager.Instance.currentLevelIndex != 11) return;
+        if (GameManager.Instance._currentLevelIndex != 11) return;
         if (_pauseMenu) _pauseMenu.SetActive(false);
         if (_startMenu) _startMenu.SetActive(false);
         if (!_endScene) _endScene.SetActive(true);
@@ -93,8 +93,8 @@ public class StartMenu : MonoBehaviour
     public void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
-        if (_playerMovement.isJumping) return;
-        if (_cutScenes.Contains(GameManager.Instance.currentLevelIndex) ) return;
+        if (_playerMovement is { isJumping: true }) return;
+        if (_cutScenes.Contains(GameManager.Instance._currentLevelIndex) ) return;
         
         if (!_paused)
         {
@@ -120,8 +120,7 @@ public class StartMenu : MonoBehaviour
         if (_starting) return;
         _starting = true;
         _blockPauseMenu = false;
-        DataPersistenceManager.Instance.LoadGame();
-        StartCoroutine(_ChangeScene());    
+        StartCoroutine(_ChangeScene(GameManager.Instance._currentLevelIndex));    
     }
 
     private void Pause()
@@ -139,9 +138,12 @@ public class StartMenu : MonoBehaviour
         _paused = false;
     }
 
-    private IEnumerator _ChangeScene()
+    private IEnumerator _ChangeScene(int? index = null)
     {
-        yield return GameManager.LoadNextLevelAsync(ActionsDuringSceneChange);
+        yield return index.HasValue
+            ? GameManager.LoadLevelAsync(index.Value, ActionsDuringSceneChange)
+            : GameManager.LoadNextLevelAsync(ActionsDuringSceneChange);
+        
         _starting = false;
     }
     
