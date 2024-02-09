@@ -15,6 +15,7 @@ TagManager:
   - Interactable
   - FadeScreen
   - InteractionPoint
+  - CeilingButton
   layers:
   - Default
   - TransparentFX
@@ -58,8 +59,14 @@ TagManager:
   - name: Background 1
     uniqueID: 69456995
     locked: 0
+  - name: Sky Layer 2
+    uniqueID: 3353593873
+    locked: 0
   - name: Midground
     uniqueID: 2065912761
+    locked: 0
+  - name: Sky Layer 1
+    uniqueID: 4109014585
     locked: 0
   - name: Default
     uniqueID: 0
