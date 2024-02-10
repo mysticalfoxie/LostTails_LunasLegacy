@@ -36,12 +36,16 @@ public class GameManager : MonoBehaviour
 
     public static void LoadNextLevel()
     {
-        LoadLevel(++Instance._currentLevelIndex);
+        var activeScene = SceneManager.GetActiveScene();
+        Instance._currentLevelIndex = activeScene.buildIndex + 1;
+        LoadLevel(Instance._currentLevelIndex);
     }
 
     public static IEnumerator LoadNextLevelAsync(Func<IEnumerator> actionsDuringBlackscreen = null)
     {
-        return LoadLevelAsync(++Instance._currentLevelIndex, actionsDuringBlackscreen);
+        var activeScene = SceneManager.GetActiveScene();
+        Instance._currentLevelIndex = activeScene.buildIndex + 1;
+        return LoadLevelAsync(Instance._currentLevelIndex, actionsDuringBlackscreen);
     }
 
     private static IEnumerator LoadLevelWithFading(int levelIndex, Func<IEnumerator> actionsDuringBlackscreen)
