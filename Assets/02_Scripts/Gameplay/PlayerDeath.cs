@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
-    //Beim Inspector: Original Height = 1 setzen,ansonsten l‰uft nix!
+    //Beim Inspector: Original Height = 1 setzen,ansonsten l√§uft nix!
     public GameObject respawnPoint;
     public GameObject player;
     private void OnTriggerEnter2D(Collider2D other)
