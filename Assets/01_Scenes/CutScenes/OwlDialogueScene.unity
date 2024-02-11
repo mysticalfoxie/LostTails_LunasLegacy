@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScene: {fileID: 11400000, guid: 4e250eee87fc93a4aace6fd899b1b940, type: 2}
   allScenes:
-  - {fileID: 11400000, guid: 1380a06ea9c228f4da7f31fa7666217f, type: 2}
+  - {fileID: 11400000, guid: 4e250eee87fc93a4aace6fd899b1b940, type: 2}
   - {fileID: 11400000, guid: f1dcc0b0ed2646d4ebaa403fe9c25c9d, type: 2}
   - {fileID: 11400000, guid: 93db58f37adf03a4f8bdb761b3b47878, type: 2}
   bottomBar: {fileID: 1061756175}
@@ -1254,8 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a52d3811a2f47b4f211266070ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelIndex: 3
-  _progress: 0
+  _currentLevelIndex: 0
 --- !u!212 &2131629806
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        if (DataPersistenceManager.Instance is null) return;
         _currentLevelIndex = DataPersistenceManager.Instance
             .GetLevelIndex()
             .GetValueOrDefault();
@@ -90,7 +91,8 @@ public class GameManager : MonoBehaviour
             yield return LoadLevelWithFading(levelIndex, actionsDuringBlackscreen);
         }
         
-        DataPersistenceManager.Instance.UpdateLevelIndex(levelIndex);
+        if (DataPersistenceManager.Instance is not null)
+            DataPersistenceManager.Instance.UpdateLevelIndex(levelIndex);
     }
     
     public static void LoadLevel(int levelIndex, Func<IEnumerator> actionsDuringBlackscreen = null)

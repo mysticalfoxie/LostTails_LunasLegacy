@@ -4,7 +4,8 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigid;
-    private Animator _animator;
+    private PlayerAnimator _animator;
+    
     [SerializeField] private AudioSource _movementSoundOne;
     [SerializeField] private AudioSource _sprintSoundOne;
     [SerializeField] private AudioSource _landingSound;
@@ -39,12 +40,6 @@ public class PlayerMovement : MonoBehaviour
     private float _originScale;
     private bool _wasGrounded;
 
-    private static readonly int IsWalkingAnimation = Animator.StringToHash("IsWalking");
-    private static readonly int IsSprintingAnimation = Animator.StringToHash("IsSprinting");
-    private static readonly int IsGroundedAnimation = Animator.StringToHash("IsGrounded");
-    private static readonly int IsJumpingAnimation = Animator.StringToHash("IsJumping");
-    private static readonly int IsFallingAnimation = Animator.StringToHash("IsFalling");
-
     private void Start()
     {
         InitGetComponent();
@@ -76,30 +71,30 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isBlocked)
         {
-            _animator.SetBool(IsWalkingAnimation, false);
+            _animator.Walking = false;
             _isMoving = false;
             return;
         }
 
         var horizontalInput = Input.GetAxisRaw("Horizontal");
-        Vector2 move = new Vector2(horizontalInput, 0).normalized;
+        var move = new Vector2(horizontalInput, 0).normalized;
         var velocity = new Vector2(move.x * GetCurrentSpeed(), (_rigid.velocity).y);
         _rigid.velocity = velocity;
 
         _isMoving = velocity.x != 0;
         if (horizontalInput == 0f)
         {
-            _animator.SetBool(IsWalkingAnimation, false);
-            _animator.SetBool(IsSprintingAnimation, false);
+            _animator.Walking = false;
+            _animator.Sprinting = false;
             _isMoving = false;
             return;
         }
 
-        if (_isSprinting && _animator.GetBool(IsWalkingAnimation))
-            _animator.SetBool(IsWalkingAnimation, false);
-        else if (!_isSprinting && !_animator.GetBool(IsWalkingAnimation))
-            _animator.SetBool(IsWalkingAnimation, true);
-        _animator.SetBool(IsSprintingAnimation, _isSprinting);
+        if (_isSprinting && _animator.Walking)
+            _animator.Walking = false;
+        else if (!_isSprinting && !_animator.Walking)
+            _animator.Walking = true;
+        _animator.Sprinting = _isSprinting;
     }
 
     private void Sprint()
@@ -115,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleJump()
     {
         var grounded = IsGrounded();
-        _animator.SetBool(IsGroundedAnimation, grounded);
+        _animator.Grounded = grounded;
 
         if ((!grounded || isJumping) && _notGroundedSince > 0)
             _notGroundedSince++;
@@ -124,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded && _isFalling)
         {
-            _animator.SetBool(IsFallingAnimation, false);
+            _animator.Falling = false;
             _isFalling = false;
             if (!_landingSound.isPlaying)
             {
@@ -137,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             _rigid.velocity = _isSprinting
                 ? new Vector2(_rigid.velocity.x + _jumpSprint, _jumpPower)
                 : new Vector2(_rigid.velocity.x, _jumpPower);
-            _animator.SetBool(IsJumpingAnimation, true);
+            _animator.Jumping = true;
             _notGroundedSince = 1;
             isJumping = true;
             _countJump = 0;
@@ -170,13 +165,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!grounded) { 
                 _isFalling = true;
-                _animator.SetBool(IsFallingAnimation, true);
+                _animator.Falling = true;
             }
             _rigid.velocity -= _plGravity * (_fallMulti * Time.deltaTime);
         }
 
         if (!_wasGrounded && grounded)
-            _animator.SetBool(IsJumpingAnimation, false);
+            _animator.Jumping = false;
 
         if (Input.GetButtonUp("Jump"))
         {
@@ -237,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
         _plGravity = new Vector2(0, -Physics2D.gravity.y);
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<PlayerAnimator>();
         var gameManager = FindObjectOfType<GameManager>();
         _levelIndex = gameManager != null ? gameManager._currentLevelIndex : 5;
         _originScale = _rigid.transform.localScale.x;
