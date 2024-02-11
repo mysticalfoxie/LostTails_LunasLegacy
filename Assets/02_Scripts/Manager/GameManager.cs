@@ -34,6 +34,15 @@ public class GameManager : MonoBehaviour
             .GetValueOrDefault();
     }
 
+    public void Update()
+    {
+        if (!Debug.isDebugBuild) return;
+        if (Input.GetKeyDown(KeyCode.F12) && Input.GetKey(KeyCode.LeftControl))
+            LoadNextLevel();
+        if (Input.GetKeyDown(KeyCode.F11) && Input.GetKey(KeyCode.LeftControl))
+            LoadLevel(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     public static void LoadNextLevel()
     {
         var activeScene = SceneManager.GetActiveScene();
