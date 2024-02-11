@@ -2716,25 +2716,12 @@ EdgeCollider2D:
   - {x: 3.1348104, y: -23.556738}
   - {x: 4.3264723, y: -22.278027}
   - {x: 5.0345535, y: -21.433458}
-  - {x: 5.9302015, y: -20.205095}
-  - {x: 6.805764, y: -19.99864}
-  - {x: 7.6336274, y: -19.331488}
-  - {x: 8.188482, y: -18.645493}
-  - {x: 8.30056, y: -18.02489}
-  - {x: 8.245687, y: -16.839512}
-  - {x: 8.206697, y: -15.8239975}
-  - {x: 7.9339085, y: -14.808229}
-  - {x: 7.604984, y: -13.786928}
-  - {x: 6.6514406, y: -12.665493}
-  - {x: 6.114263, y: -12.217386}
-  - {x: 5.8703337, y: -11.688482}
-  - {x: 6.003064, y: -11.203314}
-  - {x: 5.941524, y: -10.892658}
-  - {x: 5.844719, y: -10.118423}
-  - {x: 5.9983687, y: -9.848072}
-  - {x: 5.841158, y: -9.438923}
-  - {x: 5.42237, y: -9.000866}
-  - {x: 5.0661077, y: -8.795288}
+  - {x: 4.928774, y: -20.205095}
+  - {x: 5.6612754, y: -19.283335}
+  - {x: 7.5384016, y: -17.99861}
+  - {x: 6.2275023, y: -13.783955}
+  - {x: 5.7608485, y: -12.639212}
+  - {x: 5.029331, y: -10.768637}
   - {x: 4.3229914, y: -8.092937}
   - {x: 3.6766825, y: -6.9115143}
   - {x: 3.3392935, y: -5.257427}
@@ -4929,9 +4916,9 @@ EdgeCollider2D:
   - {x: 3.8832636, y: 20.71413}
   - {x: -1.3896556, y: 11.968516}
   - {x: -5.4140286, y: 8.41531}
-  - {x: -7.1462035, y: 9.148938}
-  - {x: -7.7210855, y: 10.443727}
-  - {x: -7.1920977, y: 11.937193}
+  - {x: -6.6454897, y: 8.755521}
+  - {x: -6.719659, y: 10.014543}
+  - {x: -6.655618, y: 11.543775}
   - {x: -5.9693904, y: 12.961605}
   - {x: -3.8395782, y: 16.75467}
   - {x: 0.3578863, y: 23.752472}
@@ -8039,7 +8026,12 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -15.205523, y: 46.263382}
+  - {x: 120.884544, y: 52.649727}
+  - {x: 1.4165096, y: 34.66871}
+  - {x: 1.1620216, y: 38.537693}
+  - {x: 1.2137871, y: 43.754612}
+  - {x: -0.7768307, y: 48.859497}
+  - {x: -15.161693, y: 45.794262}
   - {x: -13.779326, y: 37.654972}
   - {x: -12.392636, y: 35.837193}
   - {x: -10.890664, y: 30.323502}
@@ -8399,8 +8391,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -65.56239, y: -17.5924, z: 0}
-    m_Extent: {x: 66.2966, y: 20.623299, z: 0}
+    m_Center: {x: -65.5635, y: -17.595499, z: 0}
+    m_Extent: {x: 66.291695, y: 20.6205, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -14198,6 +14190,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8814216756165073142, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814216756165073142, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8814216756165073143, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -19823,8 +19823,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -17.72765, y: 1.0460999, z: 0}
-    m_Extent: {x: 22.99775, y: 3.1459, z: 0}
+    m_Center: {x: -17.7289, y: 1.0524501, z: 0}
+    m_Extent: {x: 22.999199, y: 3.1487498, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -25500,8 +25500,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -6.7167497, y: -1.3947, z: 0}
-    m_Extent: {x: 10.98855, y: 3.1883001, z: 0}
+    m_Center: {x: -6.70245, y: -1.3885999, z: 0}
+    m_Extent: {x: 10.98665, y: 3.1913, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -27221,7 +27221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1858011803
 Transform:
   m_ObjectHideFlags: 0
