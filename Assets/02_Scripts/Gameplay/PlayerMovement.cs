@@ -16,6 +16,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isSprinting;
     [SerializeField] private bool _isFalling;
+    
+    
+    [Header("Wall Detection System")]
+    public Transform _wallCheck;
+    [Range(0, 90)]
+    [SerializeField] private float _wallCollisionAngle = 60;
+    [SerializeField] private float _wallScaleX = .5f;
+    [SerializeField] private float _wallScaleY = .5f;
+    
     [SerializeField] public bool _isBlocked; //Block Movement and Jumping in Dialogue
 
     [Header("Jump System")]
@@ -36,9 +45,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _notGroundedSince;
     [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
     [SerializeField] private float _countJump;
+    [SerializeField] private bool _grounded;
     private int _levelIndex;
     private float _originScale;
     private bool _wasGrounded;
+    private bool _collisionWithWall;
+    private int _wallCollisionDirection;
 
     private void Start()
     {
@@ -69,14 +81,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        if (_isBlocked)
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        
+        if (_isBlocked || (!IsGrounded() && IsRunningAgainstWall(horizontalInput)))
         {
             _animator.Walking = false;
+            _animator.Sprinting = false;
+            _isSprinting = false;
             _isMoving = false;
             return;
         }
 
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
         var move = new Vector2(horizontalInput, 0).normalized;
         var velocity = new Vector2(move.x * GetCurrentSpeed(), (_rigid.velocity).y);
         _rigid.velocity = velocity;
@@ -193,7 +208,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_notGroundedSince > 0 && (isJumping || _notGroundedSince < _groundGhostingTickCount))
             return false;
-        return Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(_groundScaleX, _groundScaleY), CapsuleDirection2D.Horizontal, 0, _groundLayer);
+        return _grounded = Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(_groundScaleX, _groundScaleY), CapsuleDirection2D.Horizontal, 0, _groundLayer);
+    }
+
+    private bool IsCollidingWithWall()
+    {
+        return Physics2D.OverlapCapsule(_wallCheck.position, new Vector2(_wallScaleX, _wallScaleY), CapsuleDirection2D.Horizontal, _wallCollisionAngle, _groundLayer); 
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_groundCheck.position, _groundScaleX / 2);
     }
 
     private void Flip()
@@ -226,6 +251,13 @@ public class PlayerMovement : MonoBehaviour
         {
             _movementSoundOne.Play();
         }
+    }
+
+    private bool IsRunningAgainstWall(float direction)
+    {
+        var clampedDirection = direction > 0 ? 1 : direction == 0 ? 0 : -1;
+        if (clampedDirection == 0) return false;
+        return IsCollidingWithWall();
     }
 
     private void InitGetComponent()

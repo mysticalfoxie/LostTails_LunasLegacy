@@ -1,9 +1,8 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 
 public class SoundSwitch : MonoBehaviour
 {
-    [SerializeField] [OptionalField] private AudioSource _target;
+    [SerializeField] private AudioSource _target;
     [SerializeField] private bool _allowJustOnce;
 
     private void Awake()

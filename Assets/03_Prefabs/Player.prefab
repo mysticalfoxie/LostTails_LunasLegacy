@@ -566,6 +566,7 @@ Transform:
   m_Children:
   - {fileID: 837534380}
   - {fileID: 3845268310662221402}
+  - {fileID: 7743388909653956401}
   m_Father: {fileID: 8814216756165073143}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -697,6 +698,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6301524475157351253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7743388909653956401}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7743388909653956401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301524475157351253}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.554, y: 1.891, z: -22.803204}
+  m_LocalScale: {x: 0.20785424, y: 0.16859989, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3063499529003334826}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6874161967521801699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,14 +1167,18 @@ MonoBehaviour:
   _isMoving: 0
   _isSprinting: 0
   _isFalling: 0
+  _wallCollisionAngle: 90
+  _wallCheck: {fileID: 7743388909653956401}
+  _wallScaleX: 0.5
+  _wallScaleY: 0.5
   _isBlocked: 0
   _jumpPower: 7
   _maxJump: 0.4
   _fallMulti: 0
   _jumpMulti: 0
   _jumpSprint: 2
-  _groundScaleX: 2.5
-  _groundScaleY: 0.45
+  _groundScaleX: 1.5
+  _groundScaleY: 1.5
   _groundCheck: {fileID: 837534380}
   _groundLayer:
     serializedVersion: 2
@@ -1151,6 +1187,7 @@ MonoBehaviour:
   _notGroundedSince: 0
   _groundGhostingTickCount: 15
   _countJump: 0
+  _grounded: 0
 --- !u!114 &3603412516448321481
 MonoBehaviour:
   m_ObjectHideFlags: 0
