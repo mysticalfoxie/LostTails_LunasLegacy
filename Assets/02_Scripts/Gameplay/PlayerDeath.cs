@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
-    //Beim Inspector: Original Height = 1 setzen,ansonsten l‰uft nix!
+    //Beim Inspector: Original Height = 1 setzen,ansonsten l√§uft nix!
     public GameObject respawnPoint;
     public GameObject player;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag ("Player"))
         {
-            Debug.Log(this.gameObject);
-            player.transform.position = respawnPoint.transform.position;
+            if (Debug.isDebugBuild) Debug.Log(this.gameObject); // no logging in release
+            // player.transform.position = respawnPoint.transform.position; // doesnt include fading
+            GameManager.RespawnPlayer(RespawnMethod.PositionUpdate, respawnPoint); // includes fading
         }
     }
 }

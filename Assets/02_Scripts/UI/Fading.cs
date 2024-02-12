@@ -1,68 +1,120 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Fading : MonoBehaviour
 {
-    public CanvasGroup CanvasGroup;
-    [SerializeField] bool fadeIn = false;
-    [SerializeField] bool fadeOut = false;
-    [SerializeField] float timeToFade;
+    public const string FADE_IN_ANIMATION_TAG = "FadeIn";
+    public const string FADE_OUT_ANIMATION_TAG = "FadeOut";
+    
+    private static readonly int _fadeInAnimationParameter = Animator.StringToHash("FadeIn");
+    private static readonly int _fadeOutAnimationParameter = Animator.StringToHash("FadeOut");
+    private static readonly int _speedFactorParameter = Animator.StringToHash("SpeedFactor");
+    
+    private Animator _animator;
+    private string _currentAnimationTag;
+    private int _skipTickCount;
+    private event Action OnAnimationDone;
+    private bool _fadingOut;
+    private bool _fadingIn;
 
-    GameManager gameManager;
-    void Start()
+    [Header("Animation Properties")]
+    [Range(0.001F, 4.0F)]
+    [SerializeField] 
+    private float _globalSpeedModifier = 1.0F;
+
+    [Header("Animation Observer")] 
+    [Range(1, 100)] 
+    [SerializeField] private int _tickDelay; 
+
+    private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        _animator = GetComponent<Animator>();
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
+    }
+    
+    public void FadeIn(float localSpeedModifier = 1.0F)
+    {
+        StartCoroutine(FadeInAsync(localSpeedModifier));
     }
 
-    void Update()
+    public void FadeOut(float localSpeedModifier = 1.0F)
     {
-        if (fadeIn == true)
+        StartCoroutine(FadeOutAsync(localSpeedModifier));
+    }
+
+    public IEnumerator FadeInAsync(float localSpeedModifier = 1.0F)
+    {
+        if (_fadingIn) yield break;
+        _fadingIn = true;
+        _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
+        _animator.SetBool(_fadeInAnimationParameter, true);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
+        _currentAnimationTag = FADE_IN_ANIMATION_TAG;
+        _skipTickCount = _tickDelay;
+        yield return WaitForAnimationAsync();
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
+        _fadingIn = false;
+    }
+
+    public IEnumerator FadeOutAsync(float localSpeedModifier = 1.0F)
+    {
+        if (_fadingOut) yield break;
+        _fadingOut = true;
+        _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, true);
+        _currentAnimationTag = FADE_OUT_ANIMATION_TAG;
+        _skipTickCount = _tickDelay;
+        yield return WaitForAnimationAsync();
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
+        _fadingOut = false;
+    }
+    
+    private IEnumerator WaitForAnimationAsync()
+    {
+        var animationDone = false;
+
+        OnAnimationDone += Handler; 
+        
+        return new WaitWhile(() => !animationDone);
+
+        void Handler()
         {
-            if (CanvasGroup.alpha < 1)
-            {
-                CanvasGroup.alpha += timeToFade * Time.deltaTime;
-                if (CanvasGroup.alpha >= 1)
-                {
-                    fadeIn = false;
-                }
-            }
+            animationDone = true;
+            Unsubscribe();
         }
-        if (fadeOut == true)
-        {
-            if (CanvasGroup.alpha >= 0)
-            {
-                CanvasGroup.alpha -= timeToFade * Time.deltaTime;
-                if (CanvasGroup.alpha == 0)
-                {
-                    fadeOut = false;
-                }
-            }
-        }
-    }
-    public void FadeIn()
-    {
-        fadeIn = true;
+
+        void Unsubscribe() => OnAnimationDone -= Handler;
     }
 
-    public void FadeOut()
+    private void ObserveAnimationState()
     {
-        fadeOut = true;
+        if (_currentAnimationTag == default) return;
+        if (_skipTickCount > 0) return;
+        
+        var state = _animator.GetCurrentAnimatorStateInfo(0);
+        if (state.IsTag(_currentAnimationTag)) return; // Still the same tag -> Animation is still playing
+        _currentAnimationTag = default;
+        OnAnimationDone?.Invoke();
+    }
+    
+    private void FixedUpdate()
+    {
+        if (_skipTickCount > 0) _skipTickCount--;
     }
 
-    public IEnumerator _ChangeScene()
+    private void Update()
     {
-        FadeIn();
-        yield return new WaitForSeconds(1);
-        gameManager.LoadNextLevel();
-        FadeOut();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            StartCoroutine(_ChangeScene());
-        }
+        ObserveAnimationState();
+        
+        /* Debugging purpose */
+        if (Input.GetKeyDown(KeyCode.F3)) FadeIn();
+        if (Input.GetKeyDown(KeyCode.F2)) FadeOut();
     }
 }

@@ -21,12 +21,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] float currentSFXVolume;
     Resolution[] resolutions;
     [SerializeField] public GameObject optionsMenu;
+    [SerializeField] public GameObject pauseMenu;
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject saveButton;
     [SerializeField] GameObject controlsButton;
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject optionsButton;
-    [SerializeField] GameObject pauseMenu;
     bool Paused = false;
 
     private void Start()
