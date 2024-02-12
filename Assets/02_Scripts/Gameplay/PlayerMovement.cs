@@ -41,11 +41,15 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask _groundLayer;
     private Vector2 _plGravity;
 
+    // Debugging section - It's ok when these vars are not used here - They are just visually for inspector
+    // ReSharper disable NotAccessedField.Local
     [Header("Debug")][SerializeField] public bool isJumping;
     [SerializeField] private float _notGroundedSince;
     [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
     [SerializeField] private float _countJump;
     [SerializeField] private bool _grounded;
+    // ReSharper restore NotAccessedField.Local
+    
     private int _levelIndex;
     private float _originScale;
     private bool _wasGrounded;
@@ -213,17 +217,17 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsCollidingWithWall()
     {
-        return Physics2D.OverlapCapsule(_wallCheck.position, new Vector2(_wallScaleX, _wallScaleY), CapsuleDirection2D.Horizontal, _wallCollisionAngle, _groundLayer); 
-    }
-    
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(_groundCheck.position, _groundScaleX / 2);
+        if (_wallCheck is null)
+            return false;
+
+        var position = _wallCheck.position;
+        var wallcheckPosition = new Vector2(_wallScaleX, _wallScaleY);
+        return Physics2D.OverlapCapsule(position, wallcheckPosition, CapsuleDirection2D.Horizontal, _wallCollisionAngle, _groundLayer); 
     }
 
     private void Flip()
     {
-        Vector3 scale = this.transform.localScale;
+        var scale = transform.localScale;
         var scalingX = _originScale;
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
