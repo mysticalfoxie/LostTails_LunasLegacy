@@ -30,13 +30,7 @@ public class BottomBarController : MonoBehaviour
         personNameText.text = currentScene.sentences[sentenceIndex].speaker.speakerName;
         personNameText.color = currentScene.sentences[sentenceIndex].speaker.textColor;
     }
-    public void StopCoroutine()
-    {
-        if (currentScene != null)
-        {
-            StopCoroutine(TypeText(currentScene.sentences[++sentenceIndex].text));
-        }
-    }
+    
         
     public bool IsCompleted()
     {
