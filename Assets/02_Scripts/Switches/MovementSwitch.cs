@@ -11,7 +11,7 @@ public class MovementSwitch : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         
         var movement = other.GetComponent<PlayerMovement>();
-        movement.enabled = Convert.ToBoolean(_targetValue);
+        movement._isBlocked = !Convert.ToBoolean(_targetValue);
 
         enabled = !_allowJustOnce && enabled;
     }

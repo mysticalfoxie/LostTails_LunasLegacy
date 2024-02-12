@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
     [FormerlySerializedAs("_groundGhostingDuration")] [SerializeField] private float _groundGhostingTickCount;
     [SerializeField] private float _countJump;
     [SerializeField] private bool _grounded;
+
+    public bool _isDying;
+    public bool _isSpawning;
     // ReSharper restore NotAccessedField.Local
     
     private int _levelIndex;
@@ -87,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         
-        if (_isBlocked || (!IsGrounded() && IsRunningAgainstWall(horizontalInput)))
+        if (_isBlocked || _isDying || _isSpawning || (!IsGrounded() && IsRunningAgainstWall(horizontalInput)))
         {
             _animator.Walking = false;
             _animator.Sprinting = false;
@@ -229,12 +232,14 @@ public class PlayerMovement : MonoBehaviour
     {
         var scale = transform.localScale;
         var scalingX = _originScale;
-
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        var allowed = !_isBlocked && !_isSpawning && !_isDying;
+        
+        if (allowed && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             scale.x = scalingX;
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else if (allowed && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             scale.x = -scalingX;
-        this.transform.localScale = scale;
+        
+        transform.localScale = scale;
     }
 
     private void HandleSound()

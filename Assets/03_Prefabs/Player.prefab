@@ -1169,8 +1169,8 @@ MonoBehaviour:
   _isFalling: 0
   _wallCheck: {fileID: 7743388909653956401}
   _wallCollisionAngle: 90
-  _wallScaleX: 0.5
-  _wallScaleY: 0.5
+  _wallScaleX: 0.4
+  _wallScaleY: 0.4
   _isBlocked: 0
   _jumpPower: 7
   _maxJump: 0.4
@@ -1188,6 +1188,8 @@ MonoBehaviour:
   _groundGhostingTickCount: 15
   _countJump: 0
   _grounded: 0
+  _isDying: 0
+  _isSpawning: 0
 --- !u!114 &3603412516448321481
 MonoBehaviour:
   m_ObjectHideFlags: 0

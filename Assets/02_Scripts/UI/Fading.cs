@@ -14,16 +14,19 @@ public class Fading : MonoBehaviour
     
     private Animator _animator;
     private string _currentAnimationTag;
-    private bool _skipCurrentTick;
+    private int _skipTickCount;
     private event Action OnAnimationDone;
     private bool _fadingOut;
     private bool _fadingIn;
 
-    [FormerlySerializedAs("_speedMod")]
-    [FormerlySerializedAs("speedModifier")]
+    [Header("Animation Properties")]
     [Range(0.001F, 4.0F)]
     [SerializeField] 
     private float _globalSpeedModifier = 1.0F;
+
+    [Header("Animation Observer")] 
+    [Range(1, 100)] 
+    [SerializeField] private int _tickDelay; 
 
     private void Awake()
     {
@@ -49,7 +52,7 @@ public class Fading : MonoBehaviour
         _animator.SetBool(_fadeInAnimationParameter, true);
         _animator.SetBool(_fadeOutAnimationParameter, false);
         _currentAnimationTag = FADE_IN_ANIMATION_TAG;
-        _skipCurrentTick = true;
+        _skipTickCount = _tickDelay;
         yield return WaitForAnimationAsync();
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, false);
@@ -65,7 +68,7 @@ public class Fading : MonoBehaviour
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, true);
         _currentAnimationTag = FADE_OUT_ANIMATION_TAG;
-        _skipCurrentTick = true;
+        _skipTickCount = _tickDelay;
         yield return WaitForAnimationAsync();
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, false);
@@ -93,7 +96,8 @@ public class Fading : MonoBehaviour
     private void ObserveAnimationState()
     {
         if (_currentAnimationTag == default) return;
-        if (_skipCurrentTick) return; // In this exact tick the fading has been started -> It's be
+        if (_skipTickCount > 0) return;
+        
         var state = _animator.GetCurrentAnimatorStateInfo(0);
         if (state.IsTag(_currentAnimationTag)) return; // Still the same tag -> Animation is still playing
         _currentAnimationTag = default;
@@ -102,8 +106,7 @@ public class Fading : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (_skipCurrentTick) 
-            _skipCurrentTick = false;
+        if (_skipTickCount > 0) _skipTickCount--;
     }
 
     private void Update()

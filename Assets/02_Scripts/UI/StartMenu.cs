@@ -142,8 +142,8 @@ public class StartMenu : MonoBehaviour
     private IEnumerator _ChangeScene(int? index = null)
     {
         yield return index.HasValue
-            ? GameManager.LoadLevelAsync(index.Value, 1.0F, 1.0F, ActionsDuringSceneChange)
-            : GameManager.LoadNextLevelAsync(1.0F, 1.0F, ActionsDuringSceneChange);
+            ? GameManager.LoadLevelAsync(index.Value, .5F, 1.0F, 1.0F, ActionsDuringSceneChange)
+            : GameManager.LoadNextLevelAsync(.5F, 1.0F, 1.0F, ActionsDuringSceneChange);
         
         _starting = false;
     }
