@@ -54,7 +54,7 @@ public class StartMenu : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode UwU)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode uwu)
     {
         if (GameManager.Instance._currentLevelIndex != 11) return;
         if (_pauseMenu) _pauseMenu.SetActive(false);
@@ -142,8 +142,8 @@ public class StartMenu : MonoBehaviour
     private IEnumerator _ChangeScene(int? index = null)
     {
         yield return index.HasValue
-            ? GameManager.LoadLevelAsync(index.Value, ActionsDuringSceneChange)
-            : GameManager.LoadNextLevelAsync(ActionsDuringSceneChange);
+            ? GameManager.LoadLevelAsync(index.Value, 1.0F, 1.0F, ActionsDuringSceneChange)
+            : GameManager.LoadNextLevelAsync(1.0F, 1.0F, ActionsDuringSceneChange);
         
         _starting = false;
     }

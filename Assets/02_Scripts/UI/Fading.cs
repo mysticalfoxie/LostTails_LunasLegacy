@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Fading : MonoBehaviour
 {
     public const string FADE_IN_ANIMATION_TAG = "FadeIn";
     public const string FADE_OUT_ANIMATION_TAG = "FadeOut";
     
-    private static readonly int FadeInAnimation = Animator.StringToHash("FadeIn");
-    private static readonly int FadeOutAnimation = Animator.StringToHash("FadeOut");
-    private static readonly int SpeedModifier = Animator.StringToHash("SpeedFactor");
+    private static readonly int _fadeInAnimationParameter = Animator.StringToHash("FadeIn");
+    private static readonly int _fadeOutAnimationParameter = Animator.StringToHash("FadeOut");
+    private static readonly int _speedFactorParameter = Animator.StringToHash("SpeedFactor");
     
     private Animator _animator;
     private string _currentAnimationTag;
@@ -19,67 +19,75 @@ public class Fading : MonoBehaviour
     private bool _fadingOut;
     private bool _fadingIn;
 
+    [FormerlySerializedAs("_speedMod")]
+    [FormerlySerializedAs("speedModifier")]
     [Range(0.001F, 4.0F)]
     [SerializeField] 
-    private float speedModifier = 1.0F;
+    private float _globalSpeedModifier = 1.0F;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _animator.SetFloat(SpeedModifier, speedModifier);
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
     }
     
-    public void FadeIn()
+    public void FadeIn(float localSpeedModifier = 1.0F)
     {
-        StartCoroutine(FadeInAsync());
+        StartCoroutine(FadeInAsync(localSpeedModifier));
     }
 
-    public void FadeOut()
+    public void FadeOut(float localSpeedModifier = 1.0F)
     {
-        StartCoroutine(FadeOutAsync());
+        StartCoroutine(FadeOutAsync(localSpeedModifier));
     }
 
-    public IEnumerator FadeInAsync()
+    public IEnumerator FadeInAsync(float localSpeedModifier = 1.0F)
     {
         if (_fadingIn) yield break;
         _fadingIn = true;
-        _animator.SetBool(FadeInAnimation, true);
-        _animator.SetBool(FadeOutAnimation, false);
+        _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
+        _animator.SetBool(_fadeInAnimationParameter, true);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
         _currentAnimationTag = FADE_IN_ANIMATION_TAG;
         _skipCurrentTick = true;
         yield return WaitForAnimationAsync();
-        _animator.SetBool(FadeInAnimation, false);
-        _animator.SetBool(FadeOutAnimation, false);
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
         _fadingIn = false;
     }
 
-    public IEnumerator FadeOutAsync()
+    public IEnumerator FadeOutAsync(float localSpeedModifier = 1.0F)
     {
         if (_fadingOut) yield break;
         _fadingOut = true;
-        _animator.SetBool(FadeInAnimation, false);
-        _animator.SetBool(FadeOutAnimation, true);
+        _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, true);
         _currentAnimationTag = FADE_OUT_ANIMATION_TAG;
         _skipCurrentTick = true;
         yield return WaitForAnimationAsync();
-        _animator.SetBool(FadeInAnimation, false);
-        _animator.SetBool(FadeOutAnimation, false);
+        _animator.SetBool(_fadeInAnimationParameter, false);
+        _animator.SetBool(_fadeOutAnimationParameter, false);
+        _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
         _fadingOut = false;
     }
     
     private IEnumerator WaitForAnimationAsync()
     {
         var animationDone = false;
-        void Unsubscribe() => OnAnimationDone -= Handler;
+
+        OnAnimationDone += Handler; 
+        
+        return new WaitWhile(() => !animationDone);
+
         void Handler()
         {
             animationDone = true;
             Unsubscribe();
         }
 
-        OnAnimationDone += Handler; 
-        
-        return new WaitWhile(() => !animationDone);
+        void Unsubscribe() => OnAnimationDone -= Handler;
     }
 
     private void ObserveAnimationState()

@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414c0a1623fd05c40ab996e5136ce3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedModifier: 0.1
+  _globalSpeedModifier: 0.1
 --- !u!95 &180644412
 Animator:
   serializedVersion: 5
@@ -1843,6 +1843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a52d3811a2f47b4f211266070ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _respawnFadingInSpeedModifier: 5
+  _respawnFadingOutSpeedModifier: 2.5
   _currentLevelIndex: 0
 --- !u!4 &341207932
 Transform:

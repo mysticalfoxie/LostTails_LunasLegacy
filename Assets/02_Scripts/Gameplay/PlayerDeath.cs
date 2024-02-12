@@ -13,8 +13,9 @@ public class PlayerDeath : MonoBehaviour
     {
         if (other.gameObject.CompareTag ("Player"))
         {
-            Debug.Log(this.gameObject);
-            player.transform.position = respawnPoint.transform.position;
+            if (Debug.isDebugBuild) Debug.Log(this.gameObject); // no logging in release
+            // player.transform.position = respawnPoint.transform.position; // doesnt include fading
+            GameManager.RespawnPlayer(RespawnMethod.PositionUpdate, respawnPoint); // includes fading
         }
     }
 }

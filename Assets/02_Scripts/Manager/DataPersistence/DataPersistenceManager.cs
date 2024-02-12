@@ -43,7 +43,8 @@ public class DataPersistenceManager : MonoBehaviour
         */
         
         _gameData.SavedLevelIndex = index;
-        Debug.Log(JsonUtility.ToJson(_gameData));
+        if (Debug.isDebugBuild)
+            Debug.Log(JsonUtility.ToJson(_gameData));
         _dataHandler.Save(_gameData);
     }
 }

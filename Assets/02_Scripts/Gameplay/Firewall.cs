@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Firewall : MonoBehaviour
 {
-    public GameObject player;
-    void Replay()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    public GameObject player; // ~unused
+    //void Replay()
+    //{
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); ~doesnt use fading
+    //}
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag ("Player"))
         {
-            Replay();
+            //Replay();
+            GameManager.RespawnPlayer(RespawnMethod.SceneReload); // uses fading
         }
     }
 }
