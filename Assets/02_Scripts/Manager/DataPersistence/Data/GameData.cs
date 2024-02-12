@@ -13,6 +13,5 @@ public class GameData
     public GameData()
     {
         _playerPosition = Vector3.zero;
-        var _savedLevelIndex = ;
     }
 }
