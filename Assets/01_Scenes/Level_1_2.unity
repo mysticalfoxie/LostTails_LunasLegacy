@@ -8442,8 +8442,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -65.56475, y: -17.59565, z: 0}
-    m_Extent: {x: 66.28945, y: 20.617851, z: 0}
+    m_Center: {x: -65.565445, y: -17.5974, z: 0}
+    m_Extent: {x: 66.28415, y: 20.6263, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -11498,7 +11498,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -925584083606563242, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: f902556a624b7e24e9b2a5b867b70f01, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
+  m_Volume: 0.064
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11507,9 +11507,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -14240,7 +14240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318892147044605534, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1318892147044605534, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_audioClip
@@ -14260,7 +14260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1593990257372602883, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_Volume
-      value: 0.034
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 1593990257372602883, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_audioClip
@@ -14272,7 +14272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3753538529674172475, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_Volume
-      value: 0.067
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3753538529674172475, guid: 705b175add887f2498a7f51fe1c2be7f, type: 3}
       propertyPath: m_audioClip
@@ -19936,8 +19936,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -17.72525, y: 1.0579001, z: 0}
-    m_Extent: {x: 23.006851, y: 3.1528, z: 0}
+    m_Center: {x: -17.7252, y: 1.04725, z: 0}
+    m_Extent: {x: 23.003601, y: 3.15295, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -25613,8 +25613,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -6.7042, y: -1.3888999, z: 0}
-    m_Extent: {x: 10.9838, y: 3.184, z: 0}
+    m_Center: {x: -6.709749, y: -1.3838, z: 0}
+    m_Extent: {x: 10.99045, y: 3.1945, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 5.431922
@@ -27334,7 +27334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1858011803
 Transform:
   m_ObjectHideFlags: 0
@@ -27362,7 +27362,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2457538300249378793, guid: 5884ab8a65cc5b74eb0254ed11765e6d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 53c1c1519bce1b14eb87f76428a4dbb1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
