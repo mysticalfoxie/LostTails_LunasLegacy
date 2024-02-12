@@ -4138,8 +4138,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 106.18545, y: 12.49475, z: 0}
-    m_Extent: {x: 118.49555, y: 17.357151, z: 0}
+    m_Center: {x: 106.186295, y: 12.4959, z: 0}
+    m_Extent: {x: 118.4926, y: 17.3581, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9070,6 +9070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a52d3811a2f47b4f211266070ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _delayBetweenFading: 20
+  _fadingInSpeedModifier: 2.5
+  _fadingOutSpeedModifier: 2.5
   _currentLevelIndex: 9
 --- !u!4 &358203981
 Transform:
@@ -25373,8 +25376,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001267476}
   m_LocalRotation: {x: 3.557131e-12, y: -6.9849193e-10, z: -2.2750156e-11, w: 1}
-  m_LocalPosition: {x: 237.33, y: 47.85, z: -237.11}
-  m_LocalScale: {x: 0.23664117, y: 0.3043792, z: 456.44522}
+  m_LocalPosition: {x: 238.47, y: 46.24, z: -237.11}
+  m_LocalScale: {x: 0.17743118, y: 0.16747645, z: 456.44522}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1482013269}
@@ -37648,8 +37651,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 107.676994, y: 12.159201, z: 0}
-    m_Extent: {x: 118.984, y: 15.3265, z: 0}
+    m_Center: {x: 107.67474, y: 12.15615, z: 0}
+    m_Extent: {x: 118.97615, y: 15.32965, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
