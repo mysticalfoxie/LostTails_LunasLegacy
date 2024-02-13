@@ -56,10 +56,18 @@ public class StartMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode uwu)
     {
+        UpdateLoadGameButtonState();
+
         if (SceneManager.GetActiveScene().buildIndex != 11) return;
         _pauseMenu.SetActive(false);
         _startMenu.SetActive(false);
         _endScene.SetActive(true);
+    }
+
+    private void UpdateLoadGameButtonState()
+    {
+        var hasGameData = DataPersistenceManager.Instance.HasGameData();
+        _loadGameButton.SetActive(hasGameData);
     }
 
     public void Start()
@@ -69,9 +77,8 @@ public class StartMenu : MonoBehaviour
         _backgroundAudio = FindObjectOfType<AudioSource>();
         _backgroundAudio.Play();
         _resolutionDropdown.ClearOptions();
-        DataPersistenceManager.Instance.HasGameData();
-        var hasGameData = DataPersistenceManager.Instance.HasGameData();
-        _loadGameButton.SetActive(hasGameData);
+        
+        UpdateLoadGameButtonState();
 
         var options = new List<string>();
         _resolutions = Screen.resolutions;
@@ -121,7 +128,8 @@ public class StartMenu : MonoBehaviour
         if (_starting) return;
         _starting = true;
         _blockPauseMenu = false;
-        StartCoroutine(_ChangeScene(GameManager.Instance._currentLevelIndex));    
+        var index = DataPersistenceManager.Instance.GetLevelIndex();
+        StartCoroutine(_ChangeScene(index));    
     }
 
     private void Pause()
