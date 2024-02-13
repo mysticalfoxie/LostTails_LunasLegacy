@@ -56,10 +56,10 @@ public class StartMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode uwu)
     {
-        if (GameManager.Instance._currentLevelIndex != 11) return;
-        if (_pauseMenu) _pauseMenu.SetActive(false);
-        if (_startMenu) _startMenu.SetActive(false);
-        if (!_endScene) _endScene.SetActive(true);
+        if (SceneManager.GetActiveScene().buildIndex != 11) return;
+        _pauseMenu.SetActive(false);
+        _startMenu.SetActive(false);
+        _endScene.SetActive(true);
     }
 
     public void Start()

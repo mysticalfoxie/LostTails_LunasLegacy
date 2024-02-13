@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         if (!Debug.isDebugBuild) return;
+        if (Input.GetKeyDown(KeyCode.F10) && Input.GetKey(KeyCode.LeftControl))
+            LoadLevel(11);
         if (Input.GetKeyDown(KeyCode.F12) && Input.GetKey(KeyCode.LeftControl))
             LoadNextLevel();
         if (Input.GetKeyDown(KeyCode.F11) && Input.GetKey(KeyCode.LeftControl))
