@@ -10,8 +10,7 @@ using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
-    [Header("Music Control")]
-    [SerializeField] private AudioMixer _audioMixer;
+    [Header("Music Control")] [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _volumeSlider;
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _sfxSlider;
@@ -20,16 +19,14 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private float _currentSfxVolume;
     [SerializeField] private AudioSource _backgroundAudio;
 
-    [Header("Dropdowns")]
-    [SerializeField] private Dropdown _resolutionDropdown;
+    [Header("Dropdowns")] [SerializeField] private Dropdown _resolutionDropdown;
     [SerializeField] private Dropdown _qualityDropdown;
     [SerializeField] private Dropdown _textureDropdown;
     [SerializeField] private Dropdown _aaDropdown;
 
     private Resolution[] _resolutions;
 
-    [Header("Menus")]
-    [SerializeField] private GameObject _optionsMenu;
+    [Header("Menus")] [SerializeField] private GameObject _optionsMenu;
     [SerializeField] private GameObject _controlsMenu;
     [SerializeField] private GameObject _creditsMenu;
     [SerializeField] private GameObject _startMenu;
@@ -37,16 +34,17 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject _endScene;
     private bool _paused;
     private bool _gameStarted;
-    
+
     [SerializeField] private GameObject _loadGameButton;
-    
+
     [SerializeField] private GameObject _backgroundImage;
 
     private Boolean _blockPauseMenu = true;
-    
+
     private bool _starting;
+
     // ReSharper disable once HeapView.ObjectAllocation
-    private readonly int[] _cutScenes = {0,1,3,5,10};
+    private readonly int[] _cutScenes = { 0, 1, 3, 5, 10 };
     private PlayerMovement _playerMovement;
 
     public void Awake()
@@ -56,10 +54,18 @@ public class StartMenu : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode uwu)
     {
-        if (GameManager.Instance._currentLevelIndex != 11) return;
-        if (_pauseMenu) _pauseMenu.SetActive(false);
-        if (_startMenu) _startMenu.SetActive(false);
-        if (!_endScene) _endScene.SetActive(true);
+        UpdateLoadGameButtonState();
+
+        if (SceneManager.GetActiveScene().buildIndex != 11) return;
+        _pauseMenu.SetActive(false);
+        _startMenu.SetActive(false);
+        _endScene.SetActive(true);
+    }
+
+    private void UpdateLoadGameButtonState()
+    {
+        var hasGameData = DataPersistenceManager.Instance.HasGameData();
+        _loadGameButton.SetActive(hasGameData);
     }
 
     public void Start()
@@ -69,9 +75,8 @@ public class StartMenu : MonoBehaviour
         _backgroundAudio = FindObjectOfType<AudioSource>();
         _backgroundAudio.Play();
         _resolutionDropdown.ClearOptions();
-        DataPersistenceManager.Instance.HasGameData();
-        var hasGameData = DataPersistenceManager.Instance.HasGameData();
-        _loadGameButton.SetActive(hasGameData);
+
+        UpdateLoadGameButtonState();
 
         var options = new List<string>();
         _resolutions = Screen.resolutions;
@@ -95,8 +100,8 @@ public class StartMenu : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || _blockPauseMenu) return;
         if (_playerMovement is { isJumping: true }) return;
-        if (_cutScenes.Contains(GameManager.Instance._currentLevelIndex) ) return;
-        
+        if (_cutScenes.Contains(GameManager.Instance._currentLevelIndex)) return;
+
         if (!_paused)
         {
             Pause();
@@ -121,7 +126,8 @@ public class StartMenu : MonoBehaviour
         if (_starting) return;
         _starting = true;
         _blockPauseMenu = false;
-        StartCoroutine(_ChangeScene(GameManager.Instance._currentLevelIndex));    
+        var index = DataPersistenceManager.Instance.GetLevelIndex();
+        StartCoroutine(_ChangeScene(index));
     }
 
     private void Pause()
@@ -144,20 +150,27 @@ public class StartMenu : MonoBehaviour
         yield return index.HasValue
             ? GameManager.LoadLevelAsync(index.Value, .5F, 1.0F, 1.0F, ActionsDuringSceneChange)
             : GameManager.LoadNextLevelAsync(.5F, 1.0F, 1.0F, ActionsDuringSceneChange);
-        
+
         _starting = false;
     }
-    
+
     [SuppressMessage("ReSharper", "Unity.NoNullPropagation")]
     private IEnumerator ActionsDuringSceneChange()
     {
-        _backgroundAudio?.Stop();
-        if (_gameStarted)
-            yield break;
-        
-        _backgroundImage?.SetActive(false);
-        _startMenu?.SetActive(false);
-        _gameStarted = true;
+        try
+        {
+            _backgroundImage?.SetActive(false);
+            _startMenu?.SetActive(false);
+            _gameStarted = true;
+
+            _backgroundAudio?.Stop();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogException(ex);
+        }
+
+        yield break;
     }
 
     public void Credits()
@@ -178,8 +191,8 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene(0);
         _gameStarted = false;
         GameStartedOn();
-        if(_pauseMenu) _pauseMenu.SetActive(false);
-        if(_endScene) _endScene.SetActive(false);
+        if (_pauseMenu) _pauseMenu.SetActive(false);
+        if (_endScene) _endScene.SetActive(false);
         _blockPauseMenu = true;
     }
 
@@ -322,6 +335,7 @@ public class StartMenu : MonoBehaviour
             if (_gameStarted) _backgroundImage.SetActive(false);
         }
     }
+
     private void LoadSettings(int currentResolutionIndex)
     {
         _qualityDropdown.value = PlayerPrefs.HasKey("QualitySettingPreference") ? PlayerPrefs.GetInt("QualitySettingPreference") : 3;
@@ -336,14 +350,14 @@ public class StartMenu : MonoBehaviour
 
         _volumeSlider.value = PlayerPrefs.HasKey("VolumePref")
             ? _currentVolume = PlayerPrefs.GetFloat("VolumePref")
-            : PlayerPrefs.GetFloat("VolumePref"); 
-        
+            : PlayerPrefs.GetFloat("VolumePref");
+
         _musicSlider.value = PlayerPrefs.HasKey("MusicPref")
             ? _currentMusicVolume = PlayerPrefs.GetFloat("MusicPref")
             : PlayerPrefs.GetFloat("MusicPref");
-        
+
         _sfxSlider.value = PlayerPrefs.HasKey("SFXPref")
             ? _currentSfxVolume = PlayerPrefs.GetFloat("SFXPref")
-            : PlayerPrefs.GetFloat("SFXPref"); 
+            : PlayerPrefs.GetFloat("SFXPref");
     }
 }

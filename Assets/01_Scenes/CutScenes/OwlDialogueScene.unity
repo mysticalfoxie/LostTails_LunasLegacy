@@ -1124,8 +1124,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -23.621}
-  m_SizeDelta: {x: 0, y: -47.243}
+  m_AnchoredPosition: {x: 5.942993, y: -23.621002}
+  m_SizeDelta: {x: -75.2792, y: -47.243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905279230
 MonoBehaviour:
@@ -1149,8 +1149,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 131487e6eaa592a42b6b14b16c5f6b38, type: 2}
-  m_sharedMaterial: {fileID: -2038434312300200921, guid: 131487e6eaa592a42b6b14b16c5f6b38, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1254,6 +1254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a52d3811a2f47b4f211266070ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _delayBetweenFading: 20
+  _fadingInSpeedModifier: 2.5
+  _fadingOutSpeedModifier: 2.5
   _currentLevelIndex: 0
 --- !u!212 &2131629806
 SpriteRenderer:

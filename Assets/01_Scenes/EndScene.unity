@@ -398,8 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f442a52d3811a2f47b4f211266070ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelIndex: 11
-  _progress: 0
+  _delayBetweenFading: 20
+  _fadingInSpeedModifier: 2.5
+  _fadingOutSpeedModifier: 2.5
+  _currentLevelIndex: 11
 --- !u!4 &1699857883
 Transform:
   m_ObjectHideFlags: 0

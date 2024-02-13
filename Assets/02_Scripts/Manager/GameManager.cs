@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         if (!Debug.isDebugBuild) return;
+        if (Input.GetKeyDown(KeyCode.F10) && Input.GetKey(KeyCode.LeftControl))
+            LoadLevel(11);
         if (Input.GetKeyDown(KeyCode.F12) && Input.GetKey(KeyCode.LeftControl))
             LoadNextLevel();
         if (Input.GetKeyDown(KeyCode.F11) && Input.GetKey(KeyCode.LeftControl))
@@ -167,7 +169,7 @@ public class GameManager : MonoBehaviour
         Instance._inTransition = false;
         if (movement is not null) movement._isSpawning = false;
     }
-
+    
     private static IEnumerator LoadLevelWithoutFading(int levelIndex, Func<IEnumerator> actionsDuringBlackscreen)
     {
         if (actionsDuringBlackscreen is not null)

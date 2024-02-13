@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class DataPersistenceManager : MonoBehaviour
@@ -31,7 +32,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public int? GetLevelIndex() => _dataHandler.Load()?.SavedLevelIndex;
 
-    public bool HasGameData() => (_gameData?.SavedLevelIndex ?? 0) != 0;
+    public bool HasGameData() => !new[] { 0, 11 }.Contains(_gameData?.SavedLevelIndex ?? 0);
 
     public void UpdateLevelIndex(int index)
     {
