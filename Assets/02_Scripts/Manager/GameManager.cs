@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
         Instance._inTransition = false;
         if (movement is not null) movement._isSpawning = false;
     }
-
+    
     private static IEnumerator LoadLevelWithoutFading(int levelIndex, Func<IEnumerator> actionsDuringBlackscreen)
     {
         if (actionsDuringBlackscreen is not null)

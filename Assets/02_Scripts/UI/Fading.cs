@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Fading : MonoBehaviour
 {
@@ -15,15 +13,15 @@ public class Fading : MonoBehaviour
     private Animator _animator;
     private string _currentAnimationTag;
     private int _skipTickCount;
-    private event Action OnAnimationDone;
-    private bool _fadingOut;
-    private bool _fadingIn;
+
+    private bool _animationInProgress;
+    private bool _animationDone;
 
     [Header("Animation Properties")]
-    [Range(0.001F, 4.0F)]
+    [Range(0.001F, 4.0F)] 
     [SerializeField] 
     private float _globalSpeedModifier = 1.0F;
-
+    
     [Header("Animation Observer")] 
     [Range(1, 100)] 
     [SerializeField] private int _tickDelay; 
@@ -46,8 +44,7 @@ public class Fading : MonoBehaviour
 
     public IEnumerator FadeInAsync(float localSpeedModifier = 1.0F)
     {
-        if (_fadingIn) yield break;
-        _fadingIn = true;
+        if (_animationInProgress) yield break;
         _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
         _animator.SetBool(_fadeInAnimationParameter, true);
         _animator.SetBool(_fadeOutAnimationParameter, false);
@@ -57,13 +54,11 @@ public class Fading : MonoBehaviour
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, false);
         _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
-        _fadingIn = false;
     }
 
     public IEnumerator FadeOutAsync(float localSpeedModifier = 1.0F)
     {
-        if (_fadingOut) yield break;
-        _fadingOut = true;
+        if (_animationInProgress) yield break;
         _animator.SetFloat(_speedFactorParameter, localSpeedModifier * _globalSpeedModifier);
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, true);
@@ -73,47 +68,41 @@ public class Fading : MonoBehaviour
         _animator.SetBool(_fadeInAnimationParameter, false);
         _animator.SetBool(_fadeOutAnimationParameter, false);
         _animator.SetFloat(_speedFactorParameter, _globalSpeedModifier);
-        _fadingOut = false;
     }
     
     private IEnumerator WaitForAnimationAsync()
     {
-        var animationDone = false;
-
-        OnAnimationDone += Handler; 
-        
-        return new WaitWhile(() => !animationDone);
-
-        void Handler()
-        {
-            animationDone = true;
-            Unsubscribe();
-        }
-
-        void Unsubscribe() => OnAnimationDone -= Handler;
+        _animationInProgress = true;
+        _animationDone = false;
+        yield return new WaitWhile(() => !_animationDone);
+        _animationInProgress = false;
+        _animationDone = false;
     }
 
     private void ObserveAnimationState()
     {
         if (_currentAnimationTag == default) return;
+        if (!_animationInProgress) return;
         if (_skipTickCount > 0) return;
         
         var state = _animator.GetCurrentAnimatorStateInfo(0);
         if (state.IsTag(_currentAnimationTag)) return; // Still the same tag -> Animation is still playing
         _currentAnimationTag = default;
-        OnAnimationDone?.Invoke();
+        
+        _animationDone = true;
     }
     
     private void FixedUpdate()
     {
         if (_skipTickCount > 0) _skipTickCount--;
     }
-
+    
     private void Update()
     {
         ObserveAnimationState();
         
         /* Debugging purpose */
+        if (!Debug.isDebugBuild) return;
         if (Input.GetKeyDown(KeyCode.F3)) FadeIn();
         if (Input.GetKeyDown(KeyCode.F2)) FadeOut();
     }
